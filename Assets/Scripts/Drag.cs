@@ -11,12 +11,15 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 {
     [SerializeField] private Canvas canvas;
     public List<GameObject> blockLists;
-    public bool isSnapped;
-    public bool canBePlaced;
+
+    [Header("Drag obejct options")]
+       
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector2 returnPoint;
+    private bool isSnapped;
+    private bool canBePlaced;
 
 
     private void Awake()
@@ -38,8 +41,9 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
         {
             rectTransform.anchoredPosition = localPoint;
-            Debug.Log("Position Zero!");
+            //Debug.Log("Position Zero!");
         }
+
         //rectTransform.anchoredPosition = eventData.position;
     }
 
@@ -51,6 +55,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         canvasGroup.blocksRaycasts = false;
         isSnapped = false;
         canBePlaced = true;
+        //make selected object rendered at the front layer
+        rectTransform.SetAsLastSibling();
         //Debug.Log("OnBeginGrag");
     }
 
