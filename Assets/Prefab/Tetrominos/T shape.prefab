@@ -59,8 +59,8 @@ MonoBehaviour:
   - {fileID: 5154669893403190498}
   - {fileID: 7629012901004813919}
   - {fileID: 4697450524441011854}
-  isSnapped: 0
-  canBePlaced: 0
+  isToggleDrag: 0
+  useScrollToRotate: 0
 --- !u!225 &4737410103354016516
 CanvasGroup:
   m_ObjectHideFlags: 0

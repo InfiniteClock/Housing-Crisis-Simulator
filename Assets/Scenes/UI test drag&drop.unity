@@ -5428,11 +5428,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 1248676049224362525, guid: 9da2ad668fcd59544b1ea9b03aaf4b45, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248676049224362525, guid: 9da2ad668fcd59544b1ea9b03aaf4b45, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248676049224362525, guid: 9da2ad668fcd59544b1ea9b03aaf4b45, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2466835680077579746, guid: 9da2ad668fcd59544b1ea9b03aaf4b45, type: 3}
       propertyPath: m_Color.b
@@ -5589,11 +5593,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 4130051499087066231, guid: c9439ef2c30ba504a90f077f80371b84, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4130051499087066231, guid: c9439ef2c30ba504a90f077f80371b84, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130051499087066231, guid: c9439ef2c30ba504a90f077f80371b84, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5226274086390200978, guid: c9439ef2c30ba504a90f077f80371b84, type: 3}
       propertyPath: m_Pivot.x
@@ -5694,11 +5702,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 4711996215933456912, guid: 4d7df52d5a3d4304689ef71168afb19b, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4711996215933456912, guid: 4d7df52d5a3d4304689ef71168afb19b, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4711996215933456912, guid: 4d7df52d5a3d4304689ef71168afb19b, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5298972253197093322, guid: 4d7df52d5a3d4304689ef71168afb19b, type: 3}
       propertyPath: m_Pivot.x
@@ -5803,11 +5815,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 2110473917277744183, guid: cd95071538f797444ba5687015541b20, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2110473917277744183, guid: cd95071538f797444ba5687015541b20, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110473917277744183, guid: cd95071538f797444ba5687015541b20, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3363422923854115586, guid: cd95071538f797444ba5687015541b20, type: 3}
       propertyPath: m_Pivot.x
@@ -5996,11 +6012,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 8812202334970506996, guid: c0dafdfa9cd492343a7c1b5ffc37f049, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8812202334970506996, guid: c0dafdfa9cd492343a7c1b5ffc37f049, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8812202334970506996, guid: c0dafdfa9cd492343a7c1b5ffc37f049, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6099,13 +6119,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3743979517293513446, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743979517293513446, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743979517293513446, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743979517293513446, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3743979517293513446, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5403042683642765480, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
       propertyPath: canvas
       value: 
       objectReference: {fileID: 2045152529}
     - target: {fileID: 5403042683642765480, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5403042683642765480, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
       propertyPath: useQEToRotate
@@ -6113,6 +6153,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403042683642765480, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
       propertyPath: isObjectCenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5403042683642765480, guid: ec8fc2d69a7f3d74e90b1ce37333e2f0, type: 3}
+      propertyPath: useScrollToRotate
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -6138,11 +6182,15 @@ PrefabInstance:
       objectReference: {fileID: 2045152529}
     - target: {fileID: 6198582272947462532, guid: e2534bdb27efd2a4eb62dcc0d2b8f9f3, type: 3}
       propertyPath: isToggleDrag
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6198582272947462532, guid: e2534bdb27efd2a4eb62dcc0d2b8f9f3, type: 3}
       propertyPath: useQEToRotate
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198582272947462532, guid: e2534bdb27efd2a4eb62dcc0d2b8f9f3, type: 3}
+      propertyPath: useScrollToRotate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6811878682214914835, guid: e2534bdb27efd2a4eb62dcc0d2b8f9f3, type: 3}
       propertyPath: m_Pivot.x

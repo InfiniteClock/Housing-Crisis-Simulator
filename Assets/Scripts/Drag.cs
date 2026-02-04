@@ -3,24 +3,28 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
+using System.Xml.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.PlayerLoop;
 
-public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerClickHandler
+public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
     public List<GameObject> blockLists;
 
     [Header("Drag obejct options")]
     [SerializeField] private bool isToggleDrag = false;
-    [SerializeField] private bool useQEToRotate = false;
+    [SerializeField] private bool useScrollToRotate = false;
 
 
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Vector2 returnPoint;
+    private Vector3 oringinRotation;
+    private Vector3 currentRotation;
     private bool isSnapped;
     private bool canBePlaced;
     private bool isSelected;
@@ -32,77 +36,211 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         returnPoint = rectTransform.anchoredPosition;
+        oringinRotation = rectTransform.localEulerAngles;
         isSnapped = false;
         canBePlaced = true;
         isSelected = false;
     }
 
-
-    //_____Toggle__________________________________________________________________
-    //public void Update()
-    //{
-    //    //update the obejct position under toggle mode
-    //    if (isFollowingMouse)
-    //    {
-    //        //make the object always centered on the mouse
-    //        MouseFollow(Input.mousePosition);
-    //    }
-    //}
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        //disable this if not toggle
-        if (!isToggleDrag) return;
-
-
-        isFollowingMouse = !isFollowingMouse;
-
-        if (isFollowingMouse)
-        {
-            //make the object follow the mouse after click once
-            canvasGroup.alpha = 0.8f;
-            canvasGroup.blocksRaycasts = false;
-            isSnapped = false;
-            canBePlaced = true;
-            //make selected object rendered at the front layer
-            rectTransform.SetAsLastSibling();
-
-        }
-        else
-        {
-            canvasGroup.alpha = 1;
-            canvasGroup.blocksRaycasts = true;
-            if (!isSnapped || !canBePlaced)
-            {
-                rectTransform.anchoredPosition = returnPoint;
-            }
-        }
-
-    }
-
-
-    //_____Hold__________________________________________________________________
     public void Update()
     {
+        //shape rotation
         if (isSelected)
         {
             ShapeRotation(rectTransform);
+            currentRotation = rectTransform.localEulerAngles;
+        }
+
+        //Toggle logic
+
+        if (!isToggleDrag) return;
+
+        ToggleLogic();
+
+    }
+
+    //_____Toggle__________________________________________________________________
+    public void ToggleLogic()
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition,null,out Vector3 worldPoint);
+        Vector2 mousePosition = (Vector2)worldPoint;
+        Collider2D hit = Physics2D.OverlapBox(mousePosition, new Vector2(20f, 20f), 0f);
+
+        if (isFollowingMouse)
+        {
+            ToggleFollow();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            //reset shape position when clcik the blank space
+            if(hit == null)
+            {
+                if (isFollowingMouse)
+                {
+                    ToggleReturn();
+                    isFollowingMouse = false;
+                }
+            }
+
+            //if there is a block under mouse
+            else if (hit.CompareTag("Block"))
+            {
+                //get the current shape
+                Drag hitdrag = hit.GetComponentInParent<Drag>();
+                if (hitdrag != this)
+                {
+                    //if click on other shapes, it return the shape
+                    if (isFollowingMouse)
+                    {
+                        ToggleReturn();
+                        isFollowingMouse = false;
+                    }
+                    return;
+                }
+
+                if (!isFollowingMouse)
+                {
+                    //if click on this very shape, select this one and start drag shape
+                    ToggleSelectDrag();
+                    isFollowingMouse = true;
+                }
+                else
+                {
+                    //return the shape
+                    ToggleReturn();
+                    isFollowingMouse = false;
+                }
+
+                return;
+            }
+
+            //if there is a slot under mouse
+            else if (hit.CompareTag("Slot"))
+            {
+                if (!isFollowingMouse) return;
+
+                RectTransform slot = hit.GetComponentInParent<RectTransform>();
+                if (slot != null)
+                {
+                    SnapFunction(slot);       
+                    ToggleDeselectDrop();
+                    isFollowingMouse = false;
+                }
+                return;
+            }
+
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition, null, out Vector3 worldPoint);
+        Vector2 mousePosition = (Vector2)worldPoint;
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(mousePosition, new Vector3(100f, 100f, 0f));
+    }
+
+    public void ToggleSelectDrag()
+    {
+        if (!isToggleDrag) return;
+
+        SelectEffect();
+        isSelected = true;
+        isSnapped = false;
+        canBePlaced = true;
+        rectTransform.SetAsLastSibling();
+    }
+
+    public void ToggleFollow()
+    {
+        MouseFollow(Input.mousePosition);
+        foreach (GameObject block in blockLists)
+        {
+            Collider2D col = block.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = false;
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void ToggleDeselectDrop ()
     {
-        //disable this if toggle
-        if (isToggleDrag) return;
+        if (!isToggleDrag) return;
 
+        
         //Center the object to the mouse position
-        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
+        if (!isSnapped || !canBePlaced)
+        {
+            rectTransform.localEulerAngles = oringinRotation;
+            rectTransform.anchoredPosition = returnPoint;
+        }
+        DeselectEffect();
+        isSelected = false;
+
+        foreach (GameObject block in blockLists)
+        {
+            Collider2D col = block.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
+        }
+    }
+
+    public void ToggleReturn()
+    {
+        rectTransform.localEulerAngles = oringinRotation;
+        rectTransform.anchoredPosition = returnPoint;
+        DeselectEffect();
+        isSelected = false;
+
+        foreach (GameObject block in blockLists)
+        {
+            Collider2D col = block.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
+        }
+    }
+
+    public void MouseFollow(Vector2 position)
+    {
+        //called when the toggle option is on, make obejct follow the mouse
+        //Center the object to the mouse position
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, position, null, out Vector2 localPoint))
         {
             rectTransform.anchoredPosition = localPoint;
             //Debug.Log("Position Zero!");
         }
-        isSelected = true;
-        //rectTransform.anchoredPosition = eventData.position;
+    }
+
+
+    //_____Hold__________________________________________________________________
+    public void OnPointerDown(PointerEventData eventData)  
+    {
+        //disable this if toggle
+        if (!isToggleDrag)
+        {
+            //Center the object to the mouse position
+            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
+            {
+                rectTransform.anchoredPosition = localPoint;
+                //Debug.Log("Position Zero!");
+            }
+
+            SelectEffect();
+            isSelected = true;
+        }
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        //disable this if toggle
+        if (isToggleDrag) return;
+
+        //reset the shape back to the 
+        rectTransform.localEulerAngles = oringinRotation;
+        rectTransform.anchoredPosition = returnPoint;
+        DeselectEffect();
+        isSelected = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -110,11 +248,9 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //disable this if toggle
         if (isToggleDrag) return;
 
-        //Make object transparent with effects allowing mouse raycasting
-        canvasGroup.alpha = 0.8f;
-        canvasGroup.blocksRaycasts = false;
         isSnapped = false;
         canBePlaced = true;
+        //isSelected = true;
         //make selected object rendered at the front layer
         rectTransform.SetAsLastSibling();
         //Debug.Log("OnBeginGrag");
@@ -128,7 +264,6 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //Make the obejct move with the mouse offset
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
 
-        
         //Debug.Log("OnDrag");
     }
 
@@ -137,22 +272,20 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //disable this if toggle
         if (isToggleDrag) return;
 
-        //Restore the obejct
-        canvasGroup.alpha = 1;
-        canvasGroup.blocksRaycasts = true;
         //Debug.Log("OnEndGrag");
+
         if (!isSnapped || !canBePlaced)
         {
+            rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
         }
+        DeselectEffect();
         isSelected = false;
     }
 
     //_____Functions__________________________________________________________________
     public void CheckBlockSnap()
     {
-        //disable this if toggle
-        if (isToggleDrag) return;
 
         //this function is used to check if all the blocks in shape is inside the map
         isSnapped = true;
@@ -203,7 +336,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 {
                     //if there is a collider under the box is tagged with Block, the shape cannot be placed
                     blockIsOverlap = true;
-                    Debug.Log("is overlap");
+                    //Debug.Log("is overlap");
                     break;
                 }
             }
@@ -212,7 +345,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             if (blockIsOverlap)
             {
                 canBePlaced = false;
-                Debug.Log("cannot place");
+                //Debug.Log("cannot place");
                 break;
             }
         }
@@ -222,25 +355,15 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //public function called by the Drop script
         rectTransform.anchoredPosition = slot.anchoredPosition;
+        rectTransform.localEulerAngles = currentRotation;
         CheckBlockSnap();
         CheckBlockOverlap();
     }
 
-    //public void MouseFollow(Vector2 position)
-    //{
-    //    //called when the toggle option is on, make obejct follow the mouse
-    //    //Center the object to the mouse position
-    //    if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, position, null, out Vector2 localPoint))
-    //    {
-    //        rectTransform.anchoredPosition = localPoint;
-    //        //Debug.Log("Position Zero!");
-    //    }
-    //}
-
     public void ShapeRotation(RectTransform shape)
     {
         float step = 90f;
-        if (useQEToRotate)
+        if (!useScrollToRotate)
         {
             //uses QE to controll rotation, Q is anti-clockwise and E is clockwise
             if (Input.GetKeyDown(KeyCode.Q))
@@ -252,11 +375,11 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             if (Input.GetKeyDown(KeyCode.E))
             {
                 Vector3 rotation = shape.localEulerAngles;
-                rotation.z += step;
+                rotation.z -= step;
                 shape.localEulerAngles = rotation;
             }
         }
-        else if (!useQEToRotate)
+        else if (useScrollToRotate)
         {
             //uses mouse scroll to controll rotation, up is anti-clockwise and down is clockwise
             float scroll = Input.mouseScrollDelta.y;
@@ -269,10 +392,23 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             if (scroll < 0)
             {
                 Vector3 rotation = shape.localEulerAngles;
-                rotation.z += step;
+                rotation.z -= step;
                 shape.localEulerAngles = rotation;
             }
         }
+    }
+
+    public void SelectEffect()
+    {
+        //Make object transparent with effects allowing mouse raycasting
+        canvasGroup.alpha = 0.7f;
+        canvasGroup.blocksRaycasts = false;
+    }
+    public void DeselectEffect()
+    {
+        //restore the object transparent
+        canvasGroup.alpha = 1;
+        canvasGroup.blocksRaycasts = true;
     }
 
 }
