@@ -41,7 +41,10 @@ public class House : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        mr.material = matHighlight;
+        if (GameManager.currentState == GameManager.gameState.Neighborhood)
+        {
+            mr.material = matHighlight;
+        }
     }
     private void OnMouseExit()
     {
