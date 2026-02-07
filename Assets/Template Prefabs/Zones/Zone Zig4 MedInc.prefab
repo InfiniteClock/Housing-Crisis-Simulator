@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6391752637951041521}
+  - component: {fileID: 8121282862348041429}
   m_Layer: 0
   m_Name: Zone Zig4 MedInc
   m_TagString: Untagged
@@ -30,9 +31,25 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2295438679932747467}
-  - {fileID: 6380328349885138746}
+  - {fileID: 1949072969427168105}
+  - {fileID: 52379841477148403}
+  - {fileID: 3294075403121678055}
+  - {fileID: 7756332082115919605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8121282862348041429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352736945701099017}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7c759c1ea24cd4582794a9216d6d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneCam: {fileID: 1425453856860225825}
 --- !u!1 &5661448879672427104
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,53 +125,22 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!1 &5885133523939185679
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6380328349885138746}
-  m_Layer: 0
-  m_Name: Neigbourhoods
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6380328349885138746
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5885133523939185679}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1949072969427168105}
-  - {fileID: 52379841477148403}
-  - {fileID: 3294075403121678055}
-  - {fileID: 7756332082115919605}
-  m_Father: {fileID: 6391752637951041521}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1280170912100400907
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6380328349885138746}
+    m_TransformParent: {fileID: 6391752637951041521}
     m_Modifications:
     - target: {fileID: 769841398574796651, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_Name
       value: Neighbourhood MedInc (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4881378666446082901, guid: 976b13874335b314581fc56ba2772361, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 8121282862348041429}
     - target: {fileID: 8818068163891823102, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -211,12 +197,16 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6380328349885138746}
+    m_TransformParent: {fileID: 6391752637951041521}
     m_Modifications:
     - target: {fileID: 769841398574796651, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_Name
       value: Neighbourhood MedInc (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4881378666446082901, guid: 976b13874335b314581fc56ba2772361, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 8121282862348041429}
     - target: {fileID: 8818068163891823102, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
@@ -273,12 +263,16 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6380328349885138746}
+    m_TransformParent: {fileID: 6391752637951041521}
     m_Modifications:
     - target: {fileID: 769841398574796651, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_Name
       value: Neighbourhood MedInc (0)
       objectReference: {fileID: 0}
+    - target: {fileID: 4881378666446082901, guid: 976b13874335b314581fc56ba2772361, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 8121282862348041429}
     - target: {fileID: 8818068163891823102, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -335,12 +329,16 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6380328349885138746}
+    m_TransformParent: {fileID: 6391752637951041521}
     m_Modifications:
     - target: {fileID: 769841398574796651, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_Name
       value: Neighbourhood MedInc (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4881378666446082901, guid: 976b13874335b314581fc56ba2772361, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 8121282862348041429}
     - target: {fileID: 8818068163891823102, guid: 976b13874335b314581fc56ba2772361, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11

@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6986246107485469881}
+  - component: {fileID: 1442563123219715518}
   m_Layer: 0
   m_Name: Zone L3 LowInc
   m_TagString: Untagged
@@ -30,43 +31,24 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2269718314478475814}
-  - {fileID: 6584739311607641638}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1923647838296042438
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6584739311607641638}
-  m_Layer: 0
-  m_Name: Neighbourhoods
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6584739311607641638
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923647838296042438}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
   - {fileID: 7201511356942742188}
   - {fileID: 543939513958496868}
   - {fileID: 7353176200522351013}
-  m_Father: {fileID: 6986246107485469881}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1442563123219715518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527904040368032456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7c759c1ea24cd4582794a9216d6d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneCam: {fileID: 2110545592801604668}
 --- !u!1 &5622814226833447862
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +130,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6584739311607641638}
+    m_TransformParent: {fileID: 6986246107485469881}
     m_Modifications:
     - target: {fileID: 5960129331775679340, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,6 +172,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7466528527088291265, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 1442563123219715518}
     - target: {fileID: 7507867703366824664, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_Name
       value: Neighbourhood LowInc (0)
@@ -210,7 +196,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6584739311607641638}
+    m_TransformParent: {fileID: 6986246107485469881}
     m_Modifications:
     - target: {fileID: 5960129331775679340, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -252,6 +238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7466528527088291265, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 1442563123219715518}
     - target: {fileID: 7507867703366824664, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_Name
       value: Neighbourhood LowInc (2)
@@ -272,7 +262,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6584739311607641638}
+    m_TransformParent: {fileID: 6986246107485469881}
     m_Modifications:
     - target: {fileID: 5960129331775679340, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -314,6 +304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7466528527088291265, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 1442563123219715518}
     - target: {fileID: 7507867703366824664, guid: 8c9bef5c686fdac4a974c5f5e168a8a0, type: 3}
       propertyPath: m_Name
       value: Neighbourhood LowInc (1)

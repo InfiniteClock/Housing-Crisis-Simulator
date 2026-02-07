@@ -10,8 +10,9 @@ public class CameraManager : MonoBehaviour
     public static CinemachineCamera prevCam { get; private set; }
 
     // This is for debuggin and testing purposes only
-    public CinemachineCamera[] exampleCams;
-    public int exampleCamIndex = 0;
+    //public CinemachineCamera[] exampleCams;
+    //public int exampleCamIndex = 0;
+
     private void Start()
     {
         // Find and disable every camera in the scene on start. Then enable the startup cam
@@ -24,10 +25,11 @@ public class CameraManager : MonoBehaviour
         currentCam = startupCam;
         prevCam = startupCam;
     }
-
+    /*
     // Update is called once per frame
     void Update()
     {
+        
         // This is for debugging and testing purposes only
         if (Input.GetMouseButtonDown(0))
         {
@@ -42,7 +44,7 @@ public class CameraManager : MonoBehaviour
                 CameraSwitch(exampleCams[exampleCamIndex]);
             }
         }
-    }
+    }*/
     public static void CameraSwitch(CinemachineCamera newCam)
     {
         // Update the cameras

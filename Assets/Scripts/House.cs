@@ -3,10 +3,7 @@ using UnityEngine;
 
 public class House : MonoBehaviour
 {
-    [SerializeField]
-    private enum Type { Low, Med, High }
-    [SerializeField]
-    private CinemachineCamera houseCam;
+    public CinemachineCamera houseCam;
     [SerializeField]
     private Material matDefault;
     [SerializeField]
@@ -41,7 +38,7 @@ public class House : MonoBehaviour
     }
     private void OnMouseEnter()
     {
-        if (GameManager.currentState == GameManager.gameState.Neighborhood)
+        if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
         {
             mr.material = matHighlight;
         }
@@ -50,6 +47,4 @@ public class House : MonoBehaviour
     {
         mr.material = currentMat;
     }
-
-
 }

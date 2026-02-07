@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 846456888739769600}
   - component: {fileID: 4478585736970798047}
   - component: {fileID: 4488871744886406133}
-  - component: {fileID: 2563144487730821506}
+  - component: {fileID: 5916188597842149780}
   m_Layer: 0
   m_Name: Boundary Box
   m_TagString: Untagged
@@ -159,7 +159,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6013699490915073910}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -175,7 +175,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ee2a6a3dab9e3e840bad39a789ec4794, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,7 +218,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2563144487730821506
+--- !u!114 &5916188597842149780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

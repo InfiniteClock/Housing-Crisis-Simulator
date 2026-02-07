@@ -84,6 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488181547249881922}
+  - component: {fileID: 4675432844159393203}
   m_Layer: 0
   m_Name: Zone LongL4 LowInc
   m_TagString: Untagged
@@ -105,52 +106,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 558447605579204186}
-  - {fileID: 795988000785763924}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8179518455390200142
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 795988000785763924}
-  m_Layer: 0
-  m_Name: Neighbourhoods
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &795988000785763924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8179518455390200142}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
   - {fileID: 1895005980695764783}
   - {fileID: 896463743087651344}
   - {fileID: 3144170581215128054}
   - {fileID: 2874890010928312011}
-  m_Father: {fileID: 1488181547249881922}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4675432844159393203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7533277631942788159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db7c759c1ea24cd4582794a9216d6d0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoneCam: {fileID: 5453853730481742401}
 --- !u!1001 &5243082584190886450
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 795988000785763924}
+    m_TransformParent: {fileID: 1488181547249881922}
     m_Modifications:
+    - target: {fileID: 1076687222202572476, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 4675432844159393203}
     - target: {fileID: 5949046419458407709, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -211,8 +197,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 795988000785763924}
+    m_TransformParent: {fileID: 1488181547249881922}
     m_Modifications:
+    - target: {fileID: 1076687222202572476, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 4675432844159393203}
     - target: {fileID: 5949046419458407709, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -273,8 +263,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 795988000785763924}
+    m_TransformParent: {fileID: 1488181547249881922}
     m_Modifications:
+    - target: {fileID: 1076687222202572476, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 4675432844159393203}
     - target: {fileID: 5949046419458407709, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
@@ -335,8 +329,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 795988000785763924}
+    m_TransformParent: {fileID: 1488181547249881922}
     m_Modifications:
+    - target: {fileID: 1076687222202572476, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
+      propertyPath: parentZone
+      value: 
+      objectReference: {fileID: 4675432844159393203}
     - target: {fileID: 5949046419458407709, guid: 2fc2599bde605b04c96258aecbb9d2fa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 11
