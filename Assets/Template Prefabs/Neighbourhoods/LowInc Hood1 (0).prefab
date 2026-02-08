@@ -245,7 +245,7 @@ GameObject:
   - component: {fileID: 3812113103853628944}
   - component: {fileID: 3969906423527329286}
   m_Layer: 0
-  m_Name: Neighbourhood LowInc1 (0)
+  m_Name: LowInc Hood1 (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
