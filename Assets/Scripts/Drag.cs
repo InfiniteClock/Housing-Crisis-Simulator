@@ -15,8 +15,11 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     public List<GameObject> blockLists;
 
     [Header("Drag obejct options")]
-    [SerializeField] private bool isToggleDrag = false;
+    public bool isToggleDrag = false;
     [SerializeField] private bool useScrollToRotate = false;
+
+    [HideInInspector]
+    public bool canBeInteracte = true;
 
 
 
@@ -62,6 +65,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     //_____Toggle__________________________________________________________________
     public void ToggleLogic()
     {
+        if (!canBeInteracte) return;
+
         RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition,null,out Vector3 worldPoint);
         Vector2 mousePosition = (Vector2)worldPoint;
         Collider2D hit = Physics2D.OverlapBox(mousePosition, new Vector2(20f, 20f), 0f);
@@ -174,6 +179,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
+            canBeInteracte = true;
         }
         DeselectEffect();
         isSelected = false;
@@ -192,6 +198,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
         isSelected = false;
+        canBeInteracte = true;
 
         foreach (GameObject block in blockLists)
         {
@@ -217,24 +224,25 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     public void OnPointerDown(PointerEventData eventData)  
     {
         //disable this if toggle
-        if (!isToggleDrag)
-        {
-            //Center the object to the mouse position
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
-            {
-                rectTransform.anchoredPosition = localPoint;
-                //Debug.Log("Position Zero!");
-            }
+        if (isToggleDrag) return;
+        if (!canBeInteracte) return;
 
-            SelectEffect();
-            isSelected = true;
+        //Center the object to the mouse position
+        if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
+        {
+            rectTransform.anchoredPosition = localPoint;
+            //Debug.Log("Position Zero!");
         }
+        SelectEffect();
+        isSelected = true;
+
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         //disable this if toggle
         if (isToggleDrag) return;
+        if (!canBeInteracte) return;
 
         //reset the shape back to the 
         rectTransform.localEulerAngles = oringinRotation;
@@ -247,6 +255,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //disable this if toggle
         if (isToggleDrag) return;
+        if (!canBeInteracte) return;
 
         isSnapped = false;
         canBePlaced = true;
@@ -260,6 +269,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //disable this if toggle
         if (isToggleDrag) return;
+        if (!canBeInteracte) return;
 
         //Make the obejct move with the mouse offset
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -278,6 +288,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
+            canBeInteracte = true;
         }
         DeselectEffect();
         isSelected = false;
@@ -356,6 +367,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //public function called by the Drop script
         rectTransform.anchoredPosition = slot.anchoredPosition;
         rectTransform.localEulerAngles = currentRotation;
+        canBeInteracte = false;
         CheckBlockSnap();
         CheckBlockOverlap();
     }
