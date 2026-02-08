@@ -12,6 +12,11 @@ public class Drop : MonoBehaviour, IDropHandler
         //Debug.Log("OnDrop");
         if (eventData.pointerDrag != null)
         {
+            Drag shapeScript = eventData.pointerDrag.GetComponent<Drag>();
+
+            if (shapeScript.canBeInteracte == false) return;
+            if (shapeScript.isToggleDrag == true) return;
+ 
             //call the snap function and pass parmeter
             eventData.pointerDrag.GetComponent<Drag>().SnapFunction(slot);
         }

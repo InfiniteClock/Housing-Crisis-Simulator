@@ -183,6 +183,8 @@ MonoBehaviour:
   - {fileID: 6099958915296179108}
   - {fileID: 90884915692769542}
   - {fileID: 7528787791313276728}
+  - {fileID: 5845618186860085268}
+  - {fileID: 7628173565159016360}
   isToggleDrag: 0
   useScrollToRotate: 0
 --- !u!225 &2412654653439677148
