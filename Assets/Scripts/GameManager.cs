@@ -217,8 +217,8 @@ public class GameManager : MonoBehaviour
         // Rotate the entire 3D object first
         newZone.transform.Rotate(0, -rotDeg, 0, Space.Self);
 
-        // Begin loop at 1 because we don't change the center (0th) tile's position
-        for (int i = 1; i < newZoneScript.hoods.Length; i++)
+        // Rotate every neighbourhood in reverse to the overal object to maintain orientation
+        for (int i = 0; i < newZoneScript.hoods.Length; i++)
         {
             // Get the transform of the entire neighbourhood tile prefab
             Transform hood = newZoneScript.hoods[i].transform.parent;
