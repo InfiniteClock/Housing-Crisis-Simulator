@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6123662025512812327}
   - component: {fileID: 2732472346152968373}
   m_Layer: 5
-  m_Name: square 1
+  m_Name: square 3
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,9 +152,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 9211934445864321680}
-  - {fileID: 8024234346698430665}
   - {fileID: 8836561631863616421}
+  - {fileID: 8024234346698430665}
+  - {fileID: 9211934445864321680}
   - {fileID: 6746554003728059963}
   - {fileID: 5573335265470897356}
   m_Father: {fileID: 0}
@@ -177,14 +177,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 0}
+  zone: {fileID: 0}
   blockLists:
-  - {fileID: 851809995060569452}
-  - {fileID: 1658564573084575281}
   - {fileID: 5427763309538328436}
+  - {fileID: 1658564573084575281}
+  - {fileID: 851809995060569452}
   - {fileID: 5926375377377210830}
   - {fileID: 8001617908848471634}
   isToggleDrag: 0
   useScrollToRotate: 0
+  canBeInteracte: 1
 --- !u!225 &2951969130538018478
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -332,7 +334,7 @@ GameObject:
   - component: {fileID: 5671468540457715326}
   - component: {fileID: 8286919403849214634}
   m_Layer: 5
-  m_Name: square 3
+  m_Name: square 1
   m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
