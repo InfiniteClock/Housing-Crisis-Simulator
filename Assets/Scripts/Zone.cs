@@ -6,10 +6,12 @@ public class Zone : MonoBehaviour
     [SerializeField]
     private enum Type { Low, Med, High, Apartment }
     public CinemachineCamera zoneCam;
-
+    public Transform zoneCamLocalOrientation { get; private set; }
     public Neighbourhood[] hoods { get; private set; }
-    private void Start()
+    private void Awake()
     {
+        // Stores the inspector set camera transform for later
+        zoneCamLocalOrientation = zoneCam.transform;
         hoods = GetComponentsInChildren<Neighbourhood>(true);
     }
     public void SetDefMat()

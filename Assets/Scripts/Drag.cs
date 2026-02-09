@@ -12,9 +12,10 @@ using UnityEngine.PlayerLoop;
 public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
+    public GameObject zone;
     public List<GameObject> blockLists;
 
-    [Header("Drag obejct options")]
+    [Header("Drag object options")]
     public bool isToggleDrag = false;
     [SerializeField] private bool useScrollToRotate = false;
 
@@ -173,7 +174,13 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         if (!isToggleDrag) return;
 
-        
+        foreach (GameObject block in blockLists)
+        {
+            Collider2D col = block.GetComponent<Collider2D>();
+            if (col != null)
+                col.enabled = true;
+        }
+
         //Center the object to the mouse position
         if (!isSnapped || !canBePlaced)
         {
@@ -181,15 +188,14 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             rectTransform.anchoredPosition = returnPoint;
             canBeInteracte = true;
         }
-        DeselectEffect();
+        else
+        {
+            GridLock();
+        }
+            DeselectEffect();
         isSelected = false;
 
-        foreach (GameObject block in blockLists)
-        {
-            Collider2D col = block.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = true;
-        }
+        
     }
 
     public void ToggleReturn()
@@ -289,6 +295,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
             canBeInteracte = true;
+        }
+        else
+        {
+            GridLock();
         }
         DeselectEffect();
         isSelected = false;
@@ -423,4 +433,21 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         canvasGroup.blocksRaycasts = true;
     }
 
+    // Tells game manager what grid spaces are being taken up when placing object
+    private void GridLock()
+    {
+        Vector2 blockPosition = blockLists[0].transform.position;
+
+        //Created an array of all the colliders in the overlapbox
+        Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
+
+        foreach (Collider2D hit in hits)
+        {
+            if (hit.CompareTag("Slot"))
+            {
+                GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
+                break;
+            }
+        }   
+    }
 }
