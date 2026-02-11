@@ -299,8 +299,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Reorient the zone camera
-        newZoneScript.zoneCam.transform.position = newZoneScript.zoneCamLocalOrientation.position;
-        newZoneScript.zoneCam.transform.rotation = newZoneScript.zoneCamLocalOrientation.rotation;
+        newZoneScript.zoneCam.transform.RotateAround(newZone.transform.position, Vector3.up, rotDeg);
 
         // If the placed zone was not a non residential zone, move to phase 2
         if (newZoneScript.GetZoneType() != Zone.Type.NonRes)
