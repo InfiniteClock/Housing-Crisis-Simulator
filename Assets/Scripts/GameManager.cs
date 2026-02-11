@@ -156,12 +156,14 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        // Trigger test of phase transition by pressing spacebar
         if (Input.GetKeyDown(KeyCode.Space))
         {
             NextPhase();
         }
     }
 
+    // This is purely for testing and forcing phase transitions with a test zone 
     public void NextPhase()
     {
         switch (currentPhase)
@@ -186,14 +188,18 @@ public class GameManager : MonoBehaviour
         Debug.Log(currentPhase);
     }
 
+    /// <summary>
+    /// Adds a new 3D zone to the grid. Then transitions to next phase
+    /// </summary>
+    /// <param name="originTile">The tile that the object pivot aligns to</param>
+    /// <param name="zone2D">The 2D zone placed on the UI grid that aligns to this object</param>
     public void AddToGrid(GameObject originTile, Drag zone2D)
     {
         GameObject newZone = Instantiate(zone2D.zone);
         Zone newZoneScript = newZone.GetComponent<Zone>();
 
+
         // ---Position of the Zone---
-
-
         // Find matching 3D grid tile to 2D originTile
         Transform spawnTile = Get3DTileTransform(originTile);
 
@@ -209,15 +215,16 @@ public class GameManager : MonoBehaviour
         // Apply transform position to the object
         newZone.transform.position = spawnTile.transform.position;
 
+
         // ---Rotation of the zone---
-        
         // Get the z rotation of the 2D image
         float rotDeg = zone2D.transform.eulerAngles.z;
 
         // Rotate the entire 3D object first
         newZone.transform.Rotate(0, -rotDeg, 0, Space.Self);
 
-        // Rotate every neighbourhood in reverse to the overal object to maintain orientation
+        // Rotate every neighbourhood in reverse to the overall object to maintain orientation
+        // For non-residential zones, no neighbourhoods = buildings rotate with zone, not against it
         for (int i = 0; i < newZoneScript.hoods.Length; i++)
         {
             // Get the transform of the entire neighbourhood tile prefab
@@ -229,8 +236,20 @@ public class GameManager : MonoBehaviour
         // Reorient the zone camera
         newZoneScript.zoneCam.transform.position = newZoneScript.zoneCamLocalOrientation.position;
         newZoneScript.zoneCam.transform.rotation = newZoneScript.zoneCamLocalOrientation.rotation;
+
+        // If the placed zone was not a non residential zone, move to phase 2
+        if (newZoneScript.GetZoneType() != Zone.Type.NonRes)
+        {
+            PhaseUpdate(phaseState.Zone);
+            CameraManager.CameraSwitch(newZoneScript.zoneCam);
+        }
     }
-    // Returns the transform of a matching 3D tile to given 2D tile object
+
+    /// <summary>
+    /// Returns the transform of a matching 3D tile to a given 2D tile object
+    /// </summary>
+    /// <param name="originTile">The 2D tile object from the 2D zone that was placed</param>
+    /// <returns>the transform of the matching 3D tile space</returns>
     private Transform Get3DTileTransform(GameObject originTile)
     {
         for (int i = 0; i < gridY; i++)
