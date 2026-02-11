@@ -20,7 +20,7 @@ public class HappinessTracker : MonoBehaviour
     void Update()
     {
         // Debugger
-        Debug.Log(tracker.value + " " + backgroundImage.color + " " + spriteImage.sprite);
+        //Debug.Log(tracker.value + " " + backgroundImage.color + " " + spriteImage.sprite);
 
         if(tracker.value >= 30)
         {
