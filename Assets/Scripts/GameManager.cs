@@ -1,5 +1,5 @@
+using System.Collections;
 using Unity.Cinemachine;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,8 +7,15 @@ public class GameManager : MonoBehaviour
 {
     public enum gameState { Play, NoPlay, Tutorial, Message}
     public enum phaseState { City, Zone, Neighbourhood, Home }
+    
+    [SerializeField] private CanvasGroup p1City;
+    [SerializeField] private CanvasGroup p2Zone;
+    [SerializeField] private CanvasGroup p3Neighbourhood;
+    [SerializeField] private CanvasGroup p4Home;
+    [SerializeField] private float fadeTimeUI;
+    [SerializeField] private float fadeDelayUI;
+
     // Reference to Funds UI text
-    // Reference to Happiness UI text
     // Reference to Happiness UI Slider
     public Zone testZone;
     public CinemachineCamera cityCam;
@@ -71,6 +78,64 @@ public class GameManager : MonoBehaviour
     public static void PhaseUpdate(phaseState state)
     {
         currentPhase = state;
+        switch (state)
+        {
+            case phaseState.City:
+                // Fade in City UI. Fade out Neighbourhood and Home UIs
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p1City, Instance.fadeTimeUI));
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p3Neighbourhood, -Instance.fadeTimeUI));
+                if (Instance.p4Home.interactable) Instance.StartCoroutine(Instance.CanvasFade(Instance.p4Home, -Instance.fadeTimeUI));
+                break;
+            case phaseState.Zone:
+                // Fade in Zone UI. Fade out City UI.
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p2Zone, Instance.fadeTimeUI));
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p1City, -Instance.fadeTimeUI));
+                break;
+            case phaseState.Neighbourhood:
+                // Fade in Neighbourhood UI. Fade out Zone UI or Home UI as needed. 
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p3Neighbourhood, Instance.fadeTimeUI));
+                if (Instance.p2Zone.interactable) Instance.StartCoroutine(Instance.CanvasFade(Instance.p2Zone, -Instance.fadeTimeUI));
+                if (Instance.p4Home.interactable) Instance.StartCoroutine(Instance.CanvasFade(Instance.p4Home, -Instance.fadeTimeUI));
+                break;
+            case phaseState.Home:
+                // Fade in Home UI. Should fit on top of Neighbourhood UI as complement
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p4Home, Instance.fadeTimeUI));
+                break;
+        }
+    }
+    /// <summary>
+    /// Fades the UI into or out of view and changes its interactability
+    /// </summary>
+    /// <param name="target">CanvasGroup to fade</param>
+    /// <param name="fadeTime">Duration of the fade. Positive fades in, Negative fades out</param>
+    /// <returns></returns>
+    private IEnumerator CanvasFade(CanvasGroup target, float fadeTime)
+    {
+        target.interactable = false;
+        float timer = 0f;
+        while (timer < Mathf.Abs(fadeTime))
+        {
+            if (fadeTime < 0) // Negative = fade out
+            {
+                target.alpha = Mathf.Lerp(1, 0, timer / Mathf.Abs(fadeTime));
+            }
+            else if (fadeTime > 0) // Positive = fade in
+            {
+                target.alpha = Mathf.Lerp(0, 1, timer / Mathf.Abs(fadeTime));
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        if (fadeTime < 0) // Negative = fade out
+        {
+            target.alpha = 0;
+            target.interactable = false;
+        }
+        else if (fadeTime > 0) // Positive = fade in
+        {
+            target.alpha = 1;
+            target.interactable = true;
+        }
     }
 
     // Current Zone

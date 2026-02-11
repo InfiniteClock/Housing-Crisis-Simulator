@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneCam: {fileID: 1425453856860225825}
+  zoneType: 1
 --- !u!1 &5661448879672427104
 GameObject:
   m_ObjectHideFlags: 0

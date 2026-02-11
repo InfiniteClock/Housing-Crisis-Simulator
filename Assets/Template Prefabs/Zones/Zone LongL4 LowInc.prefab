@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zoneCam: {fileID: 5453853730481742401}
+  zoneType: 0
 --- !u!1001 &5243082584190886450
 PrefabInstance:
   m_ObjectHideFlags: 0
