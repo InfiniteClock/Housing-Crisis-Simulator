@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Slot
+  - Agent
   layers:
   - Default
   - TransparentFX

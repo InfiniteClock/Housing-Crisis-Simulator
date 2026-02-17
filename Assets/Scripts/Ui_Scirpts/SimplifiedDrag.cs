@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerUpHandler
+
+public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
-    public Canvas Canvas
-    {
-        get { return canvas; }
-        set { canvas = value; }
-    }
+    //public Canvas Canvas
+    //{
+    //    get { return canvas; }
+    //    set { canvas = value; }
+    //}
 
-    public GameObject zone;
-    public List<GameObject> blockLists;
+    //public GameObject zone;
+    //public List<GameObject> blockLists;
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
-    public bool useScrollToRotate = false;
 
     [HideInInspector]
-    public bool canBeInteracte = true;
-    public int spawnPointIndex;
+    //public bool canBeInteracte = true;
+    //public int spawnPointIndex;
 
 
 
@@ -31,7 +31,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     private Vector3 oringinRotation;
     private Vector3 currentRotation;
     private bool isSnapped;
-    private bool canBePlaced;
+    //private bool canBePlaced;
     private bool isSelected;
     private bool isFollowingMouse = false;
 
@@ -41,21 +41,17 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         isSnapped = false;
-        canBePlaced = true;
+        //canBePlaced = true;
         isSelected = false;
+
+        RecordReturnPosiiton();
+
     }
 
     public void Update()
     {
-        //shape rotation
-        if (isSelected)
-        {
-            ShapeRotation(rectTransform);
-            currentRotation = rectTransform.localEulerAngles;
-        }
-
+        
         //Toggle logic
-
         if (!isToggleDrag) return;
 
         ToggleLogic();
@@ -65,9 +61,9 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     //_____Toggle__________________________________________________________________
     public void ToggleLogic()
     {
-        if (!canBeInteracte) return;
+        //if (!canBeInteracte) return;
 
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition,null,out Vector3 worldPoint);
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition, null, out Vector3 worldPoint);
         Vector2 mousePosition = (Vector2)worldPoint;
         Collider2D hit = Physics2D.OverlapBox(mousePosition, new Vector2(20f, 20f), 0f);
 
@@ -79,7 +75,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         if (Input.GetMouseButtonDown(0))
         {
             //reset shape position when clcik the blank space
-            if(hit == null)
+            if (hit == null)
             {
                 if (isFollowingMouse)
                 {
@@ -88,9 +84,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 }
             }
 
-            //if there is a block under mouse
-            else if (hit.CompareTag("Block"))
+            //if there is a agent under mouse
+            else if (hit.CompareTag("Agent"))
             {
+                Debug.Log("hey");
                 //get the current shape
                 Drag hitdrag = hit.GetComponentInParent<Drag>();
                 if (hitdrag != this)
@@ -128,7 +125,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 RectTransform slot = hit.GetComponentInParent<RectTransform>();
                 if (slot != null)
                 {
-                    SnapFunction(slot);       
+                    SnapFunction(slot);
                     ToggleDeselectDrop();
                     isFollowingMouse = false;
                 }
@@ -156,48 +153,40 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         SelectEffect();
         isSelected = true;
         isSnapped = false;
-        canBePlaced = true;
+        //canBePlaced = true;
         rectTransform.SetAsLastSibling();
     }
 
     public void ToggleFollow()
     {
         MouseFollow(Input.mousePosition);
-        foreach (GameObject block in blockLists)
-        {
-            Collider2D col = block.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = false;
-        }
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = false;
     }
 
-    public void ToggleDeselectDrop ()
+    public void ToggleDeselectDrop()
     {
         if (!isToggleDrag) return;
 
-        foreach (GameObject block in blockLists)
-        {
-            Collider2D col = block.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = true;
-        }
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = true;
 
         //Center the object to the mouse position
-        if (!isSnapped || !canBePlaced)
+        if (!isSnapped)
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
-            canBeInteracte = true;
+            //canBeInteracte = true;
         }
         else
         {
-            GridLock();
-            ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
+            //GridLock();
+            //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
-            DeselectEffect();
+        DeselectEffect();
         isSelected = false;
 
-        
+
     }
 
     public void ToggleReturn()
@@ -206,14 +195,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
         isSelected = false;
-        canBeInteracte = true;
+        //canBeInteracte = true;
 
-        foreach (GameObject block in blockLists)
-        {
-            Collider2D col = block.GetComponent<Collider2D>();
-            if (col != null)
-                col.enabled = true;
-        }
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null) col.enabled = true;
     }
 
     public void MouseFollow(Vector2 position)
@@ -229,11 +214,11 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 
 
     //_____Hold__________________________________________________________________
-    public void OnPointerDown(PointerEventData eventData)  
+    public void OnPointerDown(PointerEventData eventData)
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        if (!canBeInteracte) return;
+        //if (!canBeInteracte) return;
 
 
         //Center the object to the mouse position
@@ -251,7 +236,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        if (!canBeInteracte) return;
+        //if (!canBeInteracte) return;
 
         //reset the shape back to the 
         rectTransform.localEulerAngles = oringinRotation;
@@ -264,12 +249,12 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        if (!canBeInteracte) return;
+        //if (!canBeInteracte) return;
 
         transform.SetParent(canvas.transform, true);
 
         isSnapped = false;
-        canBePlaced = true;
+        //canBePlaced = true;
         //isSelected = true;
         //make selected object rendered at the front layer
         rectTransform.SetAsLastSibling();
@@ -280,7 +265,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        if (!canBeInteracte) return;
+        //if (!canBeInteracte) return;
 
         //Make the obejct move with the mouse offset
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -295,16 +280,16 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 
         //Debug.Log("OnEndGrag");
 
-        if (!isSnapped || !canBePlaced)
+        if (!isSnapped)
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
-            canBeInteracte = true;
+            //canBeInteracte = true;
         }
         else
         {
-            GridLock();
-            ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
+            //GridLock();
+            //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
         isSelected = false;
@@ -317,113 +302,71 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //this function is used to check if all the blocks in shape is inside the map
         isSnapped = true;
 
-        foreach (GameObject block in blockLists)
+        Vector2 blockPosition = transform.position;
+
+        //Created an array of all the colliders in the overlapbox
+        Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
+
+        bool blockIsSnapped = false;
+        foreach (Collider2D hit in hits)
         {
-            Vector2 blockPosition = block.transform.position;
-
-            //Created an array of all the colliders in the overlapbox
-            Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
-
-            bool blockIsSnapped = false;
-            foreach (Collider2D hit in hits)
+            if (hit.CompareTag("Slot"))
             {
-                if (hit.CompareTag("Slot"))
-                {
-                    //if there is a collider under the box is tagged with Slot, the shape is in range
-                    blockIsSnapped = true;
-                    break;
-                }
-            }
-
-            //if there isn't any collider tagged with Slot, break the block foreach and reset position
-            if (!blockIsSnapped)
-            {
-                isSnapped = false;
+                //if there is a collider under the box is tagged with Slot, the shape is in range
+                blockIsSnapped = true;
                 break;
             }
         }
-    }
 
-    public void CheckBlockOverlap()
-    {
-        //this function is prevent shapes overlap eachother using the same logic
-        canBePlaced = true;
-
-        foreach (GameObject block in blockLists)
+        //if there isn't any collider tagged with Slot,reset position
+        if (!blockIsSnapped)
         {
-            Vector2 blockPosition = block.transform.position;
-
-            //Created an array of all the colliders in the overlapbox
-            Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
-
-            bool blockIsOverlap = false;
-            foreach (Collider2D hit in hits)
-            {
-                if (hit.CompareTag("Block") && hit.gameObject != block)
-                {
-                    //if there is a collider under the box is tagged with Block, the shape cannot be placed
-                    blockIsOverlap = true;
-                    //Debug.Log("is overlap");
-                    break;
-                }
-            }
-
-            //if triggers when the block is overlapping, thus cannot place shape
-            if (blockIsOverlap)
-            {
-                canBePlaced = false;
-                //Debug.Log("cannot place");
-                break;
-            }
+            isSnapped = false;
         }
     }
+
+    //public void CheckBlockOverlap()
+    //{
+    //    //this function is prevent shapes overlap eachother using the same logic
+    //    canBePlaced = true;
+
+    //    foreach (GameObject block in blockLists)
+    //    {
+    //        Vector2 blockPosition = block.transform.position;
+
+    //        //Created an array of all the colliders in the overlapbox
+    //        Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
+
+    //        bool blockIsOverlap = false;
+    //        foreach (Collider2D hit in hits)
+    //        {
+    //            if (hit.CompareTag("Block") && hit.gameObject != block)
+    //            {
+    //                //if there is a collider under the box is tagged with Block, the shape cannot be placed
+    //                blockIsOverlap = true;
+    //                //Debug.Log("is overlap");
+    //                break;
+    //            }
+    //        }
+
+    //        //if triggers when the block is overlapping, thus cannot place shape
+    //        if (blockIsOverlap)
+    //        {
+    //            canBePlaced = false;
+    //            //Debug.Log("cannot place");
+    //            break;
+    //        }
+    //    }
+    //}
 
     public void SnapFunction(RectTransform slot)
     {
         //public function called by the Drop script
         rectTransform.anchoredPosition = slot.anchoredPosition;
         rectTransform.localEulerAngles = currentRotation;
-        canBeInteracte = false;
+        //canBeInteracte = false;
         CheckBlockSnap();
-        CheckBlockOverlap();
-    }
-
-    public void ShapeRotation(RectTransform shape)
-    {
-        float step = 90f;
-        if (!useScrollToRotate)
-        {
-            //uses QE to controll rotation, Q is anti-clockwise and E is clockwise
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                Vector3 rotation = shape.localEulerAngles;
-                rotation.z += step;
-                shape.localEulerAngles = rotation;
-            }
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Vector3 rotation = shape.localEulerAngles;
-                rotation.z -= step;
-                shape.localEulerAngles = rotation;
-            }
-        }
-        else if (useScrollToRotate)
-        {
-            //uses mouse scroll to controll rotation, up is anti-clockwise and down is clockwise
-            float scroll = Input.mouseScrollDelta.y;
-            if (scroll > 0)
-            {
-                Vector3 rotation = shape.localEulerAngles;
-                rotation.z += step;
-                shape.localEulerAngles = rotation;
-            }
-            if (scroll < 0)
-            {
-                Vector3 rotation = shape.localEulerAngles;
-                rotation.z -= step;
-                shape.localEulerAngles = rotation;
-            }
-        }
+        //CheckBlockOverlap();
     }
 
     public void SelectEffect()
@@ -440,27 +383,27 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     }
 
     public void RecordReturnPosiiton()
-    {                
-        returnPoint = rectTransform.anchoredPosition;    
+    {
+        returnPoint = rectTransform.anchoredPosition;
         oringinRotation = rectTransform.localEulerAngles;
     }
 
 
     // Tells game manager what grid spaces are being taken up when placing object
-    private void GridLock()
-    {
-        Vector2 blockPosition = blockLists[0].transform.position;
+    //private void GridLock()
+    //{
+    //    Vector2 blockPosition = blockLists[0].transform.position;
 
-        //Created an array of all the colliders in the overlapbox
-        Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
+    //    //Created an array of all the colliders in the overlapbox
+    //    Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
 
-        foreach (Collider2D hit in hits)
-        {
-            if (hit.CompareTag("Slot"))
-            {
-                GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
-                break;
-            }
-        }   
-    }
+    //    foreach (Collider2D hit in hits)
+    //    {
+    //        if (hit.CompareTag("Slot"))
+    //        {
+    //            GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
+    //            break;
+    //        }
+    //    }
+    //}
 }
