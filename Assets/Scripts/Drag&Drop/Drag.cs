@@ -12,15 +12,22 @@ using UnityEngine.PlayerLoop;
 public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
+    public Canvas Canvas
+    {
+        get { return canvas; }
+        set { canvas = value; }
+    }
+
     public GameObject zone;
     public List<GameObject> blockLists;
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
-    [SerializeField] private bool useScrollToRotate = false;
+    public bool useScrollToRotate = false;
 
     [HideInInspector]
     public bool canBeInteracte = true;
+    public int spawnPointIndex;
 
 
 
@@ -39,8 +46,6 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
-        returnPoint = rectTransform.anchoredPosition;
-        oringinRotation = rectTransform.localEulerAngles;
         isSnapped = false;
         canBePlaced = true;
         isSelected = false;
@@ -152,6 +157,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     {
         if (!isToggleDrag) return;
 
+        transform.SetParent(canvas.transform, true);
+
         SelectEffect();
         isSelected = true;
         isSnapped = false;
@@ -191,6 +198,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         else
         {
             GridLock();
+            ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
             DeselectEffect();
         isSelected = false;
@@ -233,6 +241,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         if (isToggleDrag) return;
         if (!canBeInteracte) return;
 
+
         //Center the object to the mouse position
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
         {
@@ -262,6 +271,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         //disable this if toggle
         if (isToggleDrag) return;
         if (!canBeInteracte) return;
+
+        transform.SetParent(canvas.transform, true);
 
         isSnapped = false;
         canBePlaced = true;
@@ -299,6 +310,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         else
         {
             GridLock();
+            ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
         isSelected = false;
@@ -432,6 +444,13 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         canvasGroup.alpha = 1;
         canvasGroup.blocksRaycasts = true;
     }
+
+    public void RecordReturnPosiiton()
+    {                
+        returnPoint = rectTransform.anchoredPosition;    
+        oringinRotation = rectTransform.localEulerAngles;
+    }
+
 
     // Tells game manager what grid spaces are being taken up when placing object
     private void GridLock()

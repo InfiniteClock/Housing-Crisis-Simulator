@@ -429,6 +429,7 @@ MonoBehaviour:
   isToggleDrag: 0
   useScrollToRotate: 0
   canBeInteracte: 1
+  spawnPointIndex: 0
 --- !u!225 &6287674782692050415
 CanvasGroup:
   m_ObjectHideFlags: 0
