@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -37,6 +38,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     private bool isSelected;
     private bool isFollowingMouse = false;
 
+    private CinemachineCamera nextCam;
 
     private void Awake()
     {
@@ -45,8 +47,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         isSnapped = false;
         //canBePlaced = true;
         isSelected = false;
-
-        RecordReturnPosiiton();
 
     }
 
@@ -292,6 +292,14 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         }
         else
         {
+            if (GameManager.currentPhase == GameManager.phaseState.Zone)
+            {
+                PickLord();
+            }
+            if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
+            {
+                PickHome();
+            }
             //GridLock();
             //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
@@ -410,4 +418,15 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     //        }
     //    }
     //}
+
+    private void PickLord()
+    {
+        GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
+        CameraManager.CameraSwitch(GameManager.Instance.testZone.hoods[0].hoodCam);
+    }
+    private void PickHome()
+    {
+        GameManager.PhaseUpdate(GameManager.phaseState.City);
+        CameraManager.CameraSwitch(GameManager.Instance.cityCam);
+    }
 }

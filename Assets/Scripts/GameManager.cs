@@ -112,6 +112,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator CanvasFade(CanvasGroup target, float fadeTime)
     {
         target.interactable = false;
+        target.gameObject.SetActive(true);
         float timer = 0f;
         while (timer < Mathf.Abs(fadeTime))
         {
@@ -130,6 +131,7 @@ public class GameManager : MonoBehaviour
         {
             target.alpha = 0;
             target.interactable = false;
+            target.gameObject.SetActive(false);
         }
         else if (fadeTime > 0) // Positive = fade in
         {
@@ -180,6 +182,8 @@ public class GameManager : MonoBehaviour
             // Otherwise, set this as the instance
             Instance = this;
         }
+
+        
     }
     private void Start()
     {
@@ -209,7 +213,14 @@ public class GameManager : MonoBehaviour
                 j++;
             }
         }
-        PhaseUpdate(phaseState.City);
+
+        // Set each canvas to correct state
+        Instance.StartCoroutine(CanvasFade(Instance.p1City, 0.01f));
+        Instance.StartCoroutine(CanvasFade(Instance.p2Zone, -0.01f));
+        Instance.StartCoroutine(CanvasFade(Instance.p3Neighbourhood, -0.01f));
+        Instance.StartCoroutine(CanvasFade(Instance.p4Home, -0.01f));
+
+        currentPhase = phaseState.City;
         GameStateUpdate(gameState.Play);
         happiness = 0;
         funds = 1000;
@@ -224,10 +235,11 @@ public class GameManager : MonoBehaviour
         // Trigger test of phase transition by pressing spacebar
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            NextPhase();
+            //NextPhase();
         }
     }
 
+    /*
     // This is purely for testing and forcing phase transitions with a test zone 
     public void NextPhase()
     {
@@ -251,7 +263,7 @@ public class GameManager : MonoBehaviour
                 break;
         }
         Debug.Log(currentPhase);
-    }
+    }*/
 
     /// <summary>
     /// Adds a new 3D zone to the grid. Then transitions to next phase
@@ -304,6 +316,7 @@ public class GameManager : MonoBehaviour
         // If the placed zone was not a non residential zone, move to phase 2
         if (newZoneScript.GetZoneType() != Zone.Type.NonRes)
         {
+            testZone = newZoneScript;
             PhaseUpdate(phaseState.Zone);
             CameraManager.CameraSwitch(newZoneScript.zoneCam);
         }
