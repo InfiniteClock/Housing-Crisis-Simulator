@@ -18,6 +18,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
+    public int XOffset;
+    public int YOffset;
 
     [HideInInspector]
     //public bool canBeInteracte = true;
@@ -84,8 +86,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                 }
             }
 
-            //if there is a agent under mouse
-            else if (hit.CompareTag("Agent"))
+            //if there is a DragObject under mouse
+            else if (hit.CompareTag("DragObject"))
             {
                 Debug.Log("hey");
                 //get the current shape
@@ -224,6 +226,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         //Center the object to the mouse position
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
         {
+            localPoint.x += XOffset;
+            localPoint.y += YOffset;
             rectTransform.anchoredPosition = localPoint;
             //Debug.Log("Position Zero!");
         }
