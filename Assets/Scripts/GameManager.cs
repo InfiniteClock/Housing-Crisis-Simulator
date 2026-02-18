@@ -288,9 +288,9 @@ public class GameManager : MonoBehaviour
             return;
         }
         // Change the spawn location to be at 0 in y axis 
-        spawnTile.position = new Vector3(spawnTile.position.x, 0, spawnTile.position.z);
+        Vector3 spawn = new Vector3(spawnTile.position.x, 0, spawnTile.position.z);
         // Apply transform position to the object
-        newZone.transform.position = spawnTile.transform.position;
+        newZone.transform.position = spawn;
 
 
         // ---Rotation of the zone---
