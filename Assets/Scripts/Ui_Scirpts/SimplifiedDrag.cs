@@ -35,7 +35,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     private Vector3 currentRotation;
     private bool isSnapped;
     //private bool canBePlaced;
-    private bool isSelected;
+    private bool isSelected = false;
     private bool isFollowingMouse = false;
 
     private CinemachineCamera nextCam;
@@ -47,6 +47,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         isSnapped = false;
         //canBePlaced = true;
         isSelected = false;
+        RecordReturnPosiiton();
 
     }
 

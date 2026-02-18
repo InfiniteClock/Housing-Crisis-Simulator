@@ -11176,7 +11176,7 @@ MonoBehaviour:
   p1City: {fileID: 592982764}
   p2Zone: {fileID: 792869737}
   p3Neighbourhood: {fileID: 1829156909}
-  p4Home: {fileID: 384863157}
+  p4Home: {fileID: 1829156909}
   fadeTimeUI: 0.5
   fadeDelayUI: 0
   testZone: {fileID: 0}
@@ -14094,7 +14094,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 792869736}
   isToggleDrag: 0
-  XOffset: 0
+  XOffset: 100
   YOffset: 100
 --- !u!61 &1676892537
 BoxCollider2D:
