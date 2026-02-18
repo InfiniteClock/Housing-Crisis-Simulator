@@ -292,14 +292,15 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         }
         else
         {
-            if (GameManager.currentPhase == GameManager.phaseState.Zone)
-            {
-                PickLord();
-            }
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
                 PickHome();
             }
+            else if (GameManager.currentPhase == GameManager.phaseState.Zone)
+            {
+                PickLord();
+            }
+            
             //GridLock();
             //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
