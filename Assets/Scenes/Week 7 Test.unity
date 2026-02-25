@@ -8589,7 +8589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 657, y: 164}
+  m_AnchoredPosition: {x: 910, y: 415}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &996960971
@@ -8605,7 +8605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 792869736}
-  isToggleDrag: 0
+  isToggleDrag: 1
   XOffset: 100
   YOffset: 100
 --- !u!61 &996960973
@@ -13315,7 +13315,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 100}
+  m_SizeDelta: {x: 180, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1620039802
 MonoBehaviour:
@@ -14093,7 +14093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 792869736}
-  isToggleDrag: 0
+  isToggleDrag: 1
   XOffset: 100
   YOffset: 100
 --- !u!61 &1676892537
@@ -14548,7 +14548,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 100}
+  m_SizeDelta: {x: 180, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1729065481
 MonoBehaviour:
@@ -14698,7 +14698,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 150, y: 100}
+  m_SizeDelta: {x: 180, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1750732277
 MonoBehaviour:
@@ -17582,10 +17582,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2041761724}
   - component: {fileID: 2041761729}
-  - component: {fileID: 2041761727}
-  - component: {fileID: 2041761726}
-  - component: {fileID: 2041761725}
   - component: {fileID: 2041761730}
+  - component: {fileID: 2041761727}
+  - component: {fileID: 2041761725}
+  - component: {fileID: 2041761726}
   m_Layer: 0
   m_Name: Family Icon
   m_TagString: DragObject
@@ -17661,7 +17661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvas: {fileID: 1829156908}
-  isToggleDrag: 0
+  isToggleDrag: 1
   XOffset: 0
   YOffset: 0
 --- !u!114 &2041761727

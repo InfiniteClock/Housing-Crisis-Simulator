@@ -90,9 +90,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             //if there is a DragObject under mouse
             else if (hit.CompareTag("DragObject"))
             {
-                Debug.Log("hey");
                 //get the current shape
-                Drag hitdrag = hit.GetComponentInParent<Drag>();
+                SimplifiedDrag hitdrag = hit.GetComponentInParent<SimplifiedDrag>();
                 if (hitdrag != this)
                 {
                     //if click on other shapes, it return the shape
@@ -183,6 +182,14 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         }
         else
         {
+            if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
+            {
+                PickHome();
+            }
+            else if (GameManager.currentPhase == GameManager.phaseState.Zone)
+            {
+                PickLord();
+            }
             //GridLock();
             //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
@@ -210,6 +217,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         //Center the object to the mouse position
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, position, null, out Vector2 localPoint))
         {
+            localPoint.x += XOffset;
+            localPoint.y += YOffset;
             rectTransform.anchoredPosition = localPoint;
             //Debug.Log("Position Zero!");
         }
@@ -260,7 +269,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
         isSnapped = false;
         //canBePlaced = true;
-        //isSelected = true;
+        isSelected = true;
         //make selected object rendered at the front layer
         rectTransform.SetAsLastSibling();
         //Debug.Log("OnBeginGrag");
