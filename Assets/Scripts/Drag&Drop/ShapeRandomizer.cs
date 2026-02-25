@@ -14,6 +14,8 @@ public class ShapeRandomizer : MonoBehaviour
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
 
+    private List<GameObject> shapePool;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -25,6 +27,8 @@ public class ShapeRandomizer : MonoBehaviour
             drag.isToggleDrag = isToggleDrag;
             drag.useScrollToRotate = useScrollToRotate;
         }
+        //create an copy of the shape list
+        shapePool = new List<GameObject>(shapeList);
 
         SpawnSceneStart();
     }
@@ -40,9 +44,18 @@ public class ShapeRandomizer : MonoBehaviour
 
     public void RandomSpawnShape(int i)
     {
-        int randomIndex = Random.Range(0, shapeList.Count);
+        int randomIndex = Random.Range(0, shapePool.Count);
         Transform spawnPoint = spawnPointList[i];
-        GameObject placedShape = Instantiate(shapeList[randomIndex], spawnPoint);
+
+        //refill the pool if it is empty
+        if(shapePool.Count == 0)
+        {
+            shapePool = new List<GameObject>(shapeList);
+        }
+
+        //spawn the shape and remove it from the pool
+        GameObject placedShape = Instantiate(shapePool[randomIndex], spawnPoint);
+        shapePool.Remove(shapePool[randomIndex]);
 
         //reset the shape position
         RectTransform rectTransfrom = placedShape.GetComponent<RectTransform>();
