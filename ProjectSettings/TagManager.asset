@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Block
   - Slot
+  - DragObject
   layers:
   - Default
   - TransparentFX

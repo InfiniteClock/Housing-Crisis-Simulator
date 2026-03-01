@@ -1,0 +1,71 @@
+using NUnit.Framework;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShapeRandomizer : MonoBehaviour
+{
+    public static ShapeRandomizer Instance;
+
+    public Canvas phase1Canvas;
+    public List<GameObject> shapeList;
+    public List<Transform> spawnPointList;
+
+    [Header("Drag object options")]
+    public bool isToggleDrag = false;
+    public bool useScrollToRotate = false;
+
+    private List<GameObject> shapePool;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        Instance = this;
+        foreach (GameObject shape in shapeList)
+        {
+            Drag drag = shape.GetComponent<Drag>();
+            drag.Canvas = phase1Canvas;
+            drag.isToggleDrag = isToggleDrag;
+            drag.useScrollToRotate = useScrollToRotate;
+        }
+        //create an copy of the shape list
+        shapePool = new List<GameObject>(shapeList);
+
+        SpawnSceneStart();
+    }
+
+
+    public void SpawnSceneStart()
+    {
+        for(int i = 0; i < spawnPointList.Count; i++)
+        {
+            RandomSpawnShape(i);
+        }
+    }
+
+    public void RandomSpawnShape(int i)
+    {
+        int randomIndex = Random.Range(0, shapePool.Count);
+        Transform spawnPoint = spawnPointList[i];
+
+        //refill the pool if it is empty
+        if(shapePool.Count == 0)
+        {
+            shapePool = new List<GameObject>(shapeList);
+        }
+
+        //spawn the shape and remove it from the pool
+        GameObject placedShape = Instantiate(shapePool[randomIndex], spawnPoint);
+        shapePool.Remove(shapePool[randomIndex]);
+
+        //reset the shape position
+        RectTransform rectTransfrom = placedShape.GetComponent<RectTransform>();
+        rectTransfrom.anchoredPosition = Vector2.zero;
+        placedShape.transform.SetParent(phase1Canvas.transform, true);
+
+        //pass the index value and record current position
+        placedShape.GetComponent<Drag>().spawnPointIndex = i;
+        placedShape.GetComponent<Drag>().RecordReturnPosiiton();
+
+        
+    }
+}
