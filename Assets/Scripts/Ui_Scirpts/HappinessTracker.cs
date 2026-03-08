@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 public class HappinessTracker : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class HappinessTracker : MonoBehaviour
     public GameObject sprite;
     private Image backgroundImage;
     private Image spriteImage;
+    public List<Sprite> faceSprites;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,18 +24,26 @@ public class HappinessTracker : MonoBehaviour
     {
         // Debugger
         //Debug.Log(tracker.value + " " + backgroundImage.color + " " + spriteImage.sprite);
-
-        if(tracker.value >= 30)
+        if (faceSprites.Count == 3)
         {
-            background.GetComponent<Image>().color = Color.green;
-        }
-        else if (tracker.value >-30 & tracker.value < 30)
+            if (tracker.value >= 30)
+            {
+                background.GetComponent<Image>().color = Color.green;
+                spriteImage.sprite = faceSprites[2];
+            }
+            else if (tracker.value > -30 & tracker.value < 30)
+            {
+                background.GetComponent<Image>().color = Color.yellow;
+                spriteImage.sprite = faceSprites[1];
+            }
+            else
+            {
+                background.GetComponent<Image>().color = Color.red;
+                spriteImage.sprite = faceSprites[0];
+            }
+        } else
         {
-            background.GetComponent<Image>().color = Color.yellow;
-        }
-        else
-        {
-            background.GetComponent<Image>().color = Color.red;
+            Debug.Log("!to many sprites!");
         }
     }
 }
