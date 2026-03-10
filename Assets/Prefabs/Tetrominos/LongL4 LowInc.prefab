@@ -182,6 +182,7 @@ MonoBehaviour:
   - {fileID: 4901800697475282685}
   - {fileID: 4384578975008595467}
   - {fileID: 235038390836956916}
+  zoneCost: 1200
   isToggleDrag: 1
   useScrollToRotate: 1
   canBeInteracte: 1

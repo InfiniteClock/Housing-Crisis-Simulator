@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class LandlordSetup : MonoBehaviour
 {
     public Sprite landlordSprite;
-    public string name;
+    public string landloaedName;
     public int companyInt;
     public int Trait01;
     public int Trait02;

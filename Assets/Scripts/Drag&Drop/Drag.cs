@@ -16,14 +16,13 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     public List<GameObject> blockLists;
 
     [Header("Drag object options")]
+    public int zoneCost;
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
 
     [HideInInspector]
     public bool canBeInteracte = true;
     public int spawnPointIndex;
-
-
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
@@ -459,6 +458,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             if (hit.CompareTag("Slot"))
             {
                 GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
+                ResourceManager.Instance.SpendBudget(zoneCost);
                 break;
             }
         }   

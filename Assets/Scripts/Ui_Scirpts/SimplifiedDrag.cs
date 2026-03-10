@@ -35,7 +35,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     private Vector3 currentRotation;
     private bool isSnapped;
     //private bool canBePlaced;
-    private bool isSelected = false;
+    //private bool isSelected = false;
     private bool isFollowingMouse = false;
 
     private CinemachineCamera nextCam;
@@ -46,7 +46,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         canvasGroup = GetComponent<CanvasGroup>();
         isSnapped = false;
         //canBePlaced = true;
-        isSelected = false;
+        //isSelected = false;
         RecordReturnPosiiton();
 
     }
@@ -153,7 +153,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         transform.SetParent(canvas.transform, true);
 
         SelectEffect();
-        isSelected = true;
+        //isSelected = true;
         isSnapped = false;
         //canBePlaced = true;
         rectTransform.SetAsLastSibling();
@@ -194,7 +194,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
-        isSelected = false;
+        //isSelected = false;
 
 
     }
@@ -204,7 +204,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         rectTransform.localEulerAngles = oringinRotation;
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
-        isSelected = false;
+        //isSelected = false;
         //canBeInteracte = true;
 
         Collider2D col = GetComponent<Collider2D>();
@@ -242,7 +242,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             //Debug.Log("Position Zero!");
         }
         SelectEffect();
-        isSelected = true;
+        //isSelected = true;
 
     }
 
@@ -256,7 +256,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         rectTransform.localEulerAngles = oringinRotation;
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
-        isSelected = false;
+        //isSelected = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -269,7 +269,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
         isSnapped = false;
         //canBePlaced = true;
-        isSelected = true;
+        //isSelected = true;
         //make selected object rendered at the front layer
         rectTransform.SetAsLastSibling();
         //Debug.Log("OnBeginGrag");
@@ -315,7 +315,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
-        isSelected = false;
+        //isSelected = false;
     }
 
     //_____Functions__________________________________________________________________
