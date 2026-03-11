@@ -233,10 +233,10 @@ public class GameManager : MonoBehaviour
     public void Update()
     {
         // Trigger test of phase transition by pressing spacebar
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //NextPhase();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    NextPhase();
+        //}
     }
 
     /*
