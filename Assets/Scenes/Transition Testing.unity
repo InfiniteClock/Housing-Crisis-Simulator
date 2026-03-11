@@ -523,7 +523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &73338645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2501,7 +2501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &329178182
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3446,7 +3446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &495966481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3489,7 +3489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &497761333
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8736,6 +8736,7 @@ MonoBehaviour:
   tracker: {fileID: 1135552095}
   background: {fileID: 1284161525}
   sprite: {fileID: 1518593755}
+  faceSprites: []
 --- !u!1 &1148598574
 GameObject:
   m_ObjectHideFlags: 0
@@ -9737,6 +9738,9 @@ MonoBehaviour:
   - {fileID: 1237419076}
   - {fileID: 1540731872}
   - {fileID: 839371256}
+  zonePriceSlot1: {fileID: 0}
+  zonePriceSlot2: {fileID: 0}
+  zonePriceSlot3: {fileID: 0}
   isToggleDrag: 1
   useScrollToRotate: 1
 --- !u!1 &1243074631
@@ -10329,7 +10333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1425109044
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12985,7 +12989,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1848970044
 RectTransform:
   m_ObjectHideFlags: 0
