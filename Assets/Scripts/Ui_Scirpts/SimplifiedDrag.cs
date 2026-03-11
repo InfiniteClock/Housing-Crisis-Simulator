@@ -8,23 +8,11 @@ using UnityEngine.EventSystems;
 public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
-    //public Canvas Canvas
-    //{
-    //    get { return canvas; }
-    //    set { canvas = value; }
-    //}
-
-    //public GameObject zone;
-    //public List<GameObject> blockLists;
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
     public int XOffset;
     public int YOffset;
-
-    [HideInInspector]
-    //public bool canBeInteracte = true;
-    //public int spawnPointIndex;
 
 
 
@@ -45,10 +33,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
         isSnapped = false;
-        //canBePlaced = true;
-        //isSelected = false;
         RecordReturnPosiiton();
-
     }
 
     public void Update()
@@ -64,7 +49,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     //_____Toggle__________________________________________________________________
     public void ToggleLogic()
     {
-        //if (!canBeInteracte) return;
 
         RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, Input.mousePosition, null, out Vector3 worldPoint);
         Vector2 mousePosition = (Vector2)worldPoint;
@@ -149,13 +133,9 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     public void ToggleSelectDrag()
     {
         if (!isToggleDrag) return;
-
         transform.SetParent(canvas.transform, true);
-
         SelectEffect();
-        //isSelected = true;
         isSnapped = false;
-        //canBePlaced = true;
         rectTransform.SetAsLastSibling();
     }
 
@@ -178,23 +158,21 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
-            //canBeInteracte = true;
         }
         else
         {
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
                 PickHome();
+                TenantStats tenant = GetComponent<TenantStats>();
+                tenant.PayRent();
             }
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
                 PickLord();
             }
-            //GridLock();
-            //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
-        //isSelected = false;
 
 
     }
@@ -204,8 +182,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         rectTransform.localEulerAngles = oringinRotation;
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
-        //isSelected = false;
-        //canBeInteracte = true;
 
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = true;
@@ -230,8 +206,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        //if (!canBeInteracte) return;
-
 
         //Center the object to the mouse position
         if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas.transform as RectTransform, eventData.position, null, out Vector2 localPoint))
@@ -242,34 +216,27 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             //Debug.Log("Position Zero!");
         }
         SelectEffect();
-        //isSelected = true;
-
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        //if (!canBeInteracte) return;
 
         //reset the shape back to the 
         rectTransform.localEulerAngles = oringinRotation;
         rectTransform.anchoredPosition = returnPoint;
         DeselectEffect();
-        //isSelected = false;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        //if (!canBeInteracte) return;
 
         transform.SetParent(canvas.transform, true);
 
         isSnapped = false;
-        //canBePlaced = true;
-        //isSelected = true;
         //make selected object rendered at the front layer
         rectTransform.SetAsLastSibling();
         //Debug.Log("OnBeginGrag");
@@ -279,7 +246,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     {
         //disable this if toggle
         if (isToggleDrag) return;
-        //if (!canBeInteracte) return;
 
         //Make the obejct move with the mouse offset
         rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
@@ -298,24 +264,21 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         {
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
-            //canBeInteracte = true;
         }
         else
         {
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
                 PickHome();
+                TenantStats tenant = GetComponent<TenantStats>();
+                tenant.PayRent();
             }
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
                 PickLord();
             }
-            
-            //GridLock();
-            //ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
-        //isSelected = false;
     }
 
     //_____Functions__________________________________________________________________
@@ -348,40 +311,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         }
     }
 
-    //public void CheckBlockOverlap()
-    //{
-    //    //this function is prevent shapes overlap eachother using the same logic
-    //    canBePlaced = true;
-
-    //    foreach (GameObject block in blockLists)
-    //    {
-    //        Vector2 blockPosition = block.transform.position;
-
-    //        //Created an array of all the colliders in the overlapbox
-    //        Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
-
-    //        bool blockIsOverlap = false;
-    //        foreach (Collider2D hit in hits)
-    //        {
-    //            if (hit.CompareTag("Block") && hit.gameObject != block)
-    //            {
-    //                //if there is a collider under the box is tagged with Block, the shape cannot be placed
-    //                blockIsOverlap = true;
-    //                //Debug.Log("is overlap");
-    //                break;
-    //            }
-    //        }
-
-    //        //if triggers when the block is overlapping, thus cannot place shape
-    //        if (blockIsOverlap)
-    //        {
-    //            canBePlaced = false;
-    //            //Debug.Log("cannot place");
-    //            break;
-    //        }
-    //    }
-    //}
-
     public void SnapFunction(RectTransform slot)
     {
         //public function called by the Drop script
@@ -410,25 +339,6 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         returnPoint = rectTransform.anchoredPosition;
         oringinRotation = rectTransform.localEulerAngles;
     }
-
-
-    // Tells game manager what grid spaces are being taken up when placing object
-    //private void GridLock()
-    //{
-    //    Vector2 blockPosition = blockLists[0].transform.position;
-
-    //    //Created an array of all the colliders in the overlapbox
-    //    Collider2D[] hits = Physics2D.OverlapBoxAll(blockPosition, new Vector2(1f, 1f), 0f);
-
-    //    foreach (Collider2D hit in hits)
-    //    {
-    //        if (hit.CompareTag("Slot"))
-    //        {
-    //            GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
-    //            break;
-    //        }
-    //    }
-    //}
 
     private void PickLord()
     {

@@ -6,8 +6,8 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     [Header("Resource Status")]
-    public int initialBudget;
-    public int currentBudget;
+    public float initialBudget;
+    public float currentBudget;
 
     [Space(10)]
     [Header("UI Objects")]
@@ -42,13 +42,13 @@ public class ResourceManager : MonoBehaviour
         budgetText.text = "$" + currentBudget.ToString() + "K";
     }
 
-    public void SpendBudget(int money)
+    public void SpendBudget(float money)
     {
         currentBudget -= money;
         UpdateBudgetUI();
     }
 
-    public void AddBudget(int money)
+    public void AddBudget(float money)
     {
         currentBudget += money;
         UpdateBudgetUI();
