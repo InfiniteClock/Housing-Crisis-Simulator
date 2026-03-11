@@ -20,6 +20,7 @@ public class ShapeRandomizer : MonoBehaviour
     public bool useScrollToRotate = false;
 
     private List<GameObject> shapePool;
+    private Transform newSpawnPoint;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -60,11 +61,17 @@ public class ShapeRandomizer : MonoBehaviour
 
         //spawn the shape and remove it from the pool
         GameObject placedShape = Instantiate(shapePool[randomIndex], spawnPoint);
-        shapePool.Remove(shapePool[randomIndex]);
+        
 
         //reset the shape position
         RectTransform rectTransfrom = placedShape.GetComponent<RectTransform>();
         rectTransfrom.anchoredPosition = Vector2.zero;
+        
+
+        //find the spawnPoint after adding the offset
+        Vector3 spawnPositionOffset = shapePool[randomIndex].GetComponent<Drag>().spawnPositionOffset;
+        placedShape.transform.position = placedShape.transform.position + spawnPositionOffset;
+
         placedShape.transform.SetParent(phase1Canvas.transform, true);
 
         //pass the index value and record current position
@@ -73,6 +80,8 @@ public class ShapeRandomizer : MonoBehaviour
 
         //display the zone price
         ShowZonePrice(i, placedShape);
+
+        shapePool.Remove(shapePool[randomIndex]);
 
     }
 

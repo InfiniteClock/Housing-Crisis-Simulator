@@ -166,10 +166,14 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                 PickHome();
                 TenantStats tenant = GetComponent<TenantStats>();
                 tenant.PayRent();
+                rectTransform.localEulerAngles = oringinRotation;
+                rectTransform.anchoredPosition = returnPoint;
             }
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
                 PickLord();
+                rectTransform.localEulerAngles = oringinRotation;
+                rectTransform.anchoredPosition = returnPoint;
             }
         }
         DeselectEffect();
