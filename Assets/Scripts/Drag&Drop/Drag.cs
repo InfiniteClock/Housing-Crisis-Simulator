@@ -51,7 +51,6 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 
     public void Update()
     {
-        ReplaceSprite(blockLists, lockedSprite);
         //shape rotation
         if (isSelected)
         {
@@ -196,6 +195,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         }
         else
         {
+            
             GridLock();
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
@@ -468,7 +468,8 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 ResourceManager.Instance.SpendBudget(zoneCost);
                 break;
             }
-        }   
+        }
+        
     }
 
     // Replaces all spirtes in a block with a new one
@@ -479,5 +480,17 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         {
             block.GetComponent<Image>().sprite = newSprite;
         }
+    }
+
+    // switch sprite of all locked blocks and place name tags
+    private void OnDisable()
+    {
+        if(!canBeInteracte)
+        {
+            ReplaceSprite(blockLists, lockedSprite);
+
+            //place name tags
+
+        } 
     }
 }
