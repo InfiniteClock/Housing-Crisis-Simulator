@@ -18,6 +18,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 
     [Header("Drag object options")]
     public int zoneCost;
+    public Vector3 spawnPositionOffset;
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
 
@@ -27,6 +28,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
 
     [HideInInspector]
     public bool canBeInteracte = true;
+    [HideInInspector]
     public int spawnPointIndex;
 
     private RectTransform rectTransform;
@@ -489,8 +491,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         {
             ReplaceSprite(blockLists, lockedSprite);
 
-            //place name tags
-
+            //place name tags 
         } 
     }
 }

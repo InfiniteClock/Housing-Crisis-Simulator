@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -319, y: -148}
+  m_AnchoredPosition: {x: -319, y: -191}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6198582272947462532
@@ -59,6 +59,7 @@ MonoBehaviour:
   - {fileID: 3014232992476290515}
   - {fileID: 1763784859900160590}
   zoneCost: 900
+  spawnPositionOffset: {x: 50, y: -75, z: 0}
   isToggleDrag: 1
   useScrollToRotate: 1
   deafultSprite: {fileID: 21300000, guid: a7905ffa203440442b0de3ccffa4cc26, type: 3}
