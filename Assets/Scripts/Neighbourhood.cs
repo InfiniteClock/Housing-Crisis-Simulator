@@ -55,26 +55,26 @@ public class Neighbourhood : MonoBehaviour
         mr.material = matNonInteract;
         currentMat = matNonInteract;
     }
-    private void OnMouseEnter()
-    {
-        if (GameManager.currentPhase == GameManager.phaseState.City)
-        {
-            parentZone.SetMouseEnter();
-        }
-        if (GameManager.currentPhase == GameManager.phaseState.Zone)
-        {
-            SetMouseEnter();
-        }
-    }
+    //private void OnMouseEnter()
+    //{
+    //    if (GameManager.currentPhase == GameManager.phaseState.City)
+    //    {
+    //        parentZone.SetMouseEnter();
+    //    }
+    //    if (GameManager.currentPhase == GameManager.phaseState.Zone)
+    //    {
+    //        SetMouseEnter();
+    //    }
+    //}
     public void SetMouseEnter()
     {
         mr.material = matHighlight;
     }
-    private void OnMouseExit()
-    {
-        parentZone.SetMouseExit();
-        SetMouseExit();
-    }
+    //private void OnMouseExit()
+    //{
+    //    parentZone.SetMouseExit();
+    //    SetMouseExit();
+    //}
     public void SetMouseExit()
     {
         mr.material = currentMat;

@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2295438679932747467}
+  - {fileID: 4148705571912828415}
   - {fileID: 1949072969427168105}
   - {fileID: 52379841477148403}
   - {fileID: 3294075403121678055}
@@ -49,9 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7c759c1ea24cd4582794a9216d6d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoneCam: {fileID: 1425453856860225825}
+  zoneCam: {fileID: 6400742955074016188}
   zoneType: 1
---- !u!1 &5661448879672427104
+--- !u!1 &3205132692402302975
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -59,8 +59,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2295438679932747467}
-  - component: {fileID: 1425453856860225825}
+  - component: {fileID: 4148705571912828415}
+  - component: {fileID: 6400742955074016188}
   m_Layer: 0
   m_Name: Phase 2 Camera
   m_TagString: Untagged
@@ -68,28 +68,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2295438679932747467
+--- !u!4 &4148705571912828415
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5661448879672427104}
+  m_GameObject: {fileID: 3205132692402302975}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.92387956, z: -0.38268343, w: 0}
-  m_LocalPosition: {x: 0, y: 19, z: 25}
+  m_LocalRotation: {x: -0, y: 0.8660254, z: -0.5, w: 0}
+  m_LocalPosition: {x: -6, y: 30, z: 30}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6391752637951041521}
-  m_LocalEulerAnglesHint: {x: 45, y: 180, z: 0}
---- !u!114 &1425453856860225825
+  m_LocalEulerAnglesHint: {x: 60, y: 180, z: 0}
+--- !u!114 &6400742955074016188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5661448879672427104}
+  m_GameObject: {fileID: 3205132692402302975}
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
