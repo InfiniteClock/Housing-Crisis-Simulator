@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDragHandler, IDragHandler, IPointerUpHandler
 {
@@ -19,6 +20,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     public int zoneCost;
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
+
+    [Header("Sprites")]
+    public Sprite deafultSprite;
+    public Sprite lockedSprite;
 
     [HideInInspector]
     public bool canBeInteracte = true;
@@ -190,6 +195,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         }
         else
         {
+            
             GridLock();
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
@@ -303,6 +309,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         else
         {
             GridLock();
+            
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
         }
         DeselectEffect();
@@ -461,6 +468,29 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 ResourceManager.Instance.SpendBudget(zoneCost);
                 break;
             }
-        }   
+        }
+        
+    }
+
+    // Replaces all spirtes in a block with a new one
+    private void ReplaceSprite(List<GameObject> blocks, Sprite newSprite)
+    {
+        Debug.Log("Replace!");
+        foreach (GameObject block in blocks)
+        {
+            block.GetComponent<Image>().sprite = newSprite;
+        }
+    }
+
+    // switch sprite of all locked blocks and place name tags
+    private void OnDisable()
+    {
+        if(!canBeInteracte)
+        {
+            ReplaceSprite(blockLists, lockedSprite);
+
+            //place name tags
+
+        } 
     }
 }
