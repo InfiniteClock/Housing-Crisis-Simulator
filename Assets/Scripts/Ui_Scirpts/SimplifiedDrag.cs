@@ -8,6 +8,11 @@ using UnityEngine.EventSystems;
 public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     [SerializeField] private Canvas canvas;
+    public Canvas Canvas
+    {
+        get { return canvas; }
+        set { canvas = value; }
+    }
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
@@ -172,8 +177,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
                 PickLord();
-                rectTransform.localEulerAngles = oringinRotation;
-                rectTransform.anchoredPosition = returnPoint;
+                LandloardRandomizer.Instance.ResetLandlords();
             }
         }
         DeselectEffect();
@@ -280,6 +284,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
                 PickLord();
+                LandloardRandomizer.Instance.ResetLandlords();
             }
         }
         DeselectEffect();

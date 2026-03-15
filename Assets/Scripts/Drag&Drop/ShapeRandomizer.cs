@@ -22,10 +22,24 @@ public class ShapeRandomizer : MonoBehaviour
     private List<GameObject> shapePool;
     private Transform newSpawnPoint;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            // Suicide if Instance another game manager exists
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            // Otherwise, set this as the instance
+            Instance = this;
+        }
+
+
+    }
+
     void Start()
     {
-        Instance = this;
         foreach (GameObject shape in shapeList)
         {
             Drag drag = shape.GetComponent<Drag>();
@@ -50,14 +64,14 @@ public class ShapeRandomizer : MonoBehaviour
 
     public void RandomSpawnShape(int i)
     {
-        int randomIndex = Random.Range(0, shapePool.Count);
-        Transform spawnPoint = spawnPointList[i];
-
         //refill the pool if it is empty
         if (shapePool.Count == 0)
         {
             shapePool = new List<GameObject>(shapeList);
         }
+
+        int randomIndex = Random.Range(0, shapePool.Count);
+        Transform spawnPoint = spawnPointList[i];
 
         //spawn the shape and remove it from the pool
         GameObject placedShape = Instantiate(shapePool[randomIndex], spawnPoint);
@@ -81,7 +95,7 @@ public class ShapeRandomizer : MonoBehaviour
         //display the zone price
         ShowZonePrice(i, placedShape);
 
-        shapePool.Remove(shapePool[randomIndex]);
+        shapePool.RemoveAt(randomIndex);
 
     }
 
