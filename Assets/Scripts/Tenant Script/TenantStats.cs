@@ -12,6 +12,8 @@ public class TenantStats : MonoBehaviour
     [Header("UI Objects")]
     public TextMeshProUGUI budgetText;
 
+    private bool isHappy;
+
     void Start()
     {
         

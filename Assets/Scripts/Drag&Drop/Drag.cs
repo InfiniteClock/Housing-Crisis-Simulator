@@ -200,7 +200,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             
             GridLock();
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
-            LandloardRandomizer.Instance.RandomSpawnLandloard();
+            LandloardRandomizer.Instance.RandomSpawnLandlord();
         }
             DeselectEffect();
         isSelected = false;
@@ -313,7 +313,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         {
             GridLock();
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
-            LandloardRandomizer.Instance.RandomSpawnLandloard();
+            LandloardRandomizer.Instance.RandomSpawnLandlord();
         }
         DeselectEffect();
         isSelected = false;

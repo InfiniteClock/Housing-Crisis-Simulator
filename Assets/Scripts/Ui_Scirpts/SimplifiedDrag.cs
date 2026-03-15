@@ -19,7 +19,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     public int XOffset;
     public int YOffset;
 
-
+    [HideInInspector]
+    public int spawnPointIndex;
 
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;

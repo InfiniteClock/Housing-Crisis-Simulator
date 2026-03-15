@@ -14,7 +14,7 @@ public class LandloardRandomizer : MonoBehaviour
     public bool isToggleDrag = false;
 
     private List<GameObject> landlordPool;
-    private List<GameObject> currentPlacedLandlords;
+    private List<GameObject> currentSpawnedLandlords;
 
     private void Awake()
     {
@@ -28,25 +28,23 @@ public class LandloardRandomizer : MonoBehaviour
             // Otherwise, set this as the instance
             Instance = this;
         }
-
-
     }
 
 
     void Start()
     {
-        foreach (GameObject shape in landlordList)
+        foreach (GameObject landlord in landlordList)
         {
-            SimplifiedDrag drag = shape.GetComponent<SimplifiedDrag>();
+            SimplifiedDrag drag = landlord.GetComponent<SimplifiedDrag>();
             drag.Canvas = phase2Canvas;
             drag.isToggleDrag = isToggleDrag;
         }
 
         landlordPool = new List<GameObject>(landlordList);
-        currentPlacedLandlords = new List<GameObject>();
+        currentSpawnedLandlords = new List<GameObject>();
     }
 
-    public void RandomSpawnLandloard()
+    public void RandomSpawnLandlord()
     {
         landlordPool = new List<GameObject>(landlordList);
 
@@ -60,30 +58,30 @@ public class LandloardRandomizer : MonoBehaviour
             int randomIndex = Random.Range(0, landlordPool.Count);
             Transform spawnPoint = spawnPointList[i];
 
-            GameObject placedLandloard = Instantiate(landlordPool[randomIndex], spawnPoint);
+            GameObject spawnedLandloard = Instantiate(landlordPool[randomIndex], spawnPoint);
 
             //reset the shape position
-            RectTransform rectTransfrom = placedLandloard.GetComponent<RectTransform>();
+            RectTransform rectTransfrom = spawnedLandloard.GetComponent<RectTransform>();
             rectTransfrom.anchoredPosition = Vector2.zero;
 
-            placedLandloard.transform.SetParent(phase2Canvas.transform, true);
+            spawnedLandloard.transform.SetParent(phase2Canvas.transform, true);
 
             //record current position
-            placedLandloard.GetComponent<SimplifiedDrag>().RecordReturnPosiiton();
+            spawnedLandloard.GetComponent<SimplifiedDrag>().RecordReturnPosiiton();
 
             landlordPool.RemoveAt(randomIndex);
-            currentPlacedLandlords.Add(placedLandloard);
+            currentSpawnedLandlords.Add(spawnedLandloard);
         }
     }
 
     public void ResetLandlords()
     {
-        foreach (GameObject landlord in currentPlacedLandlords)
+        foreach (GameObject landlord in currentSpawnedLandlords)
         {
             Destroy(landlord);
         }
 
-        currentPlacedLandlords.Clear();
+        currentSpawnedLandlords.Clear();
 
     }
 }
