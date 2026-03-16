@@ -26,47 +26,49 @@ public class GameManager : MonoBehaviour
     #region Static Variables
     public static GameManager Instance { get; private set; }
     
-    // Happiness stat
-    public static int happiness { get; private set; }
-    public static void AdjustHappiness(int hap)
-    {
-        happiness += hap;
-    }
+    //// Happiness stat
+    //public static int happiness { get; private set; }
+    //public static void AdjustHappiness(int hap)
+    //{
+    //    happiness += hap;
+    //}
 
-    // Funds stat
-    public static int funds { get; private set; }
-    public static void AdjustFunds(int money)
-    {
-        funds += money;
-    }
+    //// Funds stat
+    //public static int funds { get; private set; }
+    //public static void AdjustFunds(int money)
+    //{
+    //    funds += money;
+    //}
 
-    // Housed families stat
-    public static int housedFamilies { get; private set; }
-    public static void AdjustHousedFamilies(int families)
-    {
-        housedFamilies += families;
-    }
+    //// Housed families stat
+    //public static int housedFamilies { get; private set; }
+    //public static void AdjustHousedFamilies(int families)
+    //{
+    //    housedFamilies += families;
+    //}
 
-    // Housed individuals stat
-    public static int housedPeople { get; private set; }
-    public static void AdjustHousedPeople(int people)
-    {
-        housedPeople += people;
-    }
+    //// Housed individuals stat
+    //public static int housedPeople { get; private set; }
+    //public static void AdjustHousedPeople(int people)
+    //{
+    //    housedPeople += people;
+    //}
 
-    // Homes filled stat
-    public static int filledHomes { get; private set; }
-    public static void AdjustFilledHomes(int homes)
-    {
-        filledHomes += homes;
-    }
+    //// Homes filled stat
+    //public static int filledHomes { get; private set; }
+    //public static void AdjustFilledHomes(int homes)
+    //{
+    //    filledHomes += homes;
+    //}
 
-    // Total homes stat
-    public static int totalHomes { get; private set; }
-    public static void AdjustTotalHomes(int tHomes)
-    {
-        totalHomes += tHomes;
-    }
+    //// Total homes stat
+    //public static int totalHomes { get; private set; }
+    //public static void AdjustTotalHomes(int tHomes)
+    //{
+    //    totalHomes += tHomes;
+    //}
+
+
     // Current game state
     public static gameState currentGameState { get; private set; }
     public static void GameStateUpdate(gameState state)
@@ -222,12 +224,12 @@ public class GameManager : MonoBehaviour
 
         currentPhase = phaseState.City;
         GameStateUpdate(gameState.Play);
-        happiness = 0;
-        funds = 1000;
-        housedFamilies = 0;
-        housedPeople = 0;
-        filledHomes = 0;
-        totalHomes = 0;
+        //happiness = 0;
+        //funds = 1000;
+        //housedFamilies = 0;
+        //housedPeople = 0;
+        //filledHomes = 0;
+        //totalHomes = 0;
     }
 
     public void Update()

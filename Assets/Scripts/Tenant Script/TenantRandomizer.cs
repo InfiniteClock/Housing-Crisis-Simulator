@@ -63,24 +63,82 @@ public class TenantRandomizer : MonoBehaviour
     public void SpawnLowIncome()
     {
         tenantPool = new List<GameObject>(lowIncomeTenantList);
-        
+
+        for (int i = 0; i < spawnPointList.Count; i++)
+        {
+            RandomSpawnTenant(i, 0);
+        }
+
+
     }
 
     public void SpawnTenantMidIncome()
     {
         tenantPool = new List<GameObject>(midIncomeTenantList);
+        for (int i = 0; i < spawnPointList.Count; i++)
+        {
+            RandomSpawnTenant(i, 1);
+        }
     }
 
     public void SpawnHighIncome()
     {
         tenantPool = new List<GameObject>(highIncomeTenantList);
+
+        for (int i = 0; i < spawnPointList.Count; i++)
+        {
+            RandomSpawnTenant(i, 2);
+        }
     }
 
-    public void RandomSpawnTenant(int i)
+
+    //0 = low income, 1 = mid income, 2 = high income
+    public void RandomSpawnTenant(int i, int incomeLevel)
     {
-        //what the fuck to write in here!!!!!!!!!
+        if (tenantPool.Count == 0)
+        {
+            if (incomeLevel == 0)
+            {
+                tenantPool = new List<GameObject>(lowIncomeTenantList);
+            }
+            else if (incomeLevel == 1)
+            {
+                tenantPool = new List<GameObject>(midIncomeTenantList);
+            }
+            else if (incomeLevel == 2)
+            {
+                tenantPool = new List<GameObject>(highIncomeTenantList);
+            }
+        }
 
+        int randomIndex = Random.Range(0, tenantPool.Count);
+        Transform spawnPoint = spawnPointList[i];
 
+        GameObject placedTenant = Instantiate(tenantPool[randomIndex], spawnPoint);
+
+        //reset the tenant position
+        RectTransform rectTransfrom = placedTenant.GetComponent<RectTransform>();
+        rectTransfrom.anchoredPosition = Vector2.zero;
+
+        placedTenant.transform.SetParent(phase3Canvas.transform, true);
+
+        placedTenant.GetComponent<SimplifiedDrag>().spawnPointIndex = i;
+        placedTenant.GetComponent<SimplifiedDrag>().RecordReturnPosiiton();
+
+        
+
+        tenantPool.RemoveAt(randomIndex);
+        currentSpawnedTenants.Add(placedTenant);
+    }
+
+    public void ResetTenant()
+    {
+        foreach(GameObject tenant in currentSpawnedTenants)
+        {
+            Destroy(tenant);
+        }
+
+        currentSpawnedTenants.Clear();
     }
 
 

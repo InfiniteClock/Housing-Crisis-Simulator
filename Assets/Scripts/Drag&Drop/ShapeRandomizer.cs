@@ -73,7 +73,7 @@ public class ShapeRandomizer : MonoBehaviour
         int randomIndex = Random.Range(0, shapePool.Count);
         Transform spawnPoint = spawnPointList[i];
 
-        //spawn the shape and remove it from the pool
+        //spawn the shape
         GameObject placedShape = Instantiate(shapePool[randomIndex], spawnPoint);
         
 
@@ -95,6 +95,7 @@ public class ShapeRandomizer : MonoBehaviour
         //display the zone price
         ShowZonePrice(i, placedShape);
 
+        //remove it from the pool
         shapePool.RemoveAt(randomIndex);
 
     }

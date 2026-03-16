@@ -20,6 +20,8 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI budgetText;
     public Slider happinessSlider;
 
+    public bool isEndPhase3; 
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
