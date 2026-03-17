@@ -112,8 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   downPaymentRange: 50
   downPayment: 0
-  trit1: 1
-  trit2: 4
+  trait1: 1
+  trait2: 4
   downPaymentText: {fileID: 0}
 --- !u!225 &4265575306660274320
 CanvasGroup:

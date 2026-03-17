@@ -11,8 +11,8 @@ public class LandlordStats : MonoBehaviour
     [HideInInspector]
     public float downPayment;
 
-    public LandlordTrits trit1;
-    public LandlordTrits trit2;
+    public LandlordTraits trait1;
+    public LandlordTraits trait2;
     
 
     [Space(10)]

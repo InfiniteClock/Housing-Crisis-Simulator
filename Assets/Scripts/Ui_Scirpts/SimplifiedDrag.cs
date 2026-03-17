@@ -423,7 +423,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     {
         GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
         CameraManager.CameraSwitch(GameManager.Instance.testZone.hoods[0].hoodCam);
-        GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trit1, GetComponent<LandlordStats>().trit2);
+        GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trait1, GetComponent<LandlordStats>().trait2);
         GetComponent<LandlordStats>().PayDownPayment();
     }
     private void PickHome()

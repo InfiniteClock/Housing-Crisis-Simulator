@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum zoneType {LowIncome, MidIncome, HighIncome}
 public enum tenantType {LowIncome, MidIncome, HighIncome}
-public enum LandlordTrits {Empty, increaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
+public enum LandlordTraits {Empty, increaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
 
 public class GameManager : MonoBehaviour
 {
@@ -184,13 +184,13 @@ public class GameManager : MonoBehaviour
     public bool isPhase3End;
     [SerializeField, ReadOnly(true)] private zoneType currentZoneType;
     [SerializeField, ReadOnly(true)] private float currentZonePrice;
-    [SerializeField, ReadOnly(true)] private LandlordTrits trait1;
-    [SerializeField, ReadOnly(true)] private LandlordTrits trait2;
+    [SerializeField, ReadOnly(true)] private LandlordTraits trait1;
+    [SerializeField, ReadOnly(true)] private LandlordTraits trait2;
 
     public zoneType CurrentZoneType => currentZoneType;
     public float CurrentZonePrice => currentZonePrice;
-    public LandlordTrits Trait1 => trait1;
-    public LandlordTrits Trait2 => trait2;
+    public LandlordTraits Trait1 => trait1;
+    public LandlordTraits Trait2 => trait2;
 
 
     private void Awake()
@@ -378,7 +378,7 @@ public class GameManager : MonoBehaviour
     {
         currentZonePrice = zonePrice;
     }
-    public void SetTraits(LandlordTrits t1, LandlordTrits t2)
+    public void SetTraits(LandlordTraits t1, LandlordTraits t2)
     {
         trait1 = t1;
         trait2 = t2;
