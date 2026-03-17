@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 3396396244331598202}
   - component: {fileID: 5403042683642765480}
   - component: {fileID: 302236670228583323}
+  - component: {fileID: -3011311043199524303}
   m_Layer: 5
   m_Name: LongL4 LowInc
   m_TagString: Block
@@ -202,6 +203,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &-3011311043199524303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 584671372548090508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a2ad49baf7f5c444a79a34bd0134cac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zonePrice: 1200
+  zoneIncomeType: 0
 --- !u!1 &4384578975008595467
 GameObject:
   m_ObjectHideFlags: 0

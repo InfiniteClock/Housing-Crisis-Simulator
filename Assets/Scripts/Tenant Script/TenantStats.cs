@@ -5,6 +5,7 @@ using UnityEngine;
 public class TenantStats : MonoBehaviour
 {
     [Header("Tenant Status")]
+    public tenantType tenantIncomeLevel;
     public int familyNumber;
     public float rentBudget;
 

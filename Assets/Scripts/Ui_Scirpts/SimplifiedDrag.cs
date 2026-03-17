@@ -169,9 +169,23 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         {
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
-                if (ResourceManager.Instance.isEndPhase3 == false)
+                if (!GameManager.Instance.isPhase3End)
                 {
-                    TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 0);
+                    tenantType tenantIncomeLevel = GetComponent<TenantStats>().tenantIncomeLevel;
+
+                    if (tenantIncomeLevel == tenantType.LowIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 0);
+                    }
+                    else if (tenantIncomeLevel == tenantType.MidIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 1);
+                    }
+                    else if (tenantIncomeLevel == tenantType.HighIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
+                    }
+                    
                 }
                 else
                 {
@@ -186,7 +200,18 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             {
                 PickLord();
                 LandloardRandomizer.Instance.ResetLandlords();
-                TenantRandomizer.Instance.SpawnLowIncome();
+                if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
+                {
+                    TenantRandomizer.Instance.SpawnLowIncome();
+                }
+                else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
+                {
+                    TenantRandomizer.Instance.SpawnMidIncome();
+                }
+                else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
+                {
+                    TenantRandomizer.Instance.SpawnHighIncome();
+                }
             }
         }
         DeselectEffect();
@@ -286,9 +311,22 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         {
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
-                if (ResourceManager.Instance.isEndPhase3 == false)
+                if (!GameManager.Instance.isPhase3End)
                 {
-                    TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 0);
+                    tenantType tenantIncomeLevel = GetComponent<TenantStats>().tenantIncomeLevel;
+
+                    if (tenantIncomeLevel == tenantType.LowIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 0);
+                    }
+                    else if (tenantIncomeLevel == tenantType.MidIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 1);
+                    }
+                    else if (tenantIncomeLevel == tenantType.HighIncome)
+                    {
+                        TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
+                    }
                 }
                 else
                 {
@@ -304,7 +342,19 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             {
                 PickLord();
                 LandloardRandomizer.Instance.ResetLandlords();
-                TenantRandomizer.Instance.SpawnLowIncome();
+                if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
+                {
+                    TenantRandomizer.Instance.SpawnLowIncome();
+                }
+                else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
+                {
+                    TenantRandomizer.Instance.SpawnMidIncome();
+                }
+                else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
+                {
+                    TenantRandomizer.Instance.SpawnHighIncome();
+                }
+                
             }
         }
         DeselectEffect();
@@ -373,6 +423,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     {
         GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
         CameraManager.CameraSwitch(GameManager.Instance.testZone.hoods[0].hoodCam);
+        GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trit1, GetComponent<LandlordStats>().trit2);
+        GetComponent<LandlordStats>().PayDownPayment();
     }
     private void PickHome()
     {

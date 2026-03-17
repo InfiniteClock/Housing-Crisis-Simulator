@@ -7,8 +7,8 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     [Header("Budget Resource Status")]
-    public float initialBudget;
-    public float currentBudget;
+    public float  initialBudget;
+    public decimal currentBudget;
 
     [Space(10)]
     [Header("Happiness Resource Status")]
@@ -19,8 +19,6 @@ public class ResourceManager : MonoBehaviour
     [Header("UI Objects")]
     public TextMeshProUGUI budgetText;
     public Slider happinessSlider;
-
-    public bool isEndPhase3; 
 
     private void Awake()
     {
@@ -38,7 +36,7 @@ public class ResourceManager : MonoBehaviour
 
     private void Start()
     {
-        currentBudget = initialBudget;
+        currentBudget = (decimal)initialBudget;
         UpdateBudgetUI();
         currentHappiness = happinessSlider.value;
     }
@@ -56,14 +54,14 @@ public class ResourceManager : MonoBehaviour
     //reduce money
     public void SpendBudget(float money)
     {
-        currentBudget -= money;
+        currentBudget -= (decimal)money;
         UpdateBudgetUI();
     }
 
     //increase money
     public void AddBudget(float money)
     {
-        currentBudget += money;
+        currentBudget += (decimal)money;
         UpdateBudgetUI();
     }
 

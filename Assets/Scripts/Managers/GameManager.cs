@@ -1,13 +1,20 @@
 using System.Collections;
+using System.ComponentModel;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 
+public enum zoneType {LowIncome, MidIncome, HighIncome}
+public enum tenantType {LowIncome, MidIncome, HighIncome}
+public enum LandlordTrits {Empty, increaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
+
 public class GameManager : MonoBehaviour
 {
-    public enum gameState { Play, NoPlay, Tutorial, Message}
-    public enum phaseState { City, Zone, Neighbourhood, Home }
-    
+    public enum gameState {Play, NoPlay, Tutorial, Message}
+    public enum phaseState {City, Zone, Neighbourhood, Home}
+
+
+    [Header("Basic Setup")]
     [SerializeField] private CanvasGroup p1City;
     [SerializeField] private CanvasGroup p2Zone;
     [SerializeField] private CanvasGroup p3Neighbourhood;
@@ -22,7 +29,7 @@ public class GameManager : MonoBehaviour
     public int gridX = 8;
     public int gridY = 6;
 
-
+    [Header("Map Reference")]
     #region Static Variables
     public static GameManager Instance { get; private set; }
     
@@ -171,6 +178,20 @@ public class GameManager : MonoBehaviour
     public GameObject[,] grid3D { get; private set; }
     public GameObject[,] grid2D { get; private set; }
     public GameObject[,] gridPlaced { get; private set; }
+
+    [Space(10)]
+    [Header("Stats in current gameloop")]
+    public bool isPhase3End;
+    [SerializeField, ReadOnly(true)] private zoneType currentZoneType;
+    [SerializeField, ReadOnly(true)] private float currentZonePrice;
+    [SerializeField, ReadOnly(true)] private LandlordTrits trait1;
+    [SerializeField, ReadOnly(true)] private LandlordTrits trait2;
+
+    public zoneType CurrentZoneType => currentZoneType;
+    public float CurrentZonePrice => currentZonePrice;
+    public LandlordTrits Trait1 => trait1;
+    public LandlordTrits Trait2 => trait2;
+
 
     private void Awake()
     {
@@ -346,4 +367,22 @@ public class GameManager : MonoBehaviour
         }
         return null;
     }
+
+
+    //public functions to set and get current data
+    public void SetCurrentZoneType(zoneType zoneType)
+    {
+        currentZoneType = zoneType;
+    }
+    public void SetCurrentZonePrice(float zonePrice)
+    {
+        currentZonePrice = zonePrice;
+    }
+    public void SetTraits(LandlordTrits t1, LandlordTrits t2)
+    {
+        trait1 = t1;
+        trait2 = t2;
+    }
+
+
 }

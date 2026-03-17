@@ -17,7 +17,6 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
     public List<GameObject> blockLists;
 
     [Header("Drag object options")]
-    public int zoneCost;
     public Vector3 spawnPositionOffset;
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
@@ -468,7 +467,11 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             if (hit.CompareTag("Slot"))
             {
                 GameManager.Instance.AddToGrid(hit.gameObject, GetComponent<Drag>());
-                ResourceManager.Instance.SpendBudget(zoneCost);
+                GameManager.Instance.SetCurrentZoneType(GetComponent<ZoneStats>().zoneIncomeType);
+
+                float cost = GetComponent<ZoneStats>().zonePrice;
+                GameManager.Instance.SetCurrentZonePrice(cost);
+                ResourceManager.Instance.SpendBudget(cost);
                 break;
             }
         }

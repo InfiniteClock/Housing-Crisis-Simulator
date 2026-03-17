@@ -72,7 +72,7 @@ public class TenantRandomizer : MonoBehaviour
 
     }
 
-    public void SpawnTenantMidIncome()
+    public void SpawnMidIncome()
     {
         tenantPool = new List<GameObject>(midIncomeTenantList);
         for (int i = 0; i < spawnPointList.Count; i++)

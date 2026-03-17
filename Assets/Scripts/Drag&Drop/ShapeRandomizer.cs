@@ -104,19 +104,19 @@ public class ShapeRandomizer : MonoBehaviour
     {
         if (index == 0)
         {
-            int price = placedShape.GetComponent<Drag>().zoneCost;
+            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot1.text = "$" + price.ToString() + "K";
         }
 
         if (index == 1)
         {
-            int price = placedShape.GetComponent<Drag>().zoneCost;
+            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot2.text = "$" + price.ToString() + "K";
         }
 
         if (index == 2)
         {
-            int price = placedShape.GetComponent<Drag>().zoneCost;
+            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot3.text = "$" + price.ToString() + "K";
         }
     }

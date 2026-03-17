@@ -1,14 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public enum LandlordTrits
-{
-    Empty, 
-    increaseRent, 
-    DecreaseRent, 
-    IncreaseHappiness, 
-    DecreaseHappiness
-}
+
 
 public class LandlordStats : MonoBehaviour
 {
@@ -27,14 +20,11 @@ public class LandlordStats : MonoBehaviour
     public TextMeshProUGUI downPaymentText;
 
 
-    void Start()
+    public void PayDownPayment()
     {
-        
-    }
+        float zonePrice = GameManager.Instance.CurrentZonePrice;
+        float downPayment = zonePrice * (downPaymentRange / 100);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        ResourceManager.Instance.AddBudget(downPayment);
     }
 }

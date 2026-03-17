@@ -8356,6 +8356,11 @@ MonoBehaviour:
   - {fileID: 1921742781}
   - {fileID: 240524114}
   - {fileID: 737837859}
+  isPhase3End: 0
+  currentZoneType: 0
+  currentZonePrice: 0
+  trait1: 0
+  trait2: 0
 --- !u!4 &923504514
 Transform:
   m_ObjectHideFlags: 0
@@ -8365,7 +8370,7 @@ Transform:
   m_GameObject: {fileID: 923504511}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48.96639, y: 0.04850006, z: 9.307304}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8384,7 +8389,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialBudget: 10000
-  currentBudget: 0
   currentHappiness: 0
   happinessChangeMultiplier: 10
   budgetText: {fileID: 771895399}
@@ -8435,8 +8439,18 @@ MonoBehaviour:
   - {fileID: 3998858407491534492, guid: 0b028d4fe82e3d949b4def4c6becd4ef, type: 3}
   - {fileID: 3998858407491534492, guid: e6152ef81783cdf429ebe666c3114f5c, type: 3}
   - {fileID: 3998858407491534492, guid: 5d64ce4e71e03694e84bf23201f0f044, type: 3}
-  midIncomeTenantList: []
-  highIncomeTenantList: []
+  midIncomeTenantList:
+  - {fileID: 3998858407491534492, guid: 7988e68d80185bb438b7180440c743a9, type: 3}
+  - {fileID: 3998858407491534492, guid: 0a68ebfacb1d9af4d905d45ca1c04a60, type: 3}
+  - {fileID: 3998858407491534492, guid: 2f964d687afa3734b8aa329680e2c03e, type: 3}
+  - {fileID: 3998858407491534492, guid: 7e9d929c42bf9b34a8c567c7eb284a1d, type: 3}
+  - {fileID: 3998858407491534492, guid: 7ccc45fc984d462499a6e0a2f47852e1, type: 3}
+  highIncomeTenantList:
+  - {fileID: 3998858407491534492, guid: 2bb732eb1264f2847abbf53dc73d0fe4, type: 3}
+  - {fileID: 3998858407491534492, guid: 4368abd995a059345b7a4ba5c846d000, type: 3}
+  - {fileID: 3998858407491534492, guid: 9dc08497e222a35479125dc213e4c8ff, type: 3}
+  - {fileID: 3998858407491534492, guid: d22324bffd4919d4e82b9546b65897d4, type: 3}
+  - {fileID: 3998858407491534492, guid: e507e690f837b274eb4a5ee19b7a6fc5, type: 3}
   spawnPointList:
   - {fileID: 428238058}
   - {fileID: 17793168}
