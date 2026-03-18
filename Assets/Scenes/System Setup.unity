@@ -8577,7 +8577,7 @@ MonoBehaviour:
   - {fileID: 1921742781}
   - {fileID: 240524114}
   - {fileID: 737837859}
-  isPhase3End: 1
+  isPhase3End: 0
   currentZoneType: 0
   currentZonePrice: 0
   trait1: 0
@@ -16247,7 +16247,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1793254658
 RectTransform:
   m_ObjectHideFlags: 0
