@@ -10160,7 +10160,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -10202,9 +10202,11 @@ MonoBehaviour:
   background: {fileID: 1284161525}
   sprite: {fileID: 1518593755}
   faceSprites:
-  - {fileID: 21300000, guid: 1175c7576f750e24c990188f44530e73, type: 3}
-  - {fileID: 21300000, guid: 4758b6d937e946e488207737de2d4e98, type: 3}
+  - {fileID: 21300000, guid: 1e75048a6f59a6c41abe5d11e0e31437, type: 3}
+  - {fileID: 21300000, guid: d2ea7e84ba4390a46a088b6366ccc0a7, type: 3}
+  - {fileID: 21300000, guid: 34408c2e16d297e4a892fb53e59257f9, type: 3}
   - {fileID: 21300000, guid: e2b87672683223e409a05a9733278bb2, type: 3}
+  - {fileID: 21300000, guid: 47ae15d9f490aaa4d984acdc57cdf636, type: 3}
 --- !u!1 &1139963577
 GameObject:
   m_ObjectHideFlags: 0
@@ -11529,7 +11531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.754717, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.70388687, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -13739,7 +13741,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4758b6d937e946e488207737de2d4e98, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 34408c2e16d297e4a892fb53e59257f9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
