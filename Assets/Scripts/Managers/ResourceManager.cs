@@ -20,6 +20,7 @@ public class ResourceManager : MonoBehaviour
     public TextMeshProUGUI budgetText;
     public Slider happinessSlider;
 
+    private string newText;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -48,7 +49,16 @@ public class ResourceManager : MonoBehaviour
     //make the text UI update the current money
     private void UpdateBudgetUI()
     {
-        budgetText.text = "$" + currentBudget.ToString() + "K";
+        newText = (currentBudget / 1000).ToString();
+        if (newText.Length < 3)
+        {
+            newText = newText + ".0";
+        }
+        if (currentBudget <= 9999 && newText.Length < 4)
+        {
+            newText = "0" + newText;
+        }
+        budgetText.text = newText + "M";
     }
 
     //reduce money
