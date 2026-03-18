@@ -1858,7 +1858,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &151544509
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9325,6 +9325,11 @@ MonoBehaviour:
   - {fileID: 651238578}
   - {fileID: 2137102133}
   - {fileID: 1462950678}
+  isPhase3End: 0
+  currentZoneType: 0
+  currentZonePrice: 0
+  trait1: 0
+  trait2: 0
 --- !u!4 &923504514
 Transform:
   m_ObjectHideFlags: 0
@@ -9353,8 +9358,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialBudget: 10000
-  currentBudget: 0
+  currentHappiness: 0
+  happinessChangeMultiplier: 0
   budgetText: {fileID: 771895399}
+  happinessSlider: {fileID: 0}
 --- !u!1 &929951032
 GameObject:
   m_ObjectHideFlags: 0
@@ -13303,6 +13310,7 @@ MonoBehaviour:
   isToggleDrag: 1
   XOffset: 0
   YOffset: 0
+  spawnPointIndex: 0
 --- !u!225 &1506081544
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -14272,6 +14280,7 @@ MonoBehaviour:
   isToggleDrag: 1
   XOffset: 100
   YOffset: 100
+  spawnPointIndex: 0
 --- !u!225 &1561984787
 CanvasGroup:
   m_ObjectHideFlags: 0

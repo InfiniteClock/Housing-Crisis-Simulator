@@ -8393,7 +8393,6 @@ MonoBehaviour:
   happinessChangeMultiplier: 10
   budgetText: {fileID: 771895399}
   happinessSlider: {fileID: 1135552095}
-  isEndPhase3: 1
 --- !u!114 &923504516
 MonoBehaviour:
   m_ObjectHideFlags: 0
