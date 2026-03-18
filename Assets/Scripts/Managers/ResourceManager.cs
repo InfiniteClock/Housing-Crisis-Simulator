@@ -56,7 +56,7 @@ public class ResourceManager : MonoBehaviour
         }
         if (currentBudget <= 9999 && newText.Length < 4)
         {
-            newText = "0" + newText;
+            newText =  newText + "0";
         }
         budgetText.text = newText + "M";
     }
