@@ -5107,7 +5107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &501131928
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8338,7 +8338,6 @@ MonoBehaviour:
   p4Home: {fileID: 151544513}
   fadeTimeUI: 0.5
   fadeDelayUI: 0
-  testZone: {fileID: 0}
   cityCam: {fileID: 330585547}
   gridX: 8
   gridY: 6
@@ -8607,7 +8606,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 961786180}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 923504513}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnCycleHouse
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &965843225
 GameObject:
   m_ObjectHideFlags: 0
@@ -11335,7 +11346,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1218198116}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 923504513}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnCycleHouse
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1234862926
 GameObject:
   m_ObjectHideFlags: 0
@@ -12727,7 +12750,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1434244499
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12984,7 +13007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1444814805
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17905,7 +17928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2018453939
 RectTransform:
   m_ObjectHideFlags: 0

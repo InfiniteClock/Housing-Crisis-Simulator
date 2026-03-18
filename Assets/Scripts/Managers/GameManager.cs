@@ -22,9 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float fadeTimeUI;
     [SerializeField] private float fadeDelayUI;
 
-    // Reference to Funds UI text
-    // Reference to Happiness UI Slider
-    public Zone testZone;
     public CinemachineCamera cityCam;
     public int gridX = 8;
     public int gridY = 6;
@@ -150,25 +147,76 @@ public class GameManager : MonoBehaviour
     }
 
     // Current Zone
-    public static GameObject currentZone { get; private set; }
+    public static Zone currentZone { get; private set; }
 
-    public static void ZoneUpdate(GameObject zone)
+    public static void ZoneUpdate(Zone zone)
     {
         currentZone = zone;
     }
 
     // Current Neighbourhood
-    public static GameObject currentNeighbourhood { get; private set; }
-    public static void NeighbourhoodUpdate(GameObject hood)
+    public static Neighbourhood currentNeighbourhood { get; private set; }
+    public static void NeighbourhoodUpdate(Neighbourhood hood)
     {
         currentNeighbourhood = hood;
-    }
+        int openHomes = 0;
+        switch (currentZone.type)
+        {
+            case zoneType.LowIncome:
+                openHomes = Random.Range(3, 8);
+                break;
+            case zoneType.MidIncome:
+                openHomes = Random.Range(2, 6);
+                break;
+            case zoneType.HighIncome:
+                openHomes = Random.Range(1, 4);
+                break;
+            default:
+                Debug.LogError("Zone type not implemented properly.");
+                break;
+        }
 
+        House[] shuff = Instance.HouseShuffle(currentNeighbourhood.Homes);
+        // Make sure openhomes cannot be larger than total number of homes
+        openHomes = Mathf.Min(openHomes, shuff.Length);
+        activeHouses = new House[openHomes];
+        for (int i = 0; i < openHomes; i++)
+        {
+            House h = currentNeighbourhood.Homes[i];
+            h.currentState = HouseState.Default;
+            h.SetDefMat();
+            activeHouses[i] = h;
+        }
+    }
+    // Current array of playable houses to fill with tenants
+    public static House[] activeHouses { get; private set; }
     // Current House/Apartment
-    public static GameObject currentHome { get; private set; }
-    public static void HomeUpdate(GameObject home)
+    public static House currentHome { get; private set; }
+    public static void HomeUpdate(House home)
     {
-        currentHome = home;
+        // Ensure that we are updating to a default state house only
+        if (home.currentState != HouseState.Default)
+        {
+            Debug.Log("That house cannot be selected!");
+            return;
+        }
+        // Ensure that the selected home is within the active homes list - otherwise, ignore
+        foreach (House h in activeHouses)
+        {
+            if (home == h)
+            {
+                currentHome = home;
+                currentHome.SetHighlight();
+                CameraManager.CameraSwitch(currentHome.houseCam);
+                return;
+            }
+        }
+        Debug.Log("House is not in active houses list.");
+    }
+    public static void HomeLock()
+    {
+        currentHome.SetInteracted();
+        // Change currentHome to next unselected home in list, or end phase if last one
     }
     #endregion
     [SerializeField]
@@ -336,13 +384,11 @@ public class GameManager : MonoBehaviour
         // Reorient the zone camera
         newZoneScript.zoneCam.transform.RotateAround(newZone.transform.position, Vector3.up, rotDeg);
 
-        // If the placed zone was not a non residential zone, move to phase 2
-        if (newZoneScript.GetZoneType() != Zone.Type.NonRes)
-        {
-            testZone = newZoneScript;
-            PhaseUpdate(phaseState.Zone);
-            CameraManager.CameraSwitch(newZoneScript.zoneCam);
-        }
+        // Move to phase 2
+        ZoneUpdate(newZoneScript);
+        PhaseUpdate(phaseState.Zone);
+        CameraManager.CameraSwitch(newZoneScript.zoneCam);
+        
     }
 
     /// <summary>
@@ -384,5 +430,48 @@ public class GameManager : MonoBehaviour
         trait2 = t2;
     }
 
+    // Public function for returning a randomly shuffled house array
+    public House[] HouseShuffle(House[] homes)
+    {
+        House[] shuffledHomes = homes;
+        // This is a standard Fisher Yates shuffle of the array
+        for (int i = homes.Length-1; i >= 0; i--)
+        {
+            int randomIndex = Random.Range(0, i + 1);
+            (shuffledHomes[i], shuffledHomes[randomIndex]) = (shuffledHomes[randomIndex], shuffledHomes[i]);
+        }
 
+        // Returns the array with shuffled index
+        return shuffledHomes;
+    }
+
+
+    /// <summary>
+    /// Public function for cycling through active houses in phase 3
+    /// </summary>
+    /// <param name="upCycle">If true, cycle up. Otherwise, cycle back</param>
+    public void OnCycleHouse(bool upCycle)
+    {
+        int index = 0;
+        for (int i = 0; i < activeHouses.Length; i++)
+        {
+            if (activeHouses[i] == currentHome)
+            {
+                index = i;
+                break;
+            }
+        }
+        if (upCycle)
+        {
+            if (index >= activeHouses.Length - 1) index = 0;
+            else index += 1;
+        }
+        else
+        {
+            if (index <= 0) index = activeHouses.Length - 1;
+            else index -= 1;
+        }
+        if (currentHome != null) currentHome.SetDefMat();
+        HomeUpdate(activeHouses[index]);
+    }
 }
