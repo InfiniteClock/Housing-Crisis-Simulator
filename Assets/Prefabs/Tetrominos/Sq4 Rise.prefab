@@ -305,7 +305,6 @@ MonoBehaviour:
   - {fileID: 7829432512725847124}
   - {fileID: 1426259257167855016}
   - {fileID: 7201900427090897058}
-  zoneCost: 2800
   spawnPositionOffset: {x: -65, y: -70, z: 0}
   isToggleDrag: 1
   useScrollToRotate: 1
@@ -338,7 +337,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zonePrice: 2800
-  zoneIncomeType: 2
+  zoneIncomeType: 1
 --- !u!1 &7201900427090897058
 GameObject:
   m_ObjectHideFlags: 0

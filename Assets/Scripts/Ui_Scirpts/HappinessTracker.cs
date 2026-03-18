@@ -1,7 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 
 public class HappinessTracker : MonoBehaviour
 {
@@ -11,12 +10,15 @@ public class HappinessTracker : MonoBehaviour
     private Image backgroundImage;
     private Image spriteImage;
     public List<Sprite> faceSprites;
+    public List<Color> bgColour;
+    public float barSize;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // Get background image and sprite for state changes
         backgroundImage = background.GetComponent<Image>();
         spriteImage = sprite.GetComponent<Image>();
+        barSize = tracker.maxValue - tracker.minValue;
     }
 
     // Update is called once per frame
@@ -24,26 +26,16 @@ public class HappinessTracker : MonoBehaviour
     {
         // Debugger
         //Debug.Log(tracker.value + " " + backgroundImage.color + " " + spriteImage.sprite);
-        if (faceSprites.Count == 3)
+        for (int i = 0; i < faceSprites.Count; i++)
         {
-            if (tracker.value >= 30)
+            if (tracker.value - tracker.minValue >= barSize / faceSprites.Count * i)
             {
-                background.GetComponent<Image>().color = Color.green;
-                spriteImage.sprite = faceSprites[2];
+                spriteImage.sprite = faceSprites[i];
+                background.GetComponent<Image>().color = bgColour[i];
             }
-            else if (tracker.value > -30 & tracker.value < 30)
-            {
-                background.GetComponent<Image>().color = Color.yellow;
-                spriteImage.sprite = faceSprites[1];
-            }
-            else
-            {
-                background.GetComponent<Image>().color = Color.red;
-                spriteImage.sprite = faceSprites[0];
-            }
-        } else
-        {
-            Debug.Log("!to many sprites!");
+
         }
     }
 }
+/*background.GetComponent<Image>().color = Color.green;
+*/
