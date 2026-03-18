@@ -422,7 +422,12 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     private void PickLord()
     {
         GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
-        CameraManager.CameraSwitch(GameManager.Instance.testZone.hoods[0].hoodCam);
+        
+        // Pick a random neighbourhood within the zone to focus on in phase 3
+        int randHood = UnityEngine.Random.Range(0, GameManager.currentZone.hoods.Length);
+        GameManager.NeighbourhoodUpdate(GameManager.currentZone.hoods[randHood]);
+        CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
+
         GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trait1, GetComponent<LandlordStats>().trait2);
         GetComponent<LandlordStats>().PayDownPayment();
     }

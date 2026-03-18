@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class Zone : MonoBehaviour
 {
-    [SerializeField]
-    public enum Type { Low, Med, High, Apartment, NonRes }
     public CinemachineCamera zoneCam;
+    public zoneType type;
     public Transform zoneCamLocalOrientation { get; private set; }
     public Neighbourhood[] hoods { get; private set; }
-    [SerializeField]
-    private Type zoneType;
-    public Type GetZoneType() {  return zoneType; }
+    
     private void Awake()
     {
         // Stores the inspector set camera transform for later

@@ -48,6 +48,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         isSnapped = false;
         canBePlaced = true;
         isSelected = false;
+        ReplaceSprite(blockLists, deafultSprite);
     }
 
     public void Update()
