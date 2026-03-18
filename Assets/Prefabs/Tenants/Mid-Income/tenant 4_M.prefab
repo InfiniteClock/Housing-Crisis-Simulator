@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7476063136340125146}
   - component: {fileID: 4584111597575851481}
   m_Layer: 0
-  m_Name: tenant 4
+  m_Name: tenant 4_M
   m_TagString: DragObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: cc003703d49be2c4ca541ff43b749651, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 10ec40bc2a2a3864d95f16fe70d35663, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

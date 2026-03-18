@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7476063136340125146}
   - component: {fileID: 4584111597575851481}
   m_Layer: 0
-  m_Name: tenant
+  m_Name: tenant 1_h
   m_TagString: DragObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,14 +74,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1254902, g: 0.1254902, b: 0.1254902, a: 1}
+  m_Color: {r: 0.95294124, g: 0.74509805, b: 0.21176472, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 96887f5bb82190f469455788c12a7721, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 383a714ba4182704b9d663997b72ea63, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd5be2ba718820e45a0f497485d57850, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tenantIncomeLevel: 2
   familyNumber: 4
   rentBudget: 2400
   budgetText: {fileID: 0}

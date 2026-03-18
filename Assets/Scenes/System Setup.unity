@@ -8356,7 +8356,7 @@ MonoBehaviour:
   - {fileID: 1921742781}
   - {fileID: 240524114}
   - {fileID: 737837859}
-  isPhase3End: 0
+  isPhase3End: 1
   currentZoneType: 0
   currentZonePrice: 0
   trait1: 0
