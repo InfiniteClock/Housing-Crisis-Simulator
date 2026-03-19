@@ -33,6 +33,7 @@ public class PauseButton : MonoBehaviour
 
     public void resumeGame()
     {
+        // if the "Resume" button is clicked the game resumes and the pause menu hides
         pauseScreen.SetActive(false);
     }
 }

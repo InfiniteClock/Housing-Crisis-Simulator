@@ -39,9 +39,5 @@ public class PlayGameScript : MonoBehaviour
 
     }
 
-    public void resumeGame()
-    {
-        pauseMenu.SetActive(false);
-    }
 
 }
