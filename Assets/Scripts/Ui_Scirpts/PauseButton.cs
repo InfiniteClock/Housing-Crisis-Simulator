@@ -5,6 +5,8 @@ public class PauseButton : MonoBehaviour
 {
     public GameObject pauseScreen;
     public Button menuButton;
+   // [SerializeField] GameObject pauseMenu;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,5 +28,11 @@ public class PauseButton : MonoBehaviour
             Debug.Log("Click");
             pauseScreen.SetActive(true);
         }
+    }
+
+
+    public void resumeGame()
+    {
+        pauseScreen.SetActive(false);
     }
 }
