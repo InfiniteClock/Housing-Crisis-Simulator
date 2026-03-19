@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PlayGameScript : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
-
     public void PlayGame()
     {
         //     SceneManager.LoadScene("System Setup");
