@@ -185,7 +185,8 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                     {
                         TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
                     }
-                    
+                    GameManager.FillHouse(GetComponent<TenantStats>());
+                    if (GameManager.activeHouses.Length <= 0) PickHome();
                 }
                 else
                 {
@@ -326,11 +327,12 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                     else if (tenantIncomeLevel == tenantType.HighIncome)
                     {
                         TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
-                    }
+                    }                    
                 }
                 else
                 {
-                    PickHome();
+                    GameManager.FillHouse(GetComponent<TenantStats>());
+                    if (GameManager.activeHouses.Length <= 0) PickHome();
                     //TenantStats tenant = GetComponent<TenantStats>();
                     //tenant.PayRent();
                     TenantRandomizer.Instance.ResetTenant();
