@@ -15,16 +15,15 @@ public class LandlordStats : MonoBehaviour
     public LandlordTraits trait2;
     
 
-    [Space(10)]
-    [Header("UI Objects")]
-    public TextMeshProUGUI downPaymentText;
-
-
-    public void PayDownPayment()
+    public float getDownpaymentValue()
     {
         float zonePrice = GameManager.Instance.CurrentZonePrice;
         float downPayment = zonePrice * (downPaymentRange / 100);
+        return downPayment;
+    }
 
-        ResourceManager.Instance.AddBudget(downPayment);
+    public void PayDownPayment()
+    {
+        ResourceManager.Instance.AddBudget(getDownpaymentValue());
     }
 }
