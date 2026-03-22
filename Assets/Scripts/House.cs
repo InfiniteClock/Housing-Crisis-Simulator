@@ -1,9 +1,16 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum HouseState { Interacted, NonInteractable, Highlighted, Default}
 public class House : MonoBehaviour
 {
+    public string houseName;
+    public int basePrice;
+    public int realPrice {  get; private set; }
+    private int priceMod;
+    public string houseSize;
+
     public CinemachineCamera houseCam;
     [SerializeField]
     private Material matDefault;
@@ -27,7 +34,51 @@ public class House : MonoBehaviour
         // Set the current mat to non-interactable so the functions don't risk having null values
         currentMat = matNonInteract;
         SetNonInteractable();
+
+        // Houses spawn when zone is selected, so this is the correct time to determine what zone type this house belongs to
+        // Determines how much the price should change if landlord increases/decreases rent
+        switch (GameManager.Instance.CurrentZoneType)
+        {
+            case zoneType.LowIncome:
+                priceMod = 100;
+                break;
+            case zoneType.MidIncome:
+                priceMod = 200;
+                break;
+            case zoneType.HighIncome:
+                priceMod = 300;
+                break;
+        }
     }
+    public void SetPrice()
+    {
+        // Find and apply landlord modifications to current price
+        realPrice = basePrice;
+        switch (GameManager.Instance.Trait1)
+        {
+            case LandlordTraits.increaseRent:
+                realPrice += priceMod;
+                break;
+            case LandlordTraits.DecreaseRent:
+                realPrice -= priceMod;
+                break;
+            default:
+                break;
+        }
+        // Repeat for second landlord modification
+        switch (GameManager.Instance.Trait2)
+        {
+            case LandlordTraits.increaseRent:
+                realPrice += priceMod;
+                break;
+            case LandlordTraits.DecreaseRent:
+                realPrice -= priceMod;
+                break;
+            default:
+                break;
+        }
+    }
+
     public void SetDefMat()
     {
         mr.material = matDefault;
@@ -54,6 +105,10 @@ public class House : MonoBehaviour
     }
     private void OnMouseDown()
     {
+        // Checks if mouse is blocked by UI element first
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        // Changes material between highlighted and default
         switch (currentState)
         {
             case HouseState.Default:
@@ -75,15 +130,21 @@ public class House : MonoBehaviour
         }
     }
 
-    //private void OnMouseEnter()
-    //{
-    //    if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
-    //    {
-    //        mr.material = matHighlight;
-    //    }
-    //}
-    //private void OnMouseExit()
-    //{
-    //    mr.material = currentMat;
-    //}
+    private void OnMouseEnter()
+    {
+        // Checks if mouse is blocked by UI element first
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        // Checks if in phase 3
+        if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
+        {
+            // Sets the highlight, but not the state
+            if (currentState == HouseState.Default) mr.material = matHighlight;
+        }
+    }
+    private void OnMouseExit()
+    {
+        // Removes hover highlight ONLY if still in the default state
+        if (currentState == HouseState.Default) mr.material = currentMat;
+    }
 }

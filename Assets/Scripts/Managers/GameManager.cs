@@ -190,6 +190,45 @@ public class GameManager : MonoBehaviour
     }
     // Current array of playable houses to fill with tenants
     public static House[] activeHouses { get; private set; }
+    public static void FillHouse(TenantStats tenant)
+    {
+        bool foundIndex = false;
+        House[] temp = new House[activeHouses.Length-1];
+
+        // Searches through all active houses to find the current selection, sets it to interacted state, then updates the list
+        for (int i = 0; i < activeHouses.Length; i++)
+        {
+            if (foundIndex)
+            {
+                temp[i-1] = activeHouses[i];
+            }
+            else {
+                if (activeHouses[i] == currentHome)
+                {
+                    activeHouses[i].SetInteracted();
+                    // Code to connect tenant to house goes here
+
+                    if (i > 0) temp[i - 1] = activeHouses[i];
+                    foundIndex = true;
+                }
+                else
+                {
+                    temp[i] = activeHouses[i];
+                }
+            }
+        }
+        // Updates activeHouses if we found currentHome within
+        if (foundIndex)
+        {
+            Instance.OnCycleHouse(true);
+            activeHouses = temp;
+        }
+        else Debug.Log("Could not find selected house in active houses array");
+        // Moves the tenant object offscreen but aligned to house position for debugging in scene view
+        tenant.transform.position = currentHome.transform.position + (Vector3.up * Screen.height);
+
+        Debug.Log("House Filled!");
+    }
     // Current House/Apartment
     public static House currentHome { get; private set; }
     public static void HomeUpdate(House home)
@@ -207,6 +246,7 @@ public class GameManager : MonoBehaviour
             {
                 currentHome = home;
                 currentHome.SetHighlight();
+                currentHome.SetPrice();
                 CameraManager.CameraSwitch(currentHome.houseCam);
                 return;
             }
@@ -471,7 +511,10 @@ public class GameManager : MonoBehaviour
             if (index <= 0) index = activeHouses.Length - 1;
             else index -= 1;
         }
-        if (currentHome != null) currentHome.SetDefMat();
+        if (currentHome != null)
+            if (currentHome.currentState == HouseState.Highlighted)
+                currentHome.SetDefMat();
         HomeUpdate(activeHouses[index]);
+        Debug.Log("Active house index in list: "+index);
     }
 }

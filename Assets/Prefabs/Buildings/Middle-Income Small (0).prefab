@@ -230,11 +230,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c8eebf82c169c478f04a73436c4bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  houseName: 
+  basePrice: 0
+  houseSize: 
   houseCam: {fileID: 2540571564226048690}
   matDefault: {fileID: 2100000, guid: ee2a6a3dab9e3e840bad39a789ec4794, type: 2}
-  matInteract: {fileID: 2100000, guid: 68ca5ec31739ce148ae66bca97f7ffd6, type: 2}
+  matInteracted: {fileID: 2100000, guid: 68ca5ec31739ce148ae66bca97f7ffd6, type: 2}
   matNonInteract: {fileID: 2100000, guid: 2398d1f3fd6cf1c43b88ddc8b31411d7, type: 2}
   matHighlight: {fileID: 2100000, guid: bbf8fe8e35efde546afb4ce2ccfa9afa, type: 2}
+  currentState: 1
 --- !u!1001 &4987402288778614126
 PrefabInstance:
   m_ObjectHideFlags: 0
