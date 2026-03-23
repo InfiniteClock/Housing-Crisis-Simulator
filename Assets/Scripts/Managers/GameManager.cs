@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public enum zoneType {LowIncome, MidIncome, HighIncome}
 public enum tenantType {LowIncome, MidIncome, HighIncome}
-public enum LandlordTraits {Empty, increaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
+public enum LandlordTraits {Empty, IncreaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
 
 public class GameManager : MonoBehaviour
 {

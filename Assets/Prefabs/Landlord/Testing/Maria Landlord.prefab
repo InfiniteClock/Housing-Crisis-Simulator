@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4265575306660274320}
   - component: {fileID: 2392500412701507085}
   m_Layer: 0
-  m_Name: Qian Landlord
+  m_Name: Maria Landlord
   m_TagString: DragObject
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03d5352bffae9d34e862fcf8190f1cf5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 432c62e27cbd050419c9e67969f4fc53, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -114,7 +114,6 @@ MonoBehaviour:
   downPayment: 0
   trait1: 1
   trait2: 4
-  downPaymentText: {fileID: 0}
 --- !u!225 &4265575306660274320
 CanvasGroup:
   m_ObjectHideFlags: 0

@@ -159,14 +159,16 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         Collider2D col = GetComponent<Collider2D>();
         if (col != null) col.enabled = true;
 
-        //Center the object to the mouse position
+        
         if (!isSnapped)
         {
+            //return object
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
         }
         else
         {
+            //trigger phase 3 end
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
                 if (!GameManager.Instance.isPhase3End)
@@ -199,20 +201,25 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             }
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
-                PickLord();
-                LandloardRandomizer.Instance.ResetLandlords();
-                if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
-                {
-                    TenantRandomizer.Instance.SpawnLowIncome();
-                }
-                else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
-                {
-                    TenantRandomizer.Instance.SpawnMidIncome();
-                }
-                else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
-                {
-                    TenantRandomizer.Instance.SpawnHighIncome();
-                }
+                //pass landlord info to display
+                LandlordStats Landlord = GetComponent<LandlordStats>();
+                LandlordInfoDisplay.Instance.GetLandlordInfo(Landlord.getDownpaymentValue(), Landlord.trait1, Landlord.trait2);
+                LandlordInfoDisplay.Instance.showLandlordInfo();
+
+                //PickLord();
+                //LandloardRandomizer.Instance.ResetLandlords();
+                //if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnLowIncome();
+                //}
+                //else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnMidIncome();
+                //}
+                //else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnHighIncome();
+                //}
             }
         }
         DeselectEffect();
@@ -305,11 +312,13 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
         if (!isSnapped)
         {
+            //return object
             rectTransform.localEulerAngles = oringinRotation;
             rectTransform.anchoredPosition = returnPoint;
         }
         else
         {
+            //trigger phase 3 end
             if (GameManager.currentPhase == GameManager.phaseState.Neighbourhood || GameManager.currentPhase == GameManager.phaseState.Home)
             {
                 if (!GameManager.Instance.isPhase3End)
@@ -342,21 +351,25 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
             }
             else if (GameManager.currentPhase == GameManager.phaseState.Zone)
             {
-                PickLord();
-                LandloardRandomizer.Instance.ResetLandlords();
-                if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
-                {
-                    TenantRandomizer.Instance.SpawnLowIncome();
-                }
-                else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
-                {
-                    TenantRandomizer.Instance.SpawnMidIncome();
-                }
-                else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
-                {
-                    TenantRandomizer.Instance.SpawnHighIncome();
-                }
-                
+                //pass landlord info to display
+                LandlordStats Landlord = GetComponent<LandlordStats>();
+                LandlordInfoDisplay.Instance.GetLandlordInfo(Landlord.getDownpaymentValue(), Landlord.trait1, Landlord.trait2);
+                LandlordInfoDisplay.Instance.showLandlordInfo();
+
+                //PickLord();
+                //LandloardRandomizer.Instance.ResetLandlords();
+                //if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnLowIncome();
+                //}
+                //else if (GameManager.Instance.CurrentZoneType == zoneType.MidIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnMidIncome();
+                //}
+                //else if (GameManager.Instance.CurrentZoneType == zoneType.HighIncome)
+                //{
+                //    TenantRandomizer.Instance.SpawnHighIncome();
+                //} 
             }
         }
         DeselectEffect();
@@ -421,18 +434,18 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
         //oringinRotation = rectTransform.localEulerAngles;
     }
 
-    private void PickLord()
-    {
-        GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
+    //private void PickLord()
+    //{
+    //    GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
         
-        // Pick a random neighbourhood within the zone to focus on in phase 3
-        int randHood = UnityEngine.Random.Range(0, GameManager.currentZone.hoods.Length);
-        GameManager.NeighbourhoodUpdate(GameManager.currentZone.hoods[randHood]);
-        CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
+    //    // Pick a random neighbourhood within the zone to focus on in phase 3
+    //    int randHood = UnityEngine.Random.Range(0, GameManager.currentZone.hoods.Length);
+    //    GameManager.NeighbourhoodUpdate(GameManager.currentZone.hoods[randHood]);
+    //    CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
 
-        GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trait1, GetComponent<LandlordStats>().trait2);
-        GetComponent<LandlordStats>().PayDownPayment();
-    }
+    //    GameManager.Instance.SetTraits(GetComponent<LandlordStats>().trait1, GetComponent<LandlordStats>().trait2);
+    //    GetComponent<LandlordStats>().PayDownPayment();
+    //}
     private void PickHome()
     {
         GameManager.PhaseUpdate(GameManager.phaseState.City);

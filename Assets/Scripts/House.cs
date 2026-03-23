@@ -56,7 +56,7 @@ public class House : MonoBehaviour
         realPrice = basePrice;
         switch (GameManager.Instance.Trait1)
         {
-            case LandlordTraits.increaseRent:
+            case LandlordTraits.IncreaseRent:
                 realPrice += priceMod;
                 break;
             case LandlordTraits.DecreaseRent:
@@ -68,7 +68,7 @@ public class House : MonoBehaviour
         // Repeat for second landlord modification
         switch (GameManager.Instance.Trait2)
         {
-            case LandlordTraits.increaseRent:
+            case LandlordTraits.IncreaseRent:
                 realPrice += priceMod;
                 break;
             case LandlordTraits.DecreaseRent:

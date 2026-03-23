@@ -22,8 +22,4 @@ public class LandlordStats : MonoBehaviour
         return downPayment;
     }
 
-    public void PayDownPayment()
-    {
-        ResourceManager.Instance.AddBudget(getDownpaymentValue());
-    }
 }
