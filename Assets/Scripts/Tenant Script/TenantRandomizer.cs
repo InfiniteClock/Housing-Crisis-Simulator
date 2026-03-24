@@ -114,6 +114,19 @@ public class TenantRandomizer : MonoBehaviour
         int randomIndex = Random.Range(0, tenantPool.Count);
         Transform spawnPoint = spawnPointList[i];
 
+        // Remove all previous children of spawnpoint to prevent tenants stacking on top of each other
+        if (spawnPoint.transform.childCount > 0)
+        {
+            Transform[] children = spawnPoint.transform.GetComponentsInChildren<Transform>();
+            foreach (Transform t in children)
+            {
+                if (t != spawnPoint)
+                {
+                    Destroy(t.gameObject);
+                }
+            }
+        }
+
         GameObject placedTenant = Instantiate(tenantPool[randomIndex], spawnPoint);
 
         //reset the tenant position
@@ -125,7 +138,8 @@ public class TenantRandomizer : MonoBehaviour
         placedTenant.GetComponent<SimplifiedDrag>().spawnPointIndex = i;
         placedTenant.GetComponent<SimplifiedDrag>().RecordReturnPosiiton();
 
-        
+        // Make the tenant a child object of the spawnpoint 
+        placedTenant.transform.SetParent(spawnPoint);
 
         tenantPool.RemoveAt(randomIndex);
         currentSpawnedTenants.Add(placedTenant);

@@ -225,8 +225,8 @@ public class GameManager : MonoBehaviour
         }
         else Debug.Log("Could not find selected house in active houses array");
 
-        // Moves the tenant object offscreen but aligned to house position for debugging in scene view
-        tenant.transform.position = currentHome.transform.position + (Vector3.up * Screen.height);
+        // Removes the tenant object once it is placed
+        Destroy(tenant.gameObject);
 
         Debug.Log("House Filled!");
     }
