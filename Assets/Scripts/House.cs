@@ -113,13 +113,20 @@ public class House : MonoBehaviour
         {
             case HouseState.Default:
                 GameManager.HomeUpdate(this);
+                GameManager.PhaseUpdate(GameManager.phaseState.Home);
                 break;
             case HouseState.Highlighted:
-                CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
                 SetDefMat();
+                CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
+                GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
                 break;
             case HouseState.Interacted:
                 Debug.Log("You have already locked in that house!");
+                if (GameManager.currentPhase == GameManager.phaseState.Home)
+                {
+                    CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
+                    GameManager.PhaseUpdate(GameManager.phaseState.Neighbourhood);
+                }
                 break;
             case HouseState.NonInteractable:
                 Debug.Log("You can't select that house!");

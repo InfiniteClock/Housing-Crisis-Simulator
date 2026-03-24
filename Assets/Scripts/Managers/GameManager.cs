@@ -206,9 +206,9 @@ public class GameManager : MonoBehaviour
                 if (activeHouses[i] == currentHome)
                 {
                     activeHouses[i].SetInteracted();
+
                     // Code to connect tenant to house goes here
 
-                    if (i > 0) temp[i - 1] = activeHouses[i];
                     foundIndex = true;
                 }
                 else
@@ -220,10 +220,11 @@ public class GameManager : MonoBehaviour
         // Updates activeHouses if we found currentHome within
         if (foundIndex)
         {
-            Instance.OnCycleHouse(true);
             activeHouses = temp;
+            Instance.OnCycleHouse(true);
         }
         else Debug.Log("Could not find selected house in active houses array");
+
         // Moves the tenant object offscreen but aligned to house position for debugging in scene view
         tenant.transform.position = currentHome.transform.position + (Vector3.up * Screen.height);
 
@@ -234,7 +235,7 @@ public class GameManager : MonoBehaviour
     public static void HomeUpdate(House home)
     {
         // Ensure that we are updating to a default state house only
-        if (home.currentState != HouseState.Default)
+        if (home.currentState != HouseState.Default && home.currentState != HouseState.Highlighted)
         {
             Debug.Log("That house cannot be selected!");
             return;
@@ -489,32 +490,45 @@ public class GameManager : MonoBehaviour
     /// <summary>
     /// Public function for cycling through active houses in phase 3
     /// </summary>
-    /// <param name="upCycle">If true, cycle up. Otherwise, cycle back</param>
+    /// <param name="upCycle">If true, cycle up. Otherwise, cycle down</param>
     public void OnCycleHouse(bool upCycle)
     {
         int index = 0;
-        for (int i = 0; i < activeHouses.Length; i++)
+        if (activeHouses.Length <= 1)
         {
-            if (activeHouses[i] == currentHome)
-            {
-                index = i;
-                break;
-            }
+            Debug.Log("Only 1 house left!");
         }
-        if (upCycle)
-        {
-            if (index >= activeHouses.Length - 1) index = 0;
-            else index += 1;
-        }
+        // Only cycle up or down if there is more than 1 house left
         else
         {
-            if (index <= 0) index = activeHouses.Length - 1;
-            else index -= 1;
+            for (int i = 0; i < activeHouses.Length; i++)
+            {
+                if (activeHouses[i] == currentHome)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if (upCycle)
+            {
+                if (index >= activeHouses.Length - 1) index = 0;
+                else index += 1;
+            }
+            else
+            {
+                if (index <= 0) index = activeHouses.Length - 1;
+                else index -= 1;
+            } 
         }
+        // If current house is still empty, unhighlight it before moving on
         if (currentHome != null)
             if (currentHome.currentState == HouseState.Highlighted)
                 currentHome.SetDefMat();
-        HomeUpdate(activeHouses[index]);
+        if (activeHouses.Length > 0)
+        {
+            // Update current home to next in active homes array
+            HomeUpdate(activeHouses[index]);
+        }
         Debug.Log("Active house index in list: "+index);
     }
 }
