@@ -62,7 +62,7 @@ public class LandlordInfoDisplay : MonoBehaviour
                 ui.text = "Decrease Happiness";
                 break;
             case LandlordTraits.IncreaseRent:
-                ui.text = "Decrease Rent";
+                ui.text = "Increase Rent";
                 break;
             case LandlordTraits.DecreaseRent:
                 ui.text = "Decrease Rent";
