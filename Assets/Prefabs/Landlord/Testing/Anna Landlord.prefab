@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 5178046728254702741}
   - component: {fileID: 3246851050818245962}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Money Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.03137255, g: 0.03137255, b: 0.03137255, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
