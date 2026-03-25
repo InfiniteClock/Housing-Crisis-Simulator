@@ -6969,7 +6969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 465, y: -40}
+  m_AnchoredPosition: {x: 465, y: -41}
   m_SizeDelta: {x: 660, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &722202230
@@ -8937,6 +8937,9 @@ MonoBehaviour:
   - {fileID: 504067360}
   - {fileID: 929951033}
   - {fileID: 1554631791}
+  zonePrice1: 0
+  zonePrice2: 0
+  zonePrice3: 0
   zonePriceSlot1: {fileID: 883527363}
   zonePriceSlot2: {fileID: 708157345}
   zonePriceSlot3: {fileID: 272946254}
@@ -10732,7 +10735,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 2.5}
+  m_AnchoredPosition: {x: 112.6, y: 2.5}
   m_SizeDelta: {x: 347.5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135552095
