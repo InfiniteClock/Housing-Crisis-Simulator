@@ -6,7 +6,7 @@ public class TenantStats : MonoBehaviour
 {
     [Header("Tenant Status")]
     public tenantType tenantIncomeLevel;
-    public int familyNumber;
+    public float familyNumber;
     public float rentBudget;
 
     [Space(10)]
@@ -15,20 +15,19 @@ public class TenantStats : MonoBehaviour
 
     private bool isHappy;
 
-    void Start()
+    public void Awake()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UpdateBudgetText(budgetText, rentBudget);
     }
 
     public void PayRent()
     {
         float rentBudgetInK = rentBudget / 1000;
         ResourceManager.Instance.AddBudget(rentBudgetInK);
+    }
+
+    public void UpdateBudgetText(TextMeshProUGUI ui, float rentBudget)
+    {
+        ui.text = "$" + rentBudget.ToString();
     }
 }
