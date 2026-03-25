@@ -11,7 +11,7 @@ public enum LandlordTraits {Empty, IncreaseRent, DecreaseRent, IncreaseHappiness
 public class GameManager : MonoBehaviour
 {
     public enum gameState {Play, NoPlay, Tutorial, Message}
-    public enum phaseState {City, Zone, Neighbourhood, Home}
+    public enum phaseState {City, Zone, Neighbourhood, Home, End}
 
 
     [Header("Basic Setup")]
@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float fadeDelayUI;
 
     public CinemachineCamera cityCam;
+    public CinemachineCamera endCam;
     public int gridX = 8;
     public int gridY = 6;
 
@@ -106,6 +107,10 @@ public class GameManager : MonoBehaviour
             case phaseState.Home:
                 // Fade in Home UI. Should fit on top of Neighbourhood UI as complement
                 Instance.StartCoroutine(Instance.CanvasFade(Instance.p4Home, Instance.fadeTimeUI));
+                break;
+            case phaseState.End:
+                // player click give up button or the budegt doesn't support more placement in phase 1
+                Instance.StartCoroutine(Instance.CanvasFade(Instance.p1City, -Instance.fadeTimeUI));
                 break;
         }
     }
@@ -530,5 +535,11 @@ public class GameManager : MonoBehaviour
             HomeUpdate(activeHouses[index]);
         }
         Debug.Log("Active house index in list: "+index);
+    }
+
+    public void GameEnd()
+    {
+        PhaseUpdate(phaseState.End);
+        CameraManager.CameraSwitch(endCam);
     }
 }
