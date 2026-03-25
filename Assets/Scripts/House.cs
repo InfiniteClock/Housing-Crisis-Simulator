@@ -103,6 +103,22 @@ public class House : MonoBehaviour
         currentMat = matHighlight;
         currentState = HouseState.Highlighted;
     }
+    public void SetLocked(bool filled)
+    {
+        if (filled)
+        {
+            mr.material = matInteracted;
+            currentMat = matInteracted;
+            currentState = HouseState.NonInteractable;
+        }
+        else
+        {
+            mr.material = matDefault;
+            currentMat = matDefault;
+            currentState = HouseState.NonInteractable;
+        } 
+    }
+
     private void OnMouseDown()
     {
         // Checks if mouse is blocked by UI element first

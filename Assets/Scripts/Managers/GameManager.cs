@@ -95,6 +95,18 @@ public class GameManager : MonoBehaviour
                 Instance.StartCoroutine(Instance.CanvasFade(Instance.p1City, Instance.fadeTimeUI));
                 Instance.StartCoroutine(Instance.CanvasFade(Instance.p3Neighbourhood, -Instance.fadeTimeUI));
                 if (Instance.p4Home.interactable) Instance.StartCoroutine(Instance.CanvasFade(Instance.p4Home, -Instance.fadeTimeUI));
+
+                // Lock every house for remainder of game
+                foreach (Neighbourhood n in currentZone.hoods)
+                {
+                    foreach (House h in n.Homes)
+                    {
+                        if (h.currentState == HouseState.Interacted) h.SetLocked(true);
+                        else h.SetLocked(false);
+                    }
+                }
+
+                if (Instance.BudgetCheck()) Instance.StartCoroutine(Instance.BudgetInspection());
                 break;
             case phaseState.Zone:
                 // Fade in Zone UI. Fade out City UI.
@@ -152,6 +164,16 @@ public class GameManager : MonoBehaviour
             target.alpha = 1;
             target.interactable = true;
         }
+    }
+
+    private IEnumerator BudgetInspection()
+    {
+        foreach (GameObject g in ShapeRandomizer.Instance.spawnedShapes)
+        {
+            g.GetComponent<Drag>().enabled = false;
+        }
+        yield return new WaitForSeconds(5f);
+        Instance.GameEnd();
     }
 
     // Current Zone
@@ -236,7 +258,7 @@ public class GameManager : MonoBehaviour
         // Removes the tenant object once it is placed
         Destroy(tenant.gameObject);
 
-        Debug.Log("House Filled!");
+        //Debug.Log("House Filled!");
     }
     // Current House/Apartment
     public static House currentHome { get; private set; }
@@ -245,7 +267,7 @@ public class GameManager : MonoBehaviour
         // Ensure that we are updating to a default state house only
         if (home.currentState != HouseState.Default && home.currentState != HouseState.Highlighted)
         {
-            Debug.Log("That house cannot be selected!");
+            //Debug.Log("That house cannot be selected!");
             return;
         }
         // Ensure that the selected home is within the active homes list - otherwise, ignore
@@ -506,7 +528,7 @@ public class GameManager : MonoBehaviour
         int index = 0;
         if (activeHouses.Length <= 1)
         {
-            Debug.Log("Only 1 house left!");
+            //Debug.Log("Only 1 house left!");
         }
         // Only cycle up or down if there is more than 1 house left
         else
@@ -539,7 +561,23 @@ public class GameManager : MonoBehaviour
             // Update current home to next in active homes array
             HomeUpdate(activeHouses[index]);
         }
-        Debug.Log("Active house index in list: "+index);
+        //Debug.Log("Active house index in list: "+index);
+    }
+
+    //checks if the budget is enough, if not, end game. This check the price of all the three shapes in phase 1
+    private bool BudgetCheck()
+    {
+        float currentBudget = (float)ResourceManager.Instance.currentBudget;
+
+        float shapePrice1 = ShapeRandomizer.Instance.zonePrice1;
+        float shapePrice2 = ShapeRandomizer.Instance.zonePrice2;
+        float shapePrice3 = ShapeRandomizer.Instance.zonePrice3;
+
+        if (shapePrice1 > currentBudget && shapePrice2 > currentBudget && shapePrice3 > currentBudget)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void GameEnd()
