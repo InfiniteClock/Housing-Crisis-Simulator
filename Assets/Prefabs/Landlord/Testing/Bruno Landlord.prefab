@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f4918ec756d6944cbe2b4b10c152e67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  downPaymentRange: 50
+  downPaymentRange: 60
   downPayment: 0
   trait1: 1
   trait2: 4
