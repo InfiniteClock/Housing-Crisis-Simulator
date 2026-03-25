@@ -188,14 +188,20 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                         TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
                     }
                     GameManager.FillHouse(GetComponent<TenantStats>());
-                    if (GameManager.activeHouses.Length <= 0) PickHome();
+                    if (GameManager.activeHouses.Length <= 0)
+                    {
+                        PickHome();
+                        TenantRandomizer.Instance.ResetTenant();
+
+                    }
                 }
                 else
                 {
+                    TenantRandomizer.Instance.ResetTenant();
                     PickHome();
                     //TenantStats tenant = GetComponent<TenantStats>();
                     //tenant.PayRent();
-                    TenantRandomizer.Instance.ResetTenant();
+                    
                 }
 
             }
@@ -229,8 +235,9 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
 
     public void ToggleReturn()
     {
-        rectTransform.localEulerAngles = oringinRotation;
+        //rectTransform.localEulerAngles = oringinRotation;
         rectTransform.anchoredPosition = returnPoint;
+        //transform.SetParent(returnPoint);
         DeselectEffect();
 
         Collider2D col = GetComponent<Collider2D>();

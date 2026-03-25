@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tenantIncomeLevel: 1
   familyNumber: 1
-  rentBudget: 2400
+  rentBudget: 1200
   budgetText: {fileID: 2872440786991409024}
 --- !u!114 &7476063136340125146
 MonoBehaviour:
