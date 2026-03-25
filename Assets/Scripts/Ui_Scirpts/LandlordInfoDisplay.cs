@@ -48,6 +48,16 @@ public class LandlordInfoDisplay : MonoBehaviour
         ShowTrait(Trait1InfoText, trait1);
         ShowTrait(Trait2InfoText, trait2);
     }
+
+    public void resetLandlordInfo()
+    {
+        downPayment = 0;
+        trait1 = LandlordTraits.Empty;
+        trait2 = LandlordTraits.Empty;
+        downPaymentText.text = "";
+        ShowTrait(Trait1InfoText, trait1);
+        ShowTrait(Trait2InfoText, trait2);
+    }
     public void ShowTrait(TextMeshProUGUI ui, LandlordTraits trait)
     {
         switch (trait)
@@ -80,6 +90,7 @@ public class LandlordInfoDisplay : MonoBehaviour
         else
         {
             PickLord();
+            resetLandlordInfo();
             LandloardRandomizer.Instance.ResetLandlords();
             if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
             {
