@@ -11,6 +11,9 @@ public class ShapeRandomizer : MonoBehaviour
     public List<GameObject> shapeList;
     public List<Transform> spawnPointList;
 
+    public int zonePrice1;
+    public int zonePrice2;
+    public int zonePrice3;
     public TextMeshProUGUI zonePriceSlot1;
     public TextMeshProUGUI zonePriceSlot2;
     public TextMeshProUGUI zonePriceSlot3;
@@ -20,7 +23,7 @@ public class ShapeRandomizer : MonoBehaviour
     public bool useScrollToRotate = false;
 
     private List<GameObject> shapePool;
-    private Transform newSpawnPoint;
+    
 
     private void Awake()
     {
@@ -104,20 +107,20 @@ public class ShapeRandomizer : MonoBehaviour
     {
         if (index == 0)
         {
-            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot1.text = "$" + price.ToString() + "K";
+            zonePrice1 = placedShape.GetComponent<ZoneStats>().zonePrice;
+            zonePriceSlot1.text = "$" + zonePrice1.ToString() + "K";
         }
 
         if (index == 1)
         {
-            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot2.text = "$" + price.ToString() + "K";
+            zonePrice2 = placedShape.GetComponent<ZoneStats>().zonePrice;
+            zonePriceSlot2.text = "$" + zonePrice2.ToString() + "K";
         }
 
         if (index == 2)
         {
-            int price = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot3.text = "$" + price.ToString() + "K";
+            zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
+            zonePriceSlot3.text = "$" + zonePrice3.ToString() + "K";
         }
     }
 }
