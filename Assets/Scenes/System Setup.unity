@@ -9236,6 +9236,7 @@ MonoBehaviour:
   p4Home: {fileID: 151544513}
   fadeTimeUI: 0.5
   fadeDelayUI: 0
+  happyBar: {fileID: 1135552095}
   cityCam: {fileID: 330585547}
   endCam: {fileID: 191977846}
   gridX: 8
@@ -18997,7 +18998,7 @@ GameObject:
   - component: {fileID: 1921493723}
   - component: {fileID: 1921493726}
   m_Layer: 5
-  m_Name: Puase Menu Button
+  m_Name: Pause Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

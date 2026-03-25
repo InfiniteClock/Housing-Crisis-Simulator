@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum zoneType {LowIncome, MidIncome, HighIncome}
 public enum tenantType {LowIncome, MidIncome, HighIncome}
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CanvasGroup p4Home;
     [SerializeField] private float fadeTimeUI;
     [SerializeField] private float fadeDelayUI;
+    [SerializeField] private Slider happyBar;
 
     public CinemachineCamera cityCam;
     public CinemachineCamera endCam;
@@ -30,50 +32,51 @@ public class GameManager : MonoBehaviour
     [Header("Map Reference")]
     #region Static Variables
     public static GameManager Instance { get; private set; }
-    
-    //// Happiness stat
-    //public static int happiness { get; private set; }
-    //public static void AdjustHappiness(int hap)
-    //{
-    //    happiness += hap;
-    //}
+    #region Stats
+    // Happiness stat
+    public static int happiness { get; private set; }
+    public static void AdjustHappiness(int hap)
+    {
+        happiness += hap;
+        Instance.happyBar.value = happiness;
+    }
 
-    //// Funds stat
-    //public static int funds { get; private set; }
-    //public static void AdjustFunds(int money)
-    //{
-    //    funds += money;
-    //}
+    // Funds stat
+    public static int funds { get; private set; }
+    public static void AdjustFunds(int money)
+    {
+        funds += money;
+    }
 
-    //// Housed families stat
-    //public static int housedFamilies { get; private set; }
-    //public static void AdjustHousedFamilies(int families)
-    //{
-    //    housedFamilies += families;
-    //}
+    // Housed families stat
+    public static int housedFamilies { get; private set; }
+    public static void AdjustHousedFamilies(int families)
+    {
+        housedFamilies += families;
+    }
 
-    //// Housed individuals stat
-    //public static int housedPeople { get; private set; }
-    //public static void AdjustHousedPeople(int people)
-    //{
-    //    housedPeople += people;
-    //}
+    // Housed individuals stat
+    public static int housedPeople { get; private set; }
+    public static void AdjustHousedPeople(int people)
+    {
+        housedPeople += people;
+    }
 
-    //// Homes filled stat
-    //public static int filledHomes { get; private set; }
-    //public static void AdjustFilledHomes(int homes)
-    //{
-    //    filledHomes += homes;
-    //}
+    // Homes filled stat
+    public static int filledHomes { get; private set; }
+    public static void AdjustFilledHomes(int homes)
+    {
+        filledHomes += homes;
+    }
 
-    //// Total homes stat
-    //public static int totalHomes { get; private set; }
-    //public static void AdjustTotalHomes(int tHomes)
-    //{
-    //    totalHomes += tHomes;
-    //}
-
-
+    // Total homes stat
+    public static int totalHomes { get; private set; }
+    public static void AdjustTotalHomes(int tHomes)
+    {
+        totalHomes += tHomes;
+    }
+    #endregion
+    #region Game Controls
     // Current game state
     public static gameState currentGameState { get; private set; }
     public static void GameStateUpdate(gameState state)
@@ -265,6 +268,7 @@ public class GameManager : MonoBehaviour
         // Change currentHome to next unselected home in list, or end phase if last one
     }
     #endregion
+    #endregion
     [SerializeField]
     private GameObject[] slotParent3D;
     [SerializeField]
@@ -382,6 +386,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(currentPhase);
     }*/
 
+    #region Commands
     /// <summary>
     /// Adds a new 3D zone to the grid. Then transitions to next phase
     /// </summary>
@@ -542,4 +547,5 @@ public class GameManager : MonoBehaviour
         PhaseUpdate(phaseState.End);
         CameraManager.CameraSwitch(endCam);
     }
+    #endregion
 }
