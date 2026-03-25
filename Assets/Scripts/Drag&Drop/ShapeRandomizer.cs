@@ -23,7 +23,7 @@ public class ShapeRandomizer : MonoBehaviour
     public bool useScrollToRotate = false;
 
     private List<GameObject> shapePool;
-    
+    public List<GameObject> spawnedShapes;
 
     private void Awake()
     {
@@ -101,6 +101,13 @@ public class ShapeRandomizer : MonoBehaviour
         //remove it from the pool
         shapePool.RemoveAt(randomIndex);
 
+        if (placedShape.GetComponent<ZoneStats>().zonePrice > (float)ResourceManager.Instance.currentBudget)
+        {
+            placedShape.GetComponent<Drag>().enabled = false;
+        }
+
+        //Add new shape to spawnedShapes list
+        spawnedShapes.Add(placedShape);
     }
 
     private void ShowZonePrice(int index, GameObject placedShape)

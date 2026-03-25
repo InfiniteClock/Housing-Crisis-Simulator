@@ -7,7 +7,7 @@ public class ResourceManager : MonoBehaviour
     public static ResourceManager Instance { get; private set; }
 
     [Header("Budget Resource Status")]
-    public float  initialBudget;
+    public float initialBudget;
     public decimal currentBudget;
 
     [Space(10)]
@@ -33,18 +33,11 @@ public class ResourceManager : MonoBehaviour
             // Otherwise, set this as the instance
             Instance = this;
         }
-    }
-
-    private void Start()
-    {
         currentBudget = (decimal)initialBudget;
         UpdateBudgetUI();
         currentHappiness = happinessSlider.value;
     }
-    void Update()
-    {
 
-    }
 
     //make the text UI update the current money
     private void UpdateBudgetUI()

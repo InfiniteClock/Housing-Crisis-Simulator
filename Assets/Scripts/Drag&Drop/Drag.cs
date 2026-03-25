@@ -135,17 +135,9 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
                 RectTransform slot = hit.GetComponentInParent<RectTransform>();
                 if (slot != null)
                 {
-                    if (BudgetCheck())
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        SnapFunction(slot);
-                        ToggleDeselectDrop();
-                        isFollowingMouse = false;
-                    }
-                        
+                    SnapFunction(slot);
+                    ToggleDeselectDrop();
+                    isFollowingMouse = false;
                 }
                 return;
             }
@@ -488,31 +480,10 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
         
     }
 
-    //checks if the bidget is enough, if not, end game. This check the price of all the three shapes in phase 1
-    private bool BudgetCheck()
-    {
-        float currentBudget = (float)ResourceManager.Instance.currentBudget;
-
-        float shapePrice1 = ShapeRandomizer.Instance.zonePrice1;
-        float shapePrice2 = ShapeRandomizer.Instance.zonePrice2;
-        float shapePrice3 = ShapeRandomizer.Instance.zonePrice3;
-
-        if (shapePrice1 > currentBudget || shapePrice2 > currentBudget || shapePrice3 > currentBudget)
-        {
-            GameManager.Instance.GameEnd();
-            ToggleReturn();
-            return true;
-        }
-        return false;
-
-
-    }
-
-
     // Replaces all spirtes in a block with a new one
     private void ReplaceSprite(List<GameObject> blocks, Sprite newSprite)
     {
-        Debug.Log("Replace!");
+        //Debug.Log("Replace!");
         foreach (GameObject block in blocks)
         {
             block.GetComponent<Image>().sprite = newSprite;

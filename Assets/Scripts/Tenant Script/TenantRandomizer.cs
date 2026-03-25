@@ -142,7 +142,6 @@ public class TenantRandomizer : MonoBehaviour
 
         currentSpawnedTenants.Clear();
 
-        Debug.Log("wwwww");
     }
 
 

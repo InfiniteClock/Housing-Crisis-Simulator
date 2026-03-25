@@ -8945,6 +8945,7 @@ MonoBehaviour:
   zonePriceSlot3: {fileID: 272946254}
   isToggleDrag: 1
   useScrollToRotate: 1
+  spawnedShapes: []
 --- !u!114 &923504513
 MonoBehaviour:
   m_ObjectHideFlags: 0
