@@ -7,7 +7,7 @@ public class TenantStats : MonoBehaviour
     [Header("Tenant Status")]
     public tenantType tenantIncomeLevel;
     public float familyNumber;
-    public float rentBudget;
+    public int rentBudget;
 
     [Space(10)]
     [Header("UI Objects")]
@@ -17,7 +17,7 @@ public class TenantStats : MonoBehaviour
 
     public void Awake()
     {
-        UpdateBudgetText(budgetText, rentBudget);
+        SelectBudget();
     }
 
     public void PayRent()
@@ -26,8 +26,27 @@ public class TenantStats : MonoBehaviour
         ResourceManager.Instance.AddBudget(rentBudgetInK);
     }
 
-    public void UpdateBudgetText(TextMeshProUGUI ui, float rentBudget)
+    public void UpdateBudgetText(TextMeshProUGUI ui, int rentBudget)
     {
         ui.text = "$" + rentBudget.ToString();
+    }
+
+    public void SelectBudget()
+    {
+        int randomNumb = 0;
+        switch (tenantIncomeLevel)
+        {
+            case tenantType.LowIncome:
+                randomNumb = Random.Range(2, 10);
+                break;
+            case tenantType.MidIncome:
+                randomNumb = Random.Range(7, 16);
+                break;
+            case tenantType.HighIncome:
+                randomNumb = Random.Range(14, 23);
+                break;
+        }
+        rentBudget = randomNumb * 100;
+        UpdateBudgetText(budgetText, rentBudget);
     }
 }
