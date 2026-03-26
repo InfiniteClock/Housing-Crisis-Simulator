@@ -9366,10 +9366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialBudget: 5000
-  currentHappiness: 0
-  happinessChangeMultiplier: 10
   budgetText: {fileID: 771895399}
-  happinessSlider: {fileID: 1135552095}
 --- !u!114 &923504516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11284,8 +11281,8 @@ MonoBehaviour:
   m_FillRect: {fileID: 0}
   m_HandleRect: {fileID: 51647968}
   m_Direction: 0
-  m_MinValue: -100
-  m_MaxValue: 100
+  m_MinValue: -50
+  m_MaxValue: 50
   m_WholeNumbers: 1
   m_Value: 0
   m_OnValueChanged:

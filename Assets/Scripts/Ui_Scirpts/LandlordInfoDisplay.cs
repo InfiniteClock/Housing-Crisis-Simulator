@@ -114,10 +114,9 @@ public class LandlordInfoDisplay : MonoBehaviour
 
         // Pick a random neighbourhood within the zone to focus on in phase 3
         int randHood = UnityEngine.Random.Range(0, GameManager.currentZone.hoods.Length);
+        GameManager.Instance.SetTraits(trait1, trait2);
         GameManager.NeighbourhoodUpdate(GameManager.currentZone.hoods[randHood]);
         CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
-
-        GameManager.Instance.SetTraits(trait1, trait2);
         ResourceManager.Instance.AddBudget(downPayment);
     }
 }

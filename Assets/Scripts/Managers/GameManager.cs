@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         if (performance > 1) performance = 1;
         if (performance < -10) performance = -10;
 
-        Debug.Log("Performance rating: "+performance);
+        //Debug.Log("Performance rating: "+performance);
     }
     #endregion
     #region Game Controls
@@ -250,10 +250,10 @@ public class GameManager : MonoBehaviour
         switch (Instance.trait1)
         {
             case LandlordTraits.IncreaseHappiness:
-                AdjustHappiness(2);
+                AdjustHappiness(5);
                 break;
             case LandlordTraits.DecreaseHappiness:
-                AdjustHappiness(-2);
+                AdjustHappiness(-5);
                 break;
             default:
                 break;
@@ -261,10 +261,10 @@ public class GameManager : MonoBehaviour
         switch (Instance.trait2)
         {
             case LandlordTraits.IncreaseHappiness:
-                AdjustHappiness(2);
+                AdjustHappiness(5);
                 break;
             case LandlordTraits.DecreaseHappiness:
-                AdjustHappiness(-2);
+                AdjustHappiness(-5);
                 break;
             default:
                 break;
@@ -393,7 +393,6 @@ public class GameManager : MonoBehaviour
         // Reset performance bonus after giving it out
         PerformanceUpdate(0);
 
-        Debug.Log("Giving out performance bonus: " + bonus);
     }
     #endregion
     #endregion
@@ -471,48 +470,7 @@ public class GameManager : MonoBehaviour
 
         currentPhase = phaseState.City;
         GameStateUpdate(gameState.Play);
-        //happiness = 0;
-        //funds = 1000;
-        //housedFamilies = 0;
-        //housedPeople = 0;
-        //filledHomes = 0;
-        //totalHomes = 0;
     }
-
-    public void Update()
-    {
-        // Trigger test of phase transition by pressing spacebar
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    NextPhase();
-        //}
-    }
-
-    /*
-    // This is purely for testing and forcing phase transitions with a test zone 
-    public void NextPhase()
-    {
-        switch (currentPhase)
-        {
-            case phaseState.City:
-                PhaseUpdate(phaseState.Zone);
-                CameraManager.CameraSwitch(testZone.zoneCam);
-                break;
-            case phaseState.Zone:
-                PhaseUpdate(phaseState.Neighbourhood);
-                CameraManager.CameraSwitch(testZone.hoods[0].hoodCam);
-                break;
-            case phaseState.Neighbourhood:
-                PhaseUpdate(phaseState.Home);
-                CameraManager.CameraSwitch(testZone.hoods[0].Homes[0].houseCam);
-                break;
-            case phaseState.Home:
-                PhaseUpdate(phaseState.City);
-                CameraManager.CameraSwitch(cityCam);
-                break;
-        }
-        Debug.Log(currentPhase);
-    }*/
 
     #region Commands
     /// <summary>
