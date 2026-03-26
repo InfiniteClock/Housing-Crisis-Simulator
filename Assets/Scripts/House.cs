@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public enum HouseState { Interacted, NonInteractable, Highlighted, Default}
+public enum HouseSize { small, medium, large}
 public class House : MonoBehaviour
 {
     public string houseName;
     public int basePrice;
     public int realPrice {  get; private set; }
     private int priceMod;
-    public string houseSize;
+    public HouseSize houseSize;
 
     public CinemachineCamera houseCam;
     [SerializeField]
