@@ -455,6 +455,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
     //}
     private void PickHome()
     {
+        GameManager.GivePerformanceBonus();
         GameManager.PhaseUpdate(GameManager.phaseState.City);
         CameraManager.CameraSwitch(GameManager.Instance.cityCam);
     }

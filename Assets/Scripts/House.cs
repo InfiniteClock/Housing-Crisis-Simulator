@@ -39,16 +39,16 @@ public class House : MonoBehaviour
 
     public void RandomizeHouseStats()
     {
-        // Determines random house size
-        int temp = Random.Range(0, 3);
-        houseSize = (HouseSize)temp;
-
+        int temp = 1;
         // Determines the price of a house based on zone income type and house size
         // PriceMod determines how much landlord modifiers affect the price
         switch (GameManager.Instance.CurrentZoneType)
         {
             // Low Income Houses
             case zoneType.LowIncome:
+                // Determines random house size
+                temp = Random.Range(0, 2);
+                houseSize = (HouseSize)temp;
                 priceMod = 100;
                 switch (houseSize)
                 {
@@ -65,6 +65,9 @@ public class House : MonoBehaviour
                 break;
             // Medium Income Houses
             case zoneType.MidIncome:
+                // Determines random house size
+                temp = Random.Range(0, 3);
+                houseSize = (HouseSize)temp;
                 priceMod = 200;
                 switch (houseSize)
                 {
@@ -81,6 +84,9 @@ public class House : MonoBehaviour
                 break;
             // High Income Houses
             case zoneType.HighIncome:
+                // Determines random house size
+                temp = Random.Range(1, 3);
+                houseSize = (HouseSize)temp;
                 priceMod = 300;
                 switch (houseSize)
                 {
@@ -97,6 +103,9 @@ public class House : MonoBehaviour
                 break;
             // Apartment Complexes
             case zoneType.Highrise:
+                // Determines random house size
+                temp = Random.Range(0, 3);
+                houseSize = (HouseSize)temp;
                 priceMod = 200;
                 switch (houseSize)
                 {
