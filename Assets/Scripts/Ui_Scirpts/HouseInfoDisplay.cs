@@ -33,31 +33,28 @@ public class HouseInfoDisplay : MonoBehaviour
         }
     }
 
-
-
-    public void GetHouse()
+    public void UpdateHouseInfo()
     {
+        // Get house info
         house = GameManager.currentHome;
         houseName = house.houseName;
         housePrice = house.realPrice;
         houseSize = house.houseSize;
-    }
 
-    public void UpdateHouseInfo()
-    {
+        // Apply house info to UI
         houseNameText.text = houseName;
-        housePriceText.text = "$" + housePrice.ToString() + "K";
+        housePriceText.text = "$" + housePrice.ToString();
         houseSizeText.text = houseSize.ToString();
         switch (houseSize)
         {
             case(HouseSize.small):
-                houseSizeText.text = "1 Bedroom";
+                houseContentText.text = "1 Bedroom";
                 break;
             case(HouseSize.medium):
-                houseSizeText.text = "2 Bedrooms";
+                houseContentText.text = "2 Bedrooms";
                 break;
             case(HouseSize.large):
-                houseSizeText.text = "3 Bedrooms";
+                houseContentText.text = "3 Bedrooms";
                 break;
         }
     }

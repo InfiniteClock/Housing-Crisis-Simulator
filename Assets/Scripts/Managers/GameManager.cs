@@ -307,6 +307,7 @@ public class GameManager : MonoBehaviour
                 currentHome = home;
                 currentHome.SetHighlight();
                 currentHome.SetPrice();
+                HouseInfoDisplay.Instance.UpdateHouseInfo();
                 CameraManager.CameraSwitch(currentHome.houseCam);
                 return;
             }
