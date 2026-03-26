@@ -117,8 +117,6 @@ public class ShapeRandomizer : MonoBehaviour
 
         if (placedShape.GetComponent<ZoneStats>().zonePrice > (float)ResourceManager.Instance.currentBudget)
         {
-            int index = placedShape.GetComponent<Drag>().spawnPointIndex;
-            ShowDisableIcon(index);
             placedShape.GetComponent<Drag>().enabled = false;
         }
 
@@ -132,18 +130,42 @@ public class ShapeRandomizer : MonoBehaviour
         {
             zonePrice1 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot1.text = "$" + zonePrice1.ToString() + "K";
+            if (zonePrice1 > ResourceManager.Instance.currentBudget)
+            {
+                disableIcon1.SetActive(true);
+            }
+            else
+            {
+                disableIcon1.SetActive(false);
+            }
         }
 
         if (index == 1)
         {
             zonePrice2 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot2.text = "$" + zonePrice2.ToString() + "K";
+            if (zonePrice2 > ResourceManager.Instance.currentBudget)
+            {
+                disableIcon2.SetActive(true);
+            }
+            else
+            {
+                disableIcon2.SetActive(false);
+            }
         }
 
         if (index == 2)
         {
             zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot3.text = "$" + zonePrice3.ToString() + "K";
+            if (zonePrice3 > ResourceManager.Instance.currentBudget)
+            {
+                disableIcon3.SetActive(true);
+            }
+            else
+            {
+                disableIcon3.SetActive(false);
+            }
         }
     }
 
@@ -152,20 +174,20 @@ public class ShapeRandomizer : MonoBehaviour
         spawnedShapes.Remove(shape);
     }
 
-    public void ShowDisableIcon(int index)
-    {
-        switch(index)
-        {
-            case 0:
-                disableIcon1.SetActive(true);
-                break;
-            case 1: 
-                disableIcon2.SetActive(true); 
-                break;
-            case 2:
-                disableIcon3.SetActive(true);
-                break;
+    //public void ShowDisableIcon(int index)
+    //{
+    //    switch(index)
+    //    {
+    //        case 0:
+    //            disableIcon1.SetActive(true);
+    //            break;
+    //        case 1: 
+    //            disableIcon2.SetActive(true); 
+    //            break;
+    //        case 2:
+    //            disableIcon3.SetActive(true);
+    //            break;
 
-        }
-    }
+    //    }
+    //}
 }
