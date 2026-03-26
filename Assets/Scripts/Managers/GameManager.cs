@@ -75,6 +75,39 @@ public class GameManager : MonoBehaviour
     {
         totalHomes += tHomes;
     }
+    public static int performance { get; private set; }
+    /// <summary>
+    /// Updates the performance rating of the phase
+    /// </summary>
+    /// <param name="perf">The amount to change performance by. Input 0 to reset it</param>
+    public static void PerformanceUpdate(int perf)
+    {
+        if (perf == 0)
+            performance = 0;
+        else
+        {
+            switch (Instance.currentZoneType)
+            {
+                case zoneType.LowIncome:
+                    performance += perf;
+                    break;
+                case zoneType.MidIncome:
+                    performance += perf * 2;
+                    break;
+                case zoneType.HighIncome:
+                    performance += perf * 3;
+                    break;
+                case zoneType.Highrise:
+                    performance += perf * 2;
+                    break;
+            }
+        }
+        // Performance bonus caps out at -100% (lose the bonus) and +10%
+        if (performance > 1) performance = 1;
+        if (performance < -10) performance = -10;
+
+        Debug.Log("Performance rating: "+performance);
+    }
     #endregion
     #region Game Controls
     // Current game state
@@ -271,10 +304,12 @@ public class GameManager : MonoBehaviour
                     if (tenant.rentBudget < currentHome.realPrice)
                     {
                         AdjustHappiness(-2);
+                        PerformanceUpdate(-1);
                         // Decrease happiness again if price is double budget or more
                         if (tenant.rentBudget < currentHome.realPrice / 2)
                         {
                             AdjustHappiness(-2);
+                            PerformanceUpdate(-1);
                         }
                     }
                     else if (tenant.rentBudget > currentHome.realPrice)
@@ -287,18 +322,18 @@ public class GameManager : MonoBehaviour
                     {
                         case HouseSize.small:
                             if (tenant.familyNumber > 1.0f)
-                                AdjustHappiness(-2);
-                            else AdjustHappiness(1);
+                            { AdjustHappiness(-2); PerformanceUpdate(-1); }
+                            else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                         case HouseSize.medium:
                             if (tenant.familyNumber > 2.0f)
-                                AdjustHappiness(-3);
-                            else AdjustHappiness(1);
+                            { AdjustHappiness(-3); PerformanceUpdate(-1); }
+                            else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                         case HouseSize.large:
                             if (tenant.familyNumber > 3.0f)
-                                AdjustHappiness(-4);
-                            else AdjustHappiness(1);
+                            { AdjustHappiness(-4); PerformanceUpdate(-1); }
+                            else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                     }
                 }
@@ -351,6 +386,22 @@ public class GameManager : MonoBehaviour
     {
         currentHome.SetInteracted();
         // Change currentHome to next unselected home in list, or end phase if last one
+    }
+    public static void GivePerformanceBonus()
+    {
+        // Bonus starts off at half of zone price
+        float bonus = Instance.currentZonePrice / 2;
+
+        // Bonus degrades or improves by 10% per point of performance
+        bonus *= 1f + performance * 0.1f;
+
+        // Apply bonus to funds
+        ResourceManager.Instance.AddBudget((int)bonus);
+
+        // Reset performance bonus after giving it out
+        PerformanceUpdate(0);
+
+        Debug.Log("Giving out performance bonus: " + bonus);
     }
     #endregion
     #endregion
