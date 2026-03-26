@@ -2,6 +2,7 @@ using NUnit.Framework;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class ShapeRandomizer : MonoBehaviour
 {
@@ -14,13 +15,21 @@ public class ShapeRandomizer : MonoBehaviour
     public int zonePrice1;
     public int zonePrice2;
     public int zonePrice3;
-    public TextMeshProUGUI zonePriceSlot1;
-    public TextMeshProUGUI zonePriceSlot2;
-    public TextMeshProUGUI zonePriceSlot3;
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
     public bool useScrollToRotate = false;
+
+    [Header("UI Objects")]
+    public TextMeshProUGUI zonePriceSlot1;
+    public TextMeshProUGUI zonePriceSlot2;
+    public TextMeshProUGUI zonePriceSlot3;
+    public TextMeshProUGUI zoneTypeSlot1;
+    public TextMeshProUGUI zoneTypeSlot2;
+    public TextMeshProUGUI zoneTypeSlot3;
+    public GameObject disableIcon1;
+    public GameObject disableIcon2;
+    public GameObject disableIcon3;
 
     private List<GameObject> shapePool;
     public List<GameObject> spawnedShapes;
@@ -103,6 +112,8 @@ public class ShapeRandomizer : MonoBehaviour
 
         if (placedShape.GetComponent<ZoneStats>().zonePrice > (float)ResourceManager.Instance.currentBudget)
         {
+            int index = placedShape.GetComponent<Drag>().spawnPointIndex;
+            ShowDisableIcon(index);
             placedShape.GetComponent<Drag>().enabled = false;
         }
 
@@ -128,6 +139,28 @@ public class ShapeRandomizer : MonoBehaviour
         {
             zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot3.text = "$" + zonePrice3.ToString() + "K";
+        }
+    }
+
+    public void RemovePlacedShapeFromList(GameObject shape)
+    {
+        spawnedShapes.Remove(shape);
+    }
+
+    public void ShowDisableIcon(int index)
+    {
+        switch(index)
+        {
+            case 0:
+                disableIcon1.SetActive(true);
+                break;
+            case 1: 
+                disableIcon2.SetActive(true); 
+                break;
+            case 2:
+                disableIcon3.SetActive(true);
+                break;
+
         }
     }
 }

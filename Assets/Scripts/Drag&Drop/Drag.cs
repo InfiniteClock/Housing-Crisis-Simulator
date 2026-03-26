@@ -201,6 +201,7 @@ public class Drag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler,IEndDr
             
             GridLock();
             ShapeRandomizer.Instance.RandomSpawnShape(spawnPointIndex);
+            ShapeRandomizer.Instance.RemovePlacedShapeFromList(gameObject);
             LandloardRandomizer.Instance.RandomSpawnLandlord();
         }
             DeselectEffect();
