@@ -35,19 +35,81 @@ public class House : MonoBehaviour
         // Set the current mat to non-interactable so the functions don't risk having null values
         currentMat = matNonInteract;
         SetNonInteractable();
+    }
 
-        // Houses spawn when zone is selected, so this is the correct time to determine what zone type this house belongs to
-        // Determines how much the price should change if landlord increases/decreases rent
+    public void RandomizeHouseStats()
+    {
+        // Determines random house size
+        int temp = Random.Range(0, 3);
+        houseSize = (HouseSize)temp;
+
+        // Determines the price of a house based on zone income type and house size
+        // PriceMod determines how much landlord modifiers affect the price
         switch (GameManager.Instance.CurrentZoneType)
         {
+            // Low Income Houses
             case zoneType.LowIncome:
                 priceMod = 100;
+                switch (houseSize)
+                {
+                    case HouseSize.small:
+                        basePrice = Random.Range(5, 8) * 100;
+                        break;
+                    case HouseSize.medium:
+                        basePrice = Random.Range(8, 11) * 100;
+                        break;
+                    case HouseSize.large:
+                        basePrice = Random.Range(11, 14) * 100;
+                        break;
+                }
                 break;
+            // Medium Income Houses
             case zoneType.MidIncome:
                 priceMod = 200;
+                switch (houseSize)
+                {
+                    case HouseSize.small:
+                        basePrice = Random.Range(7, 10) * 100;
+                        break;
+                    case HouseSize.medium:
+                        basePrice = Random.Range(10, 13) * 100;
+                        break;
+                    case HouseSize.large:
+                        basePrice = Random.Range(13, 16) * 100;
+                        break;
+                }
                 break;
+            // High Income Houses
             case zoneType.HighIncome:
                 priceMod = 300;
+                switch (houseSize)
+                {
+                    case HouseSize.small:
+                        basePrice = Random.Range(9, 12) * 100;
+                        break;
+                    case HouseSize.medium:
+                        basePrice = Random.Range(12, 15) * 100;
+                        break;
+                    case HouseSize.large:
+                        basePrice = Random.Range(15, 18) * 100;
+                        break;
+                }
+                break;
+            // Apartment Complexes
+            case zoneType.Highrise:
+                priceMod = 200;
+                switch (houseSize)
+                {
+                    case HouseSize.small:
+                        basePrice = Random.Range(6, 11) * 100;
+                        break;
+                    case HouseSize.medium:
+                        basePrice = Random.Range(9, 14) * 100;
+                        break;
+                    case HouseSize.large:
+                        basePrice = Random.Range(12, 17) * 100;
+                        break;
+                }
                 break;
         }
     }

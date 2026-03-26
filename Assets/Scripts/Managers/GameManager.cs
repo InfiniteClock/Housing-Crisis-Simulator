@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public enum zoneType {LowIncome, MidIncome, HighIncome}
+public enum zoneType {LowIncome, MidIncome, HighIncome, Highrise}
 public enum tenantType {LowIncome, MidIncome, HighIncome}
 public enum LandlordTraits {Empty, IncreaseRent, DecreaseRent, IncreaseHappiness, DecreaseHappiness}
 
@@ -217,6 +217,7 @@ public class GameManager : MonoBehaviour
             House h = currentNeighbourhood.Homes[i];
             h.currentState = HouseState.Default;
             h.SetDefMat();
+            h.RandomizeHouseStats();
             activeHouses[i] = h;
         }
 
