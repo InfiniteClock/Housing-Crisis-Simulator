@@ -264,11 +264,43 @@ public class GameManager : MonoBehaviour
             else {
                 if (activeHouses[i] == currentHome)
                 {
+                    foundIndex = true;
                     activeHouses[i].SetInteracted();
 
-                    // Code to connect tenant to house goes here
-
-                    foundIndex = true;
+                    // Decrease happiness if price is higher than budget
+                    if (tenant.rentBudget < currentHome.realPrice)
+                    {
+                        AdjustHappiness(-2);
+                        // Decrease happiness again if price is double budget or more
+                        if (tenant.rentBudget < currentHome.realPrice / 2)
+                        {
+                            AdjustHappiness(-2);
+                        }
+                    }
+                    else if (tenant.rentBudget > currentHome.realPrice)
+                    {
+                        AdjustHappiness(1);
+                    }
+                    // Reduce happiness if family is larger than house allows
+                    // Increase happiness if family fits into house. Increase is less than decrease
+                    switch (currentHome.houseSize)
+                    {
+                        case HouseSize.small:
+                            if (tenant.familyNumber > 1.0f)
+                                AdjustHappiness(-2);
+                            else AdjustHappiness(1);
+                                break;
+                        case HouseSize.medium:
+                            if (tenant.familyNumber > 2.0f)
+                                AdjustHappiness(-3);
+                            else AdjustHappiness(1);
+                                break;
+                        case HouseSize.large:
+                            if (tenant.familyNumber > 3.0f)
+                                AdjustHappiness(-4);
+                            else AdjustHappiness(1);
+                                break;
+                    }
                 }
                 else
                 {
