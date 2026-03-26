@@ -230,9 +230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20c8eebf82c169c478f04a73436c4bda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  houseName: 
+  houseName: Cottage
   basePrice: 0
-  houseSize: 
+  houseSize: 0
   houseCam: {fileID: 2540571564226048690}
   matDefault: {fileID: 2100000, guid: ee2a6a3dab9e3e840bad39a789ec4794, type: 2}
   matInteracted: {fileID: 2100000, guid: 68ca5ec31739ce148ae66bca97f7ffd6, type: 2}
