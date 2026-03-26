@@ -186,6 +186,8 @@ public class GameManager : MonoBehaviour
 
     // Current Neighbourhood
     public static Neighbourhood currentNeighbourhood { get; private set; }
+
+    // Called when entering phase 3
     public static void NeighbourhoodUpdate(Neighbourhood hood)
     {
         currentNeighbourhood = hood;
@@ -217,9 +219,35 @@ public class GameManager : MonoBehaviour
             h.SetDefMat();
             activeHouses[i] = h;
         }
+
+        // Apply Landlord happiness mods
+        switch (Instance.trait1)
+        {
+            case LandlordTraits.IncreaseHappiness:
+                AdjustHappiness(2);
+                break;
+            case LandlordTraits.DecreaseHappiness:
+                AdjustHappiness(-2);
+                break;
+            default:
+                break;
+        }
+        switch (Instance.trait2)
+        {
+            case LandlordTraits.IncreaseHappiness:
+                AdjustHappiness(2);
+                break;
+            case LandlordTraits.DecreaseHappiness:
+                AdjustHappiness(-2);
+                break;
+            default:
+                break;
+        }
     }
     // Current array of playable houses to fill with tenants
     public static House[] activeHouses { get; private set; }
+
+    // Called when a tenant is put into a house
     public static void FillHouse(TenantStats tenant)
     {
         bool foundIndex = false;
@@ -262,6 +290,7 @@ public class GameManager : MonoBehaviour
     }
     // Current House/Apartment
     public static House currentHome { get; private set; }
+    // Called when a new house is selected to view
     public static void HomeUpdate(House home)
     {
         // Ensure that we are updating to a default state house only
