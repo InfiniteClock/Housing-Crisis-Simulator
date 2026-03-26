@@ -11,14 +11,8 @@ public class ResourceManager : MonoBehaviour
     public decimal currentBudget;
 
     [Space(10)]
-    [Header("Happiness Resource Status")]
-    public float currentHappiness;
-    public float happinessChangeMultiplier;
-
-    [Space(10)]
     [Header("UI Objects")]
     public TextMeshProUGUI budgetText;
-    public Slider happinessSlider;
 
     private string newText;
     private void Awake()
@@ -35,7 +29,6 @@ public class ResourceManager : MonoBehaviour
         }
         currentBudget = (decimal)initialBudget;
         UpdateBudgetUI();
-        currentHappiness = happinessSlider.value;
     }
 
 
@@ -68,19 +61,4 @@ public class ResourceManager : MonoBehaviour
         UpdateBudgetUI();
     }
 
-    public void DecreaseHappiness(float happinessValue)
-    {
-        float happinessChange = happinessValue * happinessChangeMultiplier;
-        currentHappiness-= happinessChange;
-
-        happinessSlider.value = currentHappiness;
-    }
-
-    public void IncreaseHappiness(float happinessValue)
-    {
-        float happinessChange = happinessValue * happinessChangeMultiplier;
-        currentHappiness += happinessChange;
-
-        happinessSlider.value = currentHappiness;
-    }
 }

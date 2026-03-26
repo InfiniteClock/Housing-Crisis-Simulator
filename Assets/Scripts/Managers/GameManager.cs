@@ -40,14 +40,6 @@ public class GameManager : MonoBehaviour
         happiness += hap;
         Instance.happyBar.value = happiness;
     }
-
-    // Funds stat
-    public static int funds { get; private set; }
-    public static void AdjustFunds(int money)
-    {
-        funds += money;
-    }
-
     // Housed families stat
     public static int housedFamilies { get; private set; }
     public static void AdjustHousedFamilies(int families)
@@ -138,7 +130,7 @@ public class GameManager : MonoBehaviour
                         else h.SetLocked(false);
                     }
                 }
-
+                ShapeRandomizer.Instance.SpawnShapes();
                 if (Instance.BudgetCheck()) Instance.StartCoroutine(Instance.BudgetInspection());
                 break;
             case phaseState.Zone:

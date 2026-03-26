@@ -62,12 +62,17 @@ public class ShapeRandomizer : MonoBehaviour
         //create an copy of the shape list
         shapePool = new List<GameObject>(shapeList);
 
-        SpawnSceneStart();
+        SpawnShapes();
     }
 
 
-    public void SpawnSceneStart()
+    public void SpawnShapes()
     {
+        foreach (GameObject g in spawnedShapes)
+        {
+            if (g  != null)
+                Destroy(g);
+        }
         for (int i = 0; i < spawnPointList.Count; i++)
         {
             RandomSpawnShape(i);
