@@ -37,13 +37,13 @@ public class TenantStats : MonoBehaviour
         switch (tenantIncomeLevel)
         {
             case tenantType.LowIncome:
-                randomNumb = Random.Range(4, 15);
+                randomNumb = Random.Range(3, 14);
                 break;
             case tenantType.MidIncome:
-                randomNumb = Random.Range(6, 17);
+                randomNumb = Random.Range(5, 16);
                 break;
             case tenantType.HighIncome:
-                randomNumb = Random.Range(8, 19);
+                randomNumb = Random.Range(7, 18);
                 break;
         }
         rentBudget = randomNumb * 100;
