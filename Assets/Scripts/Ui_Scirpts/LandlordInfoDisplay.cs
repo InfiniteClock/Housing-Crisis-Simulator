@@ -42,14 +42,14 @@ public class LandlordInfoDisplay : MonoBehaviour
         trait2 = t2;
     }
 
-    public void showLandlordInfo()
+    public void UpdateLandlordInfo()
     {
         downPaymentText.text = "$" + downPayment.ToString() + "K";
         ShowTrait(Trait1InfoText, trait1);
         ShowTrait(Trait2InfoText, trait2);
     }
 
-    public void resetLandlordInfo()
+    public void ResetLandlordInfo()
     {
         downPayment = 0;
         trait1 = LandlordTraits.Empty;
@@ -90,7 +90,7 @@ public class LandlordInfoDisplay : MonoBehaviour
         else
         {
             PickLord();
-            resetLandlordInfo();
+            ResetLandlordInfo();
             LandloardRandomizer.Instance.ResetLandlords();
             if (GameManager.Instance.CurrentZoneType == zoneType.LowIncome)
             {

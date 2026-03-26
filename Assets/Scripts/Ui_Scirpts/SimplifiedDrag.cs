@@ -210,7 +210,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                 //pass landlord info to display
                 LandlordStats Landlord = GetComponent<LandlordStats>();
                 LandlordInfoDisplay.Instance.GetLandlordInfo(Landlord.getDownpaymentValue(), Landlord.trait1, Landlord.trait2);
-                LandlordInfoDisplay.Instance.showLandlordInfo();
+                LandlordInfoDisplay.Instance.UpdateLandlordInfo();
 
                 //PickLord();
                 //LandloardRandomizer.Instance.ResetLandlords();
@@ -361,7 +361,7 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                 //pass landlord info to display
                 LandlordStats Landlord = GetComponent<LandlordStats>();
                 LandlordInfoDisplay.Instance.GetLandlordInfo(Landlord.getDownpaymentValue(), Landlord.trait1, Landlord.trait2);
-                LandlordInfoDisplay.Instance.showLandlordInfo();
+                LandlordInfoDisplay.Instance.UpdateLandlordInfo();
 
                 //PickLord();
                 //LandloardRandomizer.Instance.ResetLandlords();
