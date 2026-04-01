@@ -9315,6 +9315,8 @@ MonoBehaviour:
   fadeTimeUI: 0.5
   fadeDelayUI: 0
   happyBar: {fileID: 1135552095}
+  resourcePrefab: {fileID: 4614748854111095040, guid: ee89b19ded179334aab297ba649a34c0, type: 3}
+  interphaseUI: {fileID: 2129937828}
   cityCam: {fileID: 330585547}
   endCam: {fileID: 191977846}
   gridX: 8

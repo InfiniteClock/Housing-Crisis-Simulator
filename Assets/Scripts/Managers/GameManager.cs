@@ -3,6 +3,7 @@ using System.ComponentModel;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public enum zoneType {LowIncome, MidIncome, HighIncome, Highrise}
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float fadeTimeUI;
     [SerializeField] private float fadeDelayUI;
     [SerializeField] private Slider happyBar;
+    [SerializeField] private GameObject resourcePrefab;
+    [SerializeField] private Canvas interphaseUI;
 
     public CinemachineCamera cityCam;
     public CinemachineCamera endCam;
@@ -38,7 +41,31 @@ public class GameManager : MonoBehaviour
     public static void AdjustHappiness(int hap)
     {
         happiness += hap;
-        Instance.happyBar.value = happiness;
+        if (hap > 0)
+        {
+            for (int i = 0; i < hap; i++)
+            {
+                GameObject resource = Instantiate(Instance.resourcePrefab);
+                resource.GetComponent<ResourceParticle>().Spawn(
+                    ResourceType.Happy, 
+                    Instance.happyBar.transform.position, 
+                    Mouse.current.position.ReadValue(), 
+                    Instance.interphaseUI);
+            }
+        }
+        else if (hap < 0)
+        {
+            for (int i = 0; i > hap; i--)
+            {
+                GameObject resource = Instantiate(Instance.resourcePrefab);
+                resource.GetComponent<ResourceParticle>().Spawn(
+                    ResourceType.Unhappy,
+                    Instance.happyBar.transform.position,
+                    Mouse.current.position.ReadValue(),
+                    Instance.interphaseUI);
+            }
+        }
+            Instance.happyBar.value = happiness;
     }
     // Housed families stat
     public static int housedFamilies { get; private set; }
