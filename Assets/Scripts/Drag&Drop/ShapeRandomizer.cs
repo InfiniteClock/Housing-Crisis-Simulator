@@ -15,6 +15,9 @@ public class ShapeRandomizer : MonoBehaviour
     public int zonePrice1;
     public int zonePrice2;
     public int zonePrice3;
+    public zoneType zoneType1;
+    public zoneType zoneType2;
+    public zoneType zoneType3;
 
     [Header("Drag object options")]
     public bool isToggleDrag = false;
@@ -109,8 +112,8 @@ public class ShapeRandomizer : MonoBehaviour
         placedShape.GetComponent<Drag>().spawnPointIndex = i;
         placedShape.GetComponent<Drag>().RecordReturnPosiiton();
 
-        //display the zone price
-        ShowZonePrice(i, placedShape);
+        //display the zone information
+        ShowZoneInfo(i, placedShape);
 
         //remove it from the pool
         shapePool.RemoveAt(randomIndex);
@@ -124,12 +127,14 @@ public class ShapeRandomizer : MonoBehaviour
         spawnedShapes.Add(placedShape);
     }
 
-    private void ShowZonePrice(int index, GameObject placedShape)
+    private void ShowZoneInfo(int index, GameObject placedShape)
     {
         if (index == 0)
         {
             zonePrice1 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot1.text = "$" + zonePrice1.ToString() + "K";
+            zonePriceSlot1.text = "$" + BudgetUnitConvert(zonePrice1);
+            zoneType1 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
+            zoneTypeSlot1.text = GetZoneTypeName(zoneType1);
             if (zonePrice1 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon1.SetActive(true);
@@ -143,7 +148,9 @@ public class ShapeRandomizer : MonoBehaviour
         if (index == 1)
         {
             zonePrice2 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot2.text = "$" + zonePrice2.ToString() + "K";
+            zonePriceSlot2.text = "$" + BudgetUnitConvert(zonePrice2);
+            zoneType2 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
+            zoneTypeSlot2.text = GetZoneTypeName(zoneType2);
             if (zonePrice2 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon2.SetActive(true);
@@ -157,7 +164,9 @@ public class ShapeRandomizer : MonoBehaviour
         if (index == 2)
         {
             zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot3.text = "$" + zonePrice3.ToString() + "K";
+            zonePriceSlot3.text = "$" + BudgetUnitConvert(zonePrice3);
+            zoneType3 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
+            zoneTypeSlot3.text = GetZoneTypeName(zoneType3);
             if (zonePrice3 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon3.SetActive(true);
@@ -172,6 +181,40 @@ public class ShapeRandomizer : MonoBehaviour
     public void RemovePlacedShapeFromList(GameObject shape)
     {
         spawnedShapes.Remove(shape);
+    }
+
+    //formatting the zone type name
+    public string GetZoneTypeName(zoneType zoneTypeKind)
+    {
+        switch (zoneTypeKind)
+        {
+            case zoneType.LowIncome:
+                return "Low-Income";
+
+            case zoneType.MidIncome:
+                return "Middle-Income";
+
+            case zoneType.Highrise:
+                return "Middle-Income";
+
+            case zoneType.HighIncome:
+                return "High-Income";
+        }
+        return "";
+    }
+
+    public string BudgetUnitConvert(int zonePrice)
+    {
+        string newText = (zonePrice / 1000).ToString();
+        if (newText.Length < 3)
+        {
+            newText = newText + ".0";
+        }
+        if (zonePrice <= 9999 && newText.Length < 4)
+        {
+            newText = newText + "0";
+        }
+        return newText + "M";
     }
 
     //public void ShowDisableIcon(int index)
