@@ -188,9 +188,11 @@ public class SimplifiedDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHand
                         TenantRandomizer.Instance.RandomSpawnTenant(spawnPointIndex, 2);
                     }
                     GameManager.FillHouse(GetComponent<TenantStats>());
+                    GameManager.AdjustHousedFamilies(1);
                     if (GameManager.activeHouses.Length <= 0)
                     {
                         PickHome();
+                        
                         TenantRandomizer.Instance.ResetTenant();
 
                     }

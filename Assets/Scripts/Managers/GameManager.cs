@@ -1,5 +1,6 @@
 using System.Collections;
 using System.ComponentModel;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float fadeTimeUI;
     [SerializeField] private float fadeDelayUI;
     [SerializeField] private Slider happyBar;
+    [SerializeField] private TextMeshProUGUI familiesNumberDisplayText;
     [SerializeField] private GameObject resourcePrefab;
     [SerializeField] private Canvas interphaseUI;
 
@@ -74,7 +76,12 @@ public class GameManager : MonoBehaviour
         housedFamilies += families;
     }
 
-    // Housed individuals stat
+    public void DisplayFamilyNumber()
+    {
+        familiesNumberDisplayText.text = "You have fit " + housedFamilies + " familes into the city";
+    }
+
+    // Housed individuals stat 
     public static int housedPeople { get; private set; }
     public static void AdjustHousedPeople(int people)
     {

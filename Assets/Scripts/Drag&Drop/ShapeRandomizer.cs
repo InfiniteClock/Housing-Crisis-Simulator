@@ -189,7 +189,6 @@ public class ShapeRandomizer : MonoBehaviour
     //formatting the zone type name
     public Sprite GetZoneTypeName(zoneType zoneTypeKind)
     {
-        print (zoneTypeKind);
         switch (zoneTypeKind)
         {
             case zoneType.LowIncome:
