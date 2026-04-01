@@ -132,7 +132,7 @@ public class ShapeRandomizer : MonoBehaviour
         if (index == 0)
         {
             zonePrice1 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot1.text = "$" + BudgetUnitConvert(zonePrice1);
+            zonePriceSlot1.text = BudgetUnitConvert(zonePrice1);
             zoneType1 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
             zoneTypeSlot1.text = GetZoneTypeName(zoneType1);
             if (zonePrice1 > ResourceManager.Instance.currentBudget)
@@ -148,7 +148,7 @@ public class ShapeRandomizer : MonoBehaviour
         if (index == 1)
         {
             zonePrice2 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot2.text = "$" + BudgetUnitConvert(zonePrice2);
+            zonePriceSlot2.text = BudgetUnitConvert(zonePrice2);
             zoneType2 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
             zoneTypeSlot2.text = GetZoneTypeName(zoneType2);
             if (zonePrice2 > ResourceManager.Instance.currentBudget)
@@ -164,7 +164,7 @@ public class ShapeRandomizer : MonoBehaviour
         if (index == 2)
         {
             zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
-            zonePriceSlot3.text = "$" + BudgetUnitConvert(zonePrice3);
+            zonePriceSlot3.text = BudgetUnitConvert(zonePrice3);
             zoneType3 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
             zoneTypeSlot3.text = GetZoneTypeName(zoneType3);
             if (zonePrice3 > ResourceManager.Instance.currentBudget)
@@ -205,7 +205,9 @@ public class ShapeRandomizer : MonoBehaviour
 
     public string BudgetUnitConvert(int zonePrice)
     {
-        string newText = (zonePrice / 1000).ToString();
+        
+        string newText = (zonePrice / 100).ToString();
+        print((zonePrice, newText));
         if (newText.Length < 3)
         {
             newText = newText + ".0";
