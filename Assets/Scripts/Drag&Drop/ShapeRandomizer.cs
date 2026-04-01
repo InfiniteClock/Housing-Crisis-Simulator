@@ -27,9 +27,10 @@ public class ShapeRandomizer : MonoBehaviour
     public TextMeshProUGUI zonePriceSlot1;
     public TextMeshProUGUI zonePriceSlot2;
     public TextMeshProUGUI zonePriceSlot3;
-    public TextMeshProUGUI zoneTypeSlot1;
-    public TextMeshProUGUI zoneTypeSlot2;
-    public TextMeshProUGUI zoneTypeSlot3;
+    public Sprite zoneTypeSlot1;
+    public Sprite zoneTypeSlot2;
+    public Sprite zoneTypeSlot3;
+    public List<Sprite> typeList;
     public GameObject disableIcon1;
     public GameObject disableIcon2;
     public GameObject disableIcon3;
