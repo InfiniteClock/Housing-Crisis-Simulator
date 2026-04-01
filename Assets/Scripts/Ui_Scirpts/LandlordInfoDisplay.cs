@@ -133,6 +133,10 @@ public class LandlordInfoDisplay : MonoBehaviour
         {
             newText = newText + "0";
         }
+        if (newText.Length == 5)
+        {
+            newText = newText.Substring(1);
+        }
         return newText + "M";
     }
 }
