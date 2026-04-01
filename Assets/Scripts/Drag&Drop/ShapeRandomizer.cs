@@ -3,6 +3,8 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.UI;
+using Microsoft.Unity.VisualStudio.Editor;
 
 public class ShapeRandomizer : MonoBehaviour
 {
@@ -27,9 +29,10 @@ public class ShapeRandomizer : MonoBehaviour
     public TextMeshProUGUI zonePriceSlot1;
     public TextMeshProUGUI zonePriceSlot2;
     public TextMeshProUGUI zonePriceSlot3;
-    public TextMeshProUGUI zoneTypeSlot1;
-    public TextMeshProUGUI zoneTypeSlot2;
-    public TextMeshProUGUI zoneTypeSlot3;
+    public GameObject zoneTypeSlot1;
+    public GameObject zoneTypeSlot2;
+    public GameObject zoneTypeSlot3;
+    public List<Sprite> typeList;
     public GameObject disableIcon1;
     public GameObject disableIcon2;
     public GameObject disableIcon3;
@@ -134,7 +137,7 @@ public class ShapeRandomizer : MonoBehaviour
             zonePrice1 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot1.text = BudgetUnitConvert(zonePrice1);
             zoneType1 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
-            zoneTypeSlot1.text = GetZoneTypeName(zoneType1);
+            zoneTypeSlot1.GetComponent<UnityEngine.UI.Image>().sprite = GetZoneTypeName(zoneType1);
             if (zonePrice1 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon1.SetActive(true);
@@ -150,7 +153,7 @@ public class ShapeRandomizer : MonoBehaviour
             zonePrice2 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot2.text = BudgetUnitConvert(zonePrice2);
             zoneType2 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
-            zoneTypeSlot2.text = GetZoneTypeName(zoneType2);
+            zoneTypeSlot2.GetComponent<UnityEngine.UI.Image>().sprite = GetZoneTypeName(zoneType2);
             if (zonePrice2 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon2.SetActive(true);
@@ -166,7 +169,7 @@ public class ShapeRandomizer : MonoBehaviour
             zonePrice3 = placedShape.GetComponent<ZoneStats>().zonePrice;
             zonePriceSlot3.text = BudgetUnitConvert(zonePrice3);
             zoneType3 = placedShape.GetComponent<ZoneStats>().zoneIncomeType;
-            zoneTypeSlot3.text = GetZoneTypeName(zoneType3);
+            zoneTypeSlot3.GetComponent<UnityEngine.UI.Image>().sprite = GetZoneTypeName(zoneType3);
             if (zonePrice3 > ResourceManager.Instance.currentBudget)
             {
                 disableIcon3.SetActive(true);
@@ -184,23 +187,24 @@ public class ShapeRandomizer : MonoBehaviour
     }
 
     //formatting the zone type name
-    public string GetZoneTypeName(zoneType zoneTypeKind)
+    public Sprite GetZoneTypeName(zoneType zoneTypeKind)
     {
+        print (zoneTypeKind);
         switch (zoneTypeKind)
         {
             case zoneType.LowIncome:
-                return "Low-Income";
+                return typeList[0];
 
             case zoneType.MidIncome:
-                return "Middle-Income";
+                return typeList[1];
 
             case zoneType.Highrise:
-                return "Middle-Income";
+                return typeList[2];
 
             case zoneType.HighIncome:
-                return "High-Income";
+                return typeList[2];
         }
-        return "";
+        return typeList[0];
     }
 
     public string BudgetUnitConvert(int zonePrice)

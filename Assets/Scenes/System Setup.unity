@@ -3363,8 +3363,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274341324}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -67.75, y: 104.99, z: 27.5}
+  m_LocalRotation: {x: 0, y: 0.94843507, z: -0.31697142, w: 0}
+  m_LocalPosition: {x: -37.98, y: 52.79, z: 92.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7539,7 +7539,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9649623}
-  - {fileID: 993511977}
   m_Father: {fileID: 1554631791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9323,9 +9322,13 @@ MonoBehaviour:
   zonePriceSlot1: {fileID: 822858677}
   zonePriceSlot2: {fileID: 1391147577}
   zonePriceSlot3: {fileID: 936862053}
-  zoneTypeSlot1: {fileID: 0}
-  zoneTypeSlot2: {fileID: 0}
-  zoneTypeSlot3: {fileID: 0}
+  zoneTypeSlot1: {fileID: 430444291}
+  zoneTypeSlot2: {fileID: 1588630270}
+  zoneTypeSlot3: {fileID: 993511976}
+  typeList:
+  - {fileID: 21300000, guid: c28e2d1c9905fce43b77edad7f61035e, type: 3}
+  - {fileID: 21300000, guid: acd1663cada4dea43ab34d1c6f7ccc13, type: 3}
+  - {fileID: 21300000, guid: 3e98665252f55614bb49b1d27683e277, type: 3}
   disableIcon1: {fileID: 1942620006}
   disableIcon2: {fileID: 529562190}
   disableIcon3: {fileID: 403067309}
@@ -10174,16 +10177,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 993511976}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 727850223}
+  m_Father: {fileID: 1554631791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -175, y: 115}
+  m_AnchoredPosition: {x: -65.00001, y: 47.499992}
   m_SizeDelta: {x: 60, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &993511978
@@ -15455,6 +15458,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 727850223}
+  - {fileID: 993511977}
   m_Father: {fileID: 345272764}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556873610
