@@ -3229,8 +3229,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274341324}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -67.75, y: 104.99, z: 27.5}
+  m_LocalRotation: {x: 0, y: 0.94843507, z: -0.31697142, w: 0}
+  m_LocalPosition: {x: -37.98, y: 52.79, z: 92.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9273,6 +9273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialBudget: 5000
   budgetText: {fileID: 771895399}
+  resourcePrefab: {fileID: 4614748854111095040, guid: ee89b19ded179334aab297ba649a34c0, type: 3}
+  interphaseUI: {fileID: 2129937828}
 --- !u!114 &923504516
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class ResourceParticle : MonoBehaviour
     [SerializeField] private Sprite unhappy;
     [SerializeField] private Sprite profit;
     [SerializeField] private Sprite cost;
-    [SerializeField] private float spawnRadius;
+    [SerializeField] public float spawnRadius;
 
     private ResourceType type;
     private Vector3 destination;
