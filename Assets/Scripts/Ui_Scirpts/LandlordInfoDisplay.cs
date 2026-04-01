@@ -19,6 +19,7 @@ public class LandlordInfoDisplay : MonoBehaviour
     public TextMeshProUGUI Trait1InfoText;
     public TextMeshProUGUI Trait2InfoText;
     public Button confirmButton;
+    public GameObject moneyCounter;
 
 
     private void Awake()
@@ -37,6 +38,7 @@ public class LandlordInfoDisplay : MonoBehaviour
 
     public void GetLandlordInfo(float dpValue, LandlordTraits t1, LandlordTraits t2)
     {
+        moneyCounter.SetActive(true);
         downPayment = dpValue;
         trait1 = t1;
         trait2 = t2;
@@ -44,7 +46,7 @@ public class LandlordInfoDisplay : MonoBehaviour
 
     public void UpdateLandlordInfo()
     {
-        downPaymentText.text = "$" + downPayment.ToString() + "K";
+        downPaymentText.text = BudgetUnitConvert(downPayment);
         ShowTrait(Trait1InfoText, trait1);
         ShowTrait(Trait2InfoText, trait2);
     }
@@ -118,5 +120,19 @@ public class LandlordInfoDisplay : MonoBehaviour
         GameManager.NeighbourhoodUpdate(GameManager.currentZone.hoods[randHood]);
         CameraManager.CameraSwitch(GameManager.currentNeighbourhood.hoodCam);
         ResourceManager.Instance.AddBudget(downPayment);
+    }
+
+    public string BudgetUnitConvert(float zonePrice)
+    {
+        string newText = (zonePrice / 1000f).ToString();
+        if (newText.Length < 3)
+        {
+            newText = newText + ".0";
+        }
+        if (zonePrice <= 9999 && newText.Length < 4)
+        {
+            newText = newText + "0";
+        }
+        return newText + "M";
     }
 }

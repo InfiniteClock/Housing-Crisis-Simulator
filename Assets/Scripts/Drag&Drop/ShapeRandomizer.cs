@@ -209,9 +209,7 @@ public class ShapeRandomizer : MonoBehaviour
 
     public string BudgetUnitConvert(int zonePrice)
     {
-        
         string newText = (zonePrice / 1000f).ToString();
-        print((zonePrice, newText));
         if (newText.Length < 3)
         {
             newText = newText + ".0";
