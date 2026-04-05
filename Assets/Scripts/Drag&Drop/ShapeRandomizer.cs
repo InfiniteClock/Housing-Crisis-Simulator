@@ -1,10 +1,6 @@
-using NUnit.Framework;
 using TMPro;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
-using Microsoft.Unity.VisualStudio.Editor;
 
 public class ShapeRandomizer : MonoBehaviour
 {
