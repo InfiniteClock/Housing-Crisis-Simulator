@@ -13,8 +13,6 @@ public class TenantStats : MonoBehaviour
     [Header("UI Objects")]
     public TextMeshProUGUI budgetText;
 
-    private bool isHappy;
-
     public void Awake()
     {
         SelectBudget();
@@ -37,13 +35,13 @@ public class TenantStats : MonoBehaviour
         switch (tenantIncomeLevel)
         {
             case tenantType.LowIncome:
-                randomNumb = Random.Range(3, 14);
+                randomNumb = Random.Range(4, 12);
                 break;
             case tenantType.MidIncome:
-                randomNumb = Random.Range(5, 16);
+                randomNumb = Random.Range(8, 16);
                 break;
             case tenantType.HighIncome:
-                randomNumb = Random.Range(7, 18);
+                randomNumb = Random.Range(12, 20);
                 break;
         }
         rentBudget = randomNumb * 100;

@@ -347,18 +347,24 @@ public class GameManager : MonoBehaviour
                     switch (currentHome.houseSize)
                     {
                         case HouseSize.small:
-                            if (tenant.familyNumber > 1.0f)
-                            { AdjustHappiness(-2); PerformanceUpdate(-1); }
+                            if (tenant.familyNumber > 3.5f)
+                            { AdjustHappiness(-3); PerformanceUpdate(-3); }
+                            else if (tenant.familyNumber > 2.5f)
+                            { AdjustHappiness(-2); PerformanceUpdate(-2); }
+                            else if (tenant.familyNumber > 1.5f)
+                            { AdjustHappiness(-1); PerformanceUpdate(-1); }
                             else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                         case HouseSize.medium:
-                            if (tenant.familyNumber > 2.0f)
-                            { AdjustHappiness(-3); PerformanceUpdate(-1); }
+                            if (tenant.familyNumber > 3.5f)
+                            { AdjustHappiness(-2); PerformanceUpdate(-2); }
+                            else if (tenant.familyNumber > 2.5f)
+                            { AdjustHappiness(-1); PerformanceUpdate(-1); }
                             else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                         case HouseSize.large:
-                            if (tenant.familyNumber > 3.0f)
-                            { AdjustHappiness(-4); PerformanceUpdate(-1); }
+                            if (tenant.familyNumber > 3.5f)
+                            { AdjustHappiness(-1); PerformanceUpdate(-1); }
                             else { AdjustHappiness(1); PerformanceUpdate(1); }
                                 break;
                     }

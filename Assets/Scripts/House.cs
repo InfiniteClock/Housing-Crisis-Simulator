@@ -53,13 +53,13 @@ public class House : MonoBehaviour
                 switch (houseSize)
                 {
                     case HouseSize.small:
-                        basePrice = Random.Range(5, 8) * 100;
+                        basePrice = Random.Range(4, 7) * 100;
                         break;
                     case HouseSize.medium:
-                        basePrice = Random.Range(8, 11) * 100;
+                        basePrice = Random.Range(7, 10) * 100;
                         break;
                     case HouseSize.large:
-                        basePrice = Random.Range(11, 14) * 100;
+                        basePrice = Random.Range(10, 13) * 100;
                         break;
                 }
                 break;
@@ -72,13 +72,13 @@ public class House : MonoBehaviour
                 switch (houseSize)
                 {
                     case HouseSize.small:
-                        basePrice = Random.Range(7, 10) * 100;
+                        basePrice = Random.Range(8, 11) * 100;
                         break;
                     case HouseSize.medium:
-                        basePrice = Random.Range(10, 13) * 100;
+                        basePrice = Random.Range(11, 14) * 100;
                         break;
                     case HouseSize.large:
-                        basePrice = Random.Range(13, 16) * 100;
+                        basePrice = Random.Range(14, 17) * 100;
                         break;
                 }
                 break;
@@ -91,13 +91,13 @@ public class House : MonoBehaviour
                 switch (houseSize)
                 {
                     case HouseSize.small:
-                        basePrice = Random.Range(9, 12) * 100;
-                        break;
-                    case HouseSize.medium:
                         basePrice = Random.Range(12, 15) * 100;
                         break;
-                    case HouseSize.large:
+                    case HouseSize.medium:
                         basePrice = Random.Range(15, 18) * 100;
+                        break;
+                    case HouseSize.large:
+                        basePrice = Random.Range(18, 21) * 100;
                         break;
                 }
                 break;
@@ -110,13 +110,13 @@ public class House : MonoBehaviour
                 switch (houseSize)
                 {
                     case HouseSize.small:
-                        basePrice = Random.Range(6, 11) * 100;
+                        basePrice = Random.Range(8, 11) * 100;
                         break;
                     case HouseSize.medium:
-                        basePrice = Random.Range(9, 14) * 100;
+                        basePrice = Random.Range(11, 14) * 100;
                         break;
                     case HouseSize.large:
-                        basePrice = Random.Range(12, 17) * 100;
+                        basePrice = Random.Range(14, 17) * 100;
                         break;
                 }
                 break;
